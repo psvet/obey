@@ -1,0 +1,55 @@
+{
+  "name": "obey",
+  "version": "0.0.1",
+  "description": "Data modelling and validation library",
+  "main": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "clean": "rm -rf node_modules",
+    "build": "babel ./src --out-dir ./build",
+    "test": "npm run lint && npm run cover",
+    "mocha": "babel-node node_modules/.bin/_mocha",
+    "cover": "babel-node node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha",
+    "lint": "eslint ./src ./test --fix"
+  },
+  "keywords": [
+    "obey",
+    "valid",
+    "validate",
+    "validation",
+    "model",
+    "modelling"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TechnologyAdvice/obey.git"
+  },
+  "author": "TechnologyAdvice",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TechnologyAdvice/obey/issues"
+  },
+  "homepage": "https://github.com/TechnologyAdvice/obey#readme",
+  "devDependencies": {
+    "babel-cli": "~6.1.4",
+    "babel-core": "~6.1.4",
+    "babel-eslint": "~4.1.7",
+    "babel-preset-es2015": "^6.5.0",
+    "chai": "~3.0.0",
+    "eslint": "~1.4.0",
+    "isparta": "^4.0.0",
+    "mocha": "~2.2.5",
+    "pre-commit": "~1.1.1"
+  },
+  "dependencies": {
+    "lodash": "^4.3.0"
+  },
+  "pre-commit": [
+    "test"
+  ],
+  "directories": {
+    "test": "test"
+  }
+}

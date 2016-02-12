@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 import _ from 'lodash'
 
 const model = {

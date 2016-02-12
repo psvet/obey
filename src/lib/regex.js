@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 export default {
   float: /^[0-9]*[.][0-9]+$/,
   number: /^[0-9]+$/,

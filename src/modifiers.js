@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 const modifiers = {
   /**
    * Library of modifiers

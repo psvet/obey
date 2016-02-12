@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 import model from './model'
 import rules from './rules'
 import modifiers from './modifiers'

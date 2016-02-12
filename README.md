@@ -27,9 +27,9 @@ const user = obey.model({
 The properties used can each be explained as:
 
 * `type`: The type of value, i.e. a string, number, email, etc
-* `rule`: Similar to type, a custom method to check validity of value, see [rules](#Rules)
-* `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#Modifiers)
-* `generator`: uses a method to create a default value if no value is supplied, see [Generators](#Generators)
+* `rule`: Similar to type, a custom method to check validity of value, see [Rules](#rules)
+* `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
+* `generator`: uses a method to create a default value if no value is supplied, see [Generators](#generators)
 * `default`: The default value if no value specified
 * `min`: The minimum character length for a string, lowest number, or minimum items in array
 * `max`: The maximum character length for a string, highest number, or maximum items in array

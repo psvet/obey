@@ -1,3 +1,4 @@
 .c9/
 build/
 node_modules/
+coverage/

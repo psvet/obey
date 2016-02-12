@@ -9,15 +9,16 @@ Suppose the following:
 ```javascript
 const user = obey.model({
   id: { type: 'uuid', generator: 'uuid', required: true },
+  email: { type: 'email', rule: 'uniqueEmail', required: true },
+  password: { type: 'string', rule: 'validPassword', modifier: 'encryptPassword', required: true }
   fname: { type: 'string', description: 'First Name' },
   lname: { type: 'string', description: 'Last Name' },
-  email: { type: 'email', rule: 'uniqueEmail', required: true },
   phone: { type: 'phone', min: 7, max: 10 },
   address: {
     street: { type: 'string', max: 45 },
     city:  { type: 'string', max: 45 }
     state: { type: 'string', max: 2, modifier: 'upperCase' },
-    zip: { type: 'number', min: 5, max: 10 }
+    zip: { type: 'number', min: 10000, max: 99999 }
   },
   type: { type: 'string', allow: [ 'user', 'admin' ], default: 'user' }
 })

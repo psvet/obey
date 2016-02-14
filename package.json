@@ -51,7 +51,7 @@
   "pre-commit": [
     "test"
   ],
-  "directories": {
-    "test": "test"
+  "babel": {
+    "presets": ["es2015"]
   }
 }

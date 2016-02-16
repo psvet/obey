@@ -26,7 +26,7 @@ const user = obey.model({
 
 The properties used can each be explained as:
 
-* `type`: The type of value, i.e. a string, number, email, etc
+* `type`: The type of value, either native or custom (RegEx), see [Types](#types)
 * `rule`: Similar to type, a custom method to check validity of value, see [Rules](#rules)
 * `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
 * `generator`: uses a method to create a default value if no value is supplied, see [Generators](#generators)
@@ -53,6 +53,24 @@ user.validate(/* ...some data object */)
 ```
 
 The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will simply resolve, any failures will reject and the array of errors will be returned.
+
+## Types
+
+Types are basic checks against native types, built-in (regex) or custom (regex). The library will check all native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well as a [list of built-in regexes](/src/lib/regex.js).
+
+### Adding New Types
+
+New types (RegEx's) can be added to the obey lib with the `obey.type` method:
+
+```javascript
+obey.type('lowerCaseOnly', /^([a-z])*$/)
+```
+
+The above would add a new type which would then be available for setting in the model configuration for any properties:
+
+```javascript
+label: { type: 'lowerCaseOnly', /* ... */ }
+```
 
 ## Rules
 

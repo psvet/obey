@@ -1,7 +1,8 @@
-/* global expect sinon */
+/* global expect, sinon, describe, it, before, after */
 import _ from 'lodash'
 import obey from 'src/index'
 import model from 'src/model'
+import types from 'src/types'
 import rules from 'src/rules'
 import modifiers from 'src/modifiers'
 import generators from 'src/generators'
@@ -13,6 +14,14 @@ describe('obey', () => {
     it('creates a composed model based on schema configuration', () => {
       obey.model({})
       expect(model.build).to.be.called
+    })
+  })
+  describe('type', () => {
+    before(() => sinon.spy(types, 'add'))
+    after(() => { types.add.restore() })
+    it('adds or overrides a type definition in the obey library', () => {
+      obey.type('tester', /^([a-z])*$/)
+      expect(types.add).to.be.called
     })
   })
   describe('rule', () => {

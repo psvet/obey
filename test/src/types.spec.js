@@ -2,6 +2,14 @@
 import types from 'src/types.js'
 
 describe('types', () => {
+  describe('add', () => {
+    it('adds a new type to the lib of regexes', () => {
+      types.add('lowercaseonly', /^([a-z])*$/)
+      expect(types.regexes.indexOf('lowercaseonly') >= 0).to.be.true
+      expect(types.check('lowercaseonly', 'abcdef')).to.be.true
+      expect(types.check('lowercaseonly', 'ABCDEF')).to.be.false
+    })
+  })
   describe('check', () => {
     it('checks a native type and returns true if valid', () => {
       expect(types.check('boolean', true)).to.be.true

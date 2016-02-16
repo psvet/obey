@@ -3,6 +3,7 @@
  */
 
 import model from './model'
+import types from './types'
 import rules from './rules'
 import modifiers from './modifiers'
 import generators from './generators'
@@ -17,6 +18,13 @@ const obey = {
    * @returns {Object}
    */
   model: obj => model.build(obj),
+
+  /**
+   * Creates and stores (or replaces) a type
+   * @param {String} name The name of the type
+   * @param {String} regex The regex for the type test
+   */
+  type: (name, regex) => types.add(name, regex),
 
   /**
    * Creates and stores a rule

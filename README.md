@@ -134,7 +134,18 @@ When the model is validated, if no `created` property is provided the `timestamp
 
 ## Asynchronous Validation
 
-Crazy, right? Wrong. Model validation approaches are typically simple, synchronous, and their placement in line with so many asynchronous operations such as request handling, CRUD, and others, often results in adding synchronous validation into promise chains.
+Crazy, right? Wrong. Model validation approaches are typically simple, synchronous, and their placement in line with so many asynchronous operations such as request handling, CRUD, and others, often results in adding synchronous validation into promise chains. With obey, the validation step just fits into the chain like so...
+
+```javascript
+// Define a model somewhere in your code...
+const user = obey.model(/* ...Model Definition... */)
+
+// Use it to validate before creating a record...
+user.validate(/* ...some object... */)
+  .then(createUser)
+  .then(/* ...respond, or something... */)
+  .catch(/* ...deal with the errors... */)
+```
 
 Additionally, validation has remained simplistic, pass/fail, and flat, but the ability to auto-generate data or run more complex validation rules can further simplify processes in which model valiation is required.
 

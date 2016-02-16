@@ -14,7 +14,9 @@ const rules = {
    * @param {Function} fn The rule's method
    */
   add: (name, fn) => {
-    return { name, fn }
+    if (typeof name !== 'string') throw new Error('Rule name should be a string')
+    if (typeof fn !== 'function') throw new Error('Rule method should be a function')
+    rules.lib[name] = fn
   }
 }
 

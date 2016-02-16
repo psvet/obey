@@ -14,7 +14,9 @@ const generators = {
    * @param {Function} fn The generator's method
    */
   add: (name, fn) => {
-    return { name, fn }
+    if (typeof name !== 'string') throw new Error('Generator name should be a string')
+    if (typeof fn !== 'function') throw new Error('Generator method should be a function')
+    generators.lib[name] = fn
   }
 }
 

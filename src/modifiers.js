@@ -14,7 +14,9 @@ const modifiers = {
    * @param {Function} fn The modifier's method
    */
   add: (name, fn) => {
-    return { name, fn }
+    if (typeof name !== 'string') throw new Error('Modifier name should be a string')
+    if (typeof fn !== 'function') throw new Error('Modifier method should be a function')
+    modifiers.lib[name] = fn
   }
 }
 

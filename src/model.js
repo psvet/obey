@@ -3,11 +3,12 @@
  */
 
 import _ from 'lodash'
+import validate from './lib/validate'
 
 const model = {
   /**
    * Parses a property from the model and returns the original
-   * object with `_validate` method
+   * object with `validate` method
    * @param {Object} def The configuration definition to parse
    * @returns {Object}
    */
@@ -25,25 +26,25 @@ const model = {
    */
   build: obj => {
     // Setup model object
-    const composedModel = {
-      schema: _.cloneDeep(obj)
-    }
-    /** const iterate = schema => {
-      for (let key in schema) {
-        if (typeof schema[key] === 'object') {
+    const schema = _.cloneDeep(obj)
+    const iterate = schemaObj => {
+      for (let key in schemaObj) {
+        if (typeof schemaObj[key] === 'object') {
           // Has sub-object, recurse
-          iterate(schema[key])
+          iterate(schemaObj[key])
         } else {
           // Parse the schema definition
-          schema[key] = model.parseProperty(schema[key])
+          schema[key] = model.parseProperty(schemaObj[key])
         }
       }
     }
     // Begin iteration
-    iterate(obj)
-    */
+    iterate(schema)
     // Return built model
-    return composedModel
+    return {
+      schema,
+      validate: validate(schema)
+    }
   }
 }
 

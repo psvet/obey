@@ -1,7 +1,7 @@
 /* global expect, sinon, describe, it, before, after */
 import _ from 'lodash'
 import obey from 'src/index'
-import model from 'src/model'
+import model from 'src/models'
 import types from 'src/types'
 import rules from 'src/rules'
 import modifiers from 'src/modifiers'

@@ -2,7 +2,7 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 
-import model from './model'
+import models from './models'
 import types from './types'
 import rules from './rules'
 import modifiers from './modifiers'
@@ -17,7 +17,7 @@ const obey = {
    * @param {Object} obj The definition object
    * @returns {Object}
    */
-  model: obj => model.build(obj),
+  model: obj => models.build(obj),
 
   /**
    * Creates and stores (or replaces) a type

@@ -18,14 +18,17 @@ const model = {
   },
 
   /**
-   * Iterates over raw model object and composes _validate
-   * method for each property which is called when model is
-   * validated
+   * Iterates over raw model schema object and composes a built
+   * model object with validate method
    * @param {Object} obj Raw model object
    * @returns {Object}
    */
   build: obj => {
-    const iterate = schema => {
+    // Setup model object
+    const composedModel = {
+      schema: _.cloneDeep(obj)
+    }
+    /** const iterate = schema => {
       for (let key in schema) {
         if (typeof schema[key] === 'object') {
           // Has sub-object, recurse
@@ -38,8 +41,9 @@ const model = {
     }
     // Begin iteration
     iterate(obj)
+    */
     // Return built model
-    return obj
+    return composedModel
   }
 }
 

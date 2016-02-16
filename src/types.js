@@ -24,6 +24,8 @@ const types = {
   check: (type, val) => {
     const typeName = type.toString().toLowerCase()
     if (types.native.includes(typeName)) {
+      if (typeName === 'array') return Array.isArray(val)
+      if (typeName === 'null') return val === null
       return typeof val === typeName
     } else if (types.regexes.includes(typeName)) {
       return regex[typeName].test(val)

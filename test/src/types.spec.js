@@ -1,11 +1,16 @@
-/* global expect */
+/* global expect, describe, it  */
 import types from 'src/types.js'
 
 describe('types', () => {
   describe('check', () => {
     it('checks a native type and returns true if valid', () => {
-      const actual = types.check('boolean', true)
-      expect(actual).to.be.true
+      expect(types.check('boolean', true)).to.be.true
+      expect(types.check('null', null)).to.be.true
+      expect(types.check('undefined', undefined)).to.be.true
+      expect(types.check('number', 73)).to.be.true
+      expect(types.check('string', 'foo')).to.be.true
+      expect(types.check('object', { foo: 'bar' })).to.be.true
+      expect(types.check('array', [ 'foo', 'bar' ])).to.be.true
     })
     it('checks a native type and returns false if invalid', () => {
       const actual = types.check('number', 'foo')

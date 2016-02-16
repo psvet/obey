@@ -13,8 +13,13 @@ describe('types', () => {
       expect(types.check('array', [ 'foo', 'bar' ])).to.be.true
     })
     it('checks a native type and returns false if invalid', () => {
-      const actual = types.check('number', 'foo')
-      expect(actual).to.be.false
+      expect(types.check('boolean', 'foo')).to.be.false
+      expect(types.check('null', 'foo')).to.be.false
+      expect(types.check('undefined', 'foo')).to.be.false
+      expect(types.check('number', 'foo')).to.be.false
+      expect(types.check('string', 1)).to.be.false
+      expect(types.check('object', 'foo')).to.be.false
+      expect(types.check('array', 'foo')).to.be.false
     })
     it('checks a regex and returns true if valid', () => {
       const actual = types.check('email', 'john@email.com')

@@ -1,4 +1,3 @@
-/* global expect, describe, it  */
 import types from 'src/types.js'
 
 describe('types', () => {

@@ -14,12 +14,13 @@ const user = obey.model({
   fname: { type: 'string', description: 'First Name' },
   lname: { type: 'string', description: 'Last Name' },
   phone: { type: 'phone', min: 7, max: 10 },
-  address: {
+  // Nested object
+  address: { type: 'object', keys: {
     street: { type: 'string', max: 45 },
     city:  { type: 'string', max: 45 }
     state: { type: 'string', max: 2, modifier: 'upperCase' },
     zip: { type: 'number', min: 10000, max: 99999 }
-  },
+  }},
   type: { type: 'string', allow: [ 'user', 'admin' ], default: 'user' }
 })
 ```
@@ -44,11 +45,11 @@ Using the example above, validation is done by calling the following:
 ```javascript
 user.validate(/* ...some data object */)
   .then((data) => {
-    // Passes back cloned `data` object with passing validations and any
+    // Passes back `data` object with passing validations and any
     // generated or modified values
   })
   .catch(errors => {
-    // Nope, not valid...
+    // Invalid, returns array of errors
   })
 ```
 
@@ -81,7 +82,11 @@ Rules allow more complex, custom validation methods. For example, checking that 
 Rules can be added to the obey lib with the `obey.rule` method:
 
 ```javascript
-obey.rule('uniqueEmail', (val) => { /* run check */ })
+obey.rule('uniqueEmail', (val) => {
+  if (val !== true) {
+    throw new Error('Was not what I expected')
+  }
+})
 ```
 
 The above example would add a ruled named `uniqueEmail` which could be called like so:

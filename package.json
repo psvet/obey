@@ -46,12 +46,15 @@
     "sinon-chai": "~2.8.0"
   },
   "dependencies": {
+    "bluebird": "^3.3.1",
     "lodash": "^4.3.0"
   },
   "pre-commit": [
     "test"
   ],
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   }
 }

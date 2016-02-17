@@ -15,19 +15,26 @@ const models = {
    * Acts as validation for, and respective order of operations
    * of, properties for a schema-prop configuration
    */
-  props: [
-    function generator(schema) {
+  props: [{
+    name: 'generator',
+    fn: function(schema) {
       if (generators[schema.generator]) return generators[schema.generator]
       throw new Error(`Generator '${schema.generator}' does not exist`)
-    },
-    function default (schema, key, value) {
+    }
+  }, {
+    name: 'default',
+    fn: function(schema, key, value) {
       return value || schema.default
-    },
-    function modifier (schema, key, value) {
+    }
+  }, {
+    name: 'modifier',
+    fn: function(schema, key, value) {
       if (modifiers[schema.modifier]) return modifiers[schema.modifier](value)
       throw new Error(`Modifier '${schema.modifier}' does not exist`)
-    },
-    function rule (schema, key, value) {
+    }
+  }, {
+    name: 'rule',
+    fn: function(schema, key, value) {
       if (!rules[schema.rule]) throw new Error(`Rule '${schema.rule}' does not exist`)
       return new Promise(resolve => {
         rules[schema.rule](value)
@@ -37,24 +44,50 @@ const models = {
             resolve(value)
           })
       })
-    },
-    function allowed (schema, key, value) {
-      if (schema.allowed.indexOf(val) === -1) {
+    }
+  }, {
+    name: 'allowed',
+    fn: function(schema, key, value) {
+      if (schema.allowed.indexOf(value) === -1) {
         this.errors.push({ key, value, message: `Value '${value}' is not an allowed for '${key}'` })
       }
-    },
-    function type (schema, key, value) {
-      const fail = message => {
-        this.errors.push(key, value: val, message)
+    }
+  }, {
+    name: 'min',
+    fn: function(schema, key, value) {
+      if (typeof value === 'array' || typeof value === 'string' && value.length < schema.min) {
+        this.errors.push({ key, value, message: `Value is less than ${schema.min}` })
+      } else if (typeof value === 'number' && value < schema.min) {
+        this.errors.push({ key, value, message: `Value is less than ${schema.min}` })
       }
-      types.check({ schema, key, val, fail })
-    },
-    function required (schema, key, value) {
+      return value
+    }
+  }, {
+    name: 'max',
+    fn: function(schema, key, value) {
+      if (typeof value === 'array' || typeof value === 'string' && value.length > schema.max) {
+        this.errors.push({ key, value, message: `Value is greater than ${schema.max}` })
+      } else if (typeof value === 'number' && value > schema.max) {
+        this.errors.push({ key, value, message: `Value is greater than ${schema.max}` })
+      }
+      return value
+    }
+  }, {
+    name: 'type',
+    fn: function(schema, key, value) {
+      const fail = message => {
+        this.errors.push(key, value, message)
+      }
+      types.check({ schema, key, value, fail })
+    }
+  }, {
+    name: 'required',
+    fn: function(schema, key, value) {
       if (!value) {
         this.errors.push({ key, value, message: `Property '${key}' is required` })
       }
     }
-  ],
+  }],
 
   makeValidate: schema => {
     const context = {
@@ -62,11 +95,11 @@ const models = {
     }
     return (obj) => {
       const promises = _.forEach(schema, (val, key) => {
-        if (!def.type) throw new Error('Every property must specify type')
+        if (!val.type) throw new Error('Every property must specify type')
         const chain = Promise.resolve(obj[key])
         _.forEach(models.props, prop => {
           if (val[prop.name]) {
-            chain = chain.then(prop.bind(context, key, val))
+            chain = chain.then(prop.fn.bind(context, key, val))
           }
         })
         return chain

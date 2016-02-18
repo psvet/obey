@@ -35,25 +35,26 @@ const models = {
       const context = { errors: [] }
       const validObj = {}
       _.forEach(schema, (val, key) => {
-        if (!val.type) throw new Error('Every property must specify type')
+        if (!val.type) throw new Error('Model properties must define a \'type\'')
         let chain = Promise.resolve(obj[key])
         _.forEach(models.props, prop => {
           if (val[prop.name]) {
             chain = chain.then(prop.fn.bind(context, schema, key)).then(res => {
-              if (res === undefined) return val
-              return res
+              return res === undefined ? val : res
             })
           }
         })
         validObj[key] = chain
       })
-      return Promise.props(validObj)
+      return Promise.props(() => {
+        if (context.errors.length === 0) throw new Error(context.errors)
+        return validObj
+      })
     }
   },
 
   /**
-   * Iterates over raw model schema object and composes a built
-   * model object with validate method
+   * Returns model object with schema obj and validate method
    * @param {Object} obj Raw model object
    * @returns {Object}
    */

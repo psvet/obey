@@ -1,7 +1,13 @@
-/* global describe, it, expect */
+/* global describe, it, expect, beforeEach, afterEach */
 import types from 'src/types.js'
 
 describe('types', () => {
+  describe('validator', () => {
+    it('builds a fail method and returns types.check', () => {
+      const actual = types.validator.call({ errors: [] }, {}, 'foo', 'bar')
+      expect(actual).to.be.a.function
+    })
+  })
   describe('add', () => {
     it('adds a new type to the strategies', () => {
       types.add('lowerCaseOnly', context => {
@@ -14,5 +20,22 @@ describe('types', () => {
     })
   })
   describe('check', () => {
+    let context = {}
+    beforeEach(() => {
+      context = {
+        schema: {
+          type: 'string'
+        },
+        fail: () => null
+      }
+    })
+    it('loads a type strategy and returns a promise which calls the strategy', () => {
+      const actual = types.check(context)
+      expect(actual).to.be.a.function
+    })
+    it('throws an error if the specified type does not exist', () => {
+      context.schema.type = 'nope'
+      expect(types.check.bind(null, context)).to.throw('Type \'nope\' does not exist')
+    })
   })
 })

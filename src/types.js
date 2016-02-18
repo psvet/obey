@@ -18,7 +18,7 @@ const types = {
     const fail = message => {
       this.errors.push(key, value, message)
     }
-    types.check({ schema, key, value, fail })
+    return types.check({ schema, key, value, fail })
   },
 
   /**
@@ -37,9 +37,17 @@ const types = {
    * @returns {Boolean}
    */
   check: context => {
-    if (!types.typeStrategies[context.schema.type]) {
-      // @TODO: try/catch module not required
-      types.strategies[context.schema.type] = require(`./types/${context.schema.type}`).default
+    if (!types.strategies[context.schema.type]) {
+      try {
+        types.strategies[context.schema.type] = require(`./types/${context.schema.type}`).default
+      } catch (e) {
+        /* istanbul ignore else */
+        if (e.message.indexOf('Cannot find module') >= 0) {
+          throw new Error(`Type '${context.schema.type}' does not exist`)
+        } else {
+          throw e
+        }
+      }
     }
     return Promise.resolve(types.strategies[context.schema.type](context))
       .then(() => context.value)

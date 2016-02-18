@@ -27,7 +27,7 @@ const user = obey.model({
 
 The properties used can each be explained as:
 
-* `type`: The type of value, either native or custom (RegEx), see [Types](#types)
+* `type`: The type of value, either native or custom, see [Types](#types)
 * `rule`: Similar to type, a custom method to check validity of value, see [Rules](#rules)
 * `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
 * `generator`: uses a method to create a default value if no value is supplied, see [Generators](#generators)
@@ -57,17 +57,31 @@ The validate method returns a promise (for more information see [Asynchronous Va
 
 ## Types
 
-Types are basic checks against native types, built-in (regex) or custom (regex). The library will check all native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well as a [list of built-in regexes](/src/lib/regex.js).
+Types are basic checks against native types, built-ins or custom. The library will check all native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well as a [list of built-in types](/src/types).
 
 ### Adding New Types
 
-New types (RegEx's) can be added to the obey lib with the `obey.type` method:
+New types can be added to the obey lib with the `obey.type` method:
 
 ```javascript
-obey.type('lowerCaseOnly', /^([a-z])*$/)
+obey.type('lowerCaseOnly', context => {
+  if (!context.value.test(/^([a-z])*$/) {
+    context.fail(`${context.key} must be lowercase`)
+  }
+  return context.value
+})
 ```
 
-The above would add a new type which would then be available for setting in the model configuration for any properties:
+The second argument is the method to run validation and gets passed a `context` object. This object has the following properties:
+
+* `schema`: The entire rule for the property in the model
+* `key`: The name of the property being tested
+* `value`: The value to test
+* `fail`: A function accepting a failure message as an argument
+
+**Important:** The type must return the `context.value`
+
+The above would add a new type which would then be available for setting in the model configuration for any properties.
 
 ```javascript
 label: { type: 'lowerCaseOnly', /* ... */ }

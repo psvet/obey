@@ -4,7 +4,6 @@
 
 import _ from 'lodash'
 import Promise from 'bluebird'
-import validate from './lib/validate'
 import types from './types'
 import modifiers from './modifiers'
 import generators from './generators'
@@ -80,9 +79,10 @@ const models = {
       errors: []
     }
     return (obj) => {
+      /* eslint no-unused-vars: 0 */
       const promises = _.forEach(schema, (val, key) => {
         if (!val.type) throw new Error('Every property must specify type')
-        const chain = Promise.resolve(obj[key])
+        let chain = Promise.resolve(obj[key])
         _.forEach(models.props, prop => {
           if (val[prop.name]) {
             chain = chain.then(prop.fn.bind(context, key, val))

@@ -67,7 +67,6 @@ obey.type('lowerCaseOnly', context => {
   if (!context.value.test(/^([a-z])*$/) {
     context.fail(`${context.key} must be lowercase`)
   }
-  return context.value
 })
 ```
 

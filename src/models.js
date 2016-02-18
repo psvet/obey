@@ -11,7 +11,7 @@ import validators from './lib/validators'
 
 const models = {
   /**
-   * Acts as validation for, and respective order of operations
+   * Acts as validation setup for, and respective order of operations
    * of, properties for a schema-prop configuration
    */
   props: [

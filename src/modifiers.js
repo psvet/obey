@@ -15,7 +15,7 @@ const modifiers = {
    * @param {*} value The value being validated
    */
   validator: function(schema, key, value) {
-    if (modifiers[schema.modifier]) return modifiers[schema.modifier](value)
+    if (modifiers.lib[schema.modifier]) return modifiers.lib[schema.modifier](value)
     throw new Error(`Modifier '${schema.modifier}' does not exist`)
   },
 

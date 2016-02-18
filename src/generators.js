@@ -16,7 +16,7 @@ const generators = {
    */
   validator: function(schema, key, value) {
     if (value !== undefined) return value
-    if (generators[schema.generator]) return generators[schema.generator]()
+    if (generators.lib[schema.generator]) return generators.lib[schema.generator]()
     throw new Error(`Generator '${schema.generator}' does not exist`)
   },
 

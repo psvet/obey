@@ -5,6 +5,20 @@ describe('generators', () => {
   afterEach(() => {
     generators.lib = {}
   })
+  describe('validator', () => {
+    it('returns the original value if defined', () => {
+      const actual = generators.validator({}, 'foo', 'bar')
+      expect(actual).to.equal('bar')
+    })
+    it('returns the modifier method if exists', () => {
+      generators.add('test', () => 'foo')
+      const actual = generators.validator({ generator: 'test' }, 'foo')
+      expect(actual).to.be.a.function
+    })
+    it('throws an error if the generator does not exist', () => {
+      expect(generators.validator.bind(null, { generator: 'nope'})).to.throw('Generator \'nope\' does not exist')
+    })
+  })
   describe('add', () => {
     it('adds a new generator to the lib', () => {
       generators.add('test', () => 'foo')

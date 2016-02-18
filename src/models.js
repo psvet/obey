@@ -26,10 +26,8 @@ const models = {
   ],
 
   makeValidate: schema => {
-    const context = {
-      errors: []
-    }
     return (obj) => {
+      const context = { errors: [] }
       const validObj = {}
       _.forEach(schema, (val, key) => {
         if (!val.type) throw new Error('Every property must specify type')
@@ -57,7 +55,6 @@ const models = {
   build: obj => {
     // Setup model object
     const schema = _.cloneDeep(obj)
-
     // Return built model
     return {
       schema,

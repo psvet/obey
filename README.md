@@ -28,6 +28,7 @@ const user = obey.model({
 The properties used can each be explained as:
 
 * `type`: The type of value, either native or custom, see [Types](#types)
+* `keys`: Property of `object` type, indicates nested object properties
 * `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
 * `generator`: uses a method to create a default value if no value is supplied, see [Generators](#generators)
 * `default`: The default value if no value specified

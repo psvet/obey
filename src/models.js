@@ -25,6 +25,11 @@ const models = {
     { name: 'required', fn: validators.required }
   ],
 
+  /**
+   * Builds validation methods against properties
+   * @param {Object} schema The model configuration schema
+   * @returns {Function}
+   */
   makeValidate: schema => {
     return (obj) => {
       const context = { errors: [] }

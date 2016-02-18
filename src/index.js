@@ -4,7 +4,6 @@
 
 import models from './models'
 import types from './types'
-import rules from './rules'
 import modifiers from './modifiers'
 import generators from './generators'
 
@@ -22,16 +21,9 @@ const obey = {
   /**
    * Creates and stores (or replaces) a type
    * @param {String} name The name of the type
-   * @param {String} regex The regex for the type test
+   * @param {Function} fn The type evaluation method
    */
-  type: (name, regex) => types.add(name, regex),
-
-  /**
-   * Creates and stores a rule
-   * @param {String} name The rule's name
-   * @param {Function} fn The method for the rule
-   */
-  rule: (name, fn) => rules.add(name, fn),
+  type: (name, fn) => types.add(name, fn),
 
   /**
    * Creates and stores a modifier

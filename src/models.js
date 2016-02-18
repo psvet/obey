@@ -6,7 +6,6 @@ import _ from 'lodash'
 import Promise from 'bluebird'
 import validate from './lib/validate'
 import types from './types'
-import rules from './rules'
 import modifiers from './modifiers'
 import generators from './generators'
 
@@ -31,19 +30,6 @@ const models = {
     fn: function(schema, key, value) {
       if (modifiers[schema.modifier]) return modifiers[schema.modifier](value)
       throw new Error(`Modifier '${schema.modifier}' does not exist`)
-    }
-  }, {
-    name: 'rule',
-    fn: function(schema, key, value) {
-      if (!rules[schema.rule]) throw new Error(`Rule '${schema.rule}' does not exist`)
-      return new Promise(resolve => {
-        rules[schema.rule](value)
-          .then(() => resolve(value))
-          .catch(err => {
-            this.errors.push({ key, value, message: err.message })
-            resolve(value)
-          })
-      })
     }
   }, {
     name: 'allowed',

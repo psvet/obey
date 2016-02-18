@@ -9,8 +9,8 @@ Suppose the following:
 ```javascript
 const user = obey.model({
   id: { type: 'uuid', generator: 'uuid', required: true },
-  email: { type: 'email', rule: 'uniqueEmail', required: true },
-  password: { type: 'string', rule: 'validPassword', modifier: 'encryptPassword', required: true }
+  email: { type: 'email', required: true },
+  password: { type: 'string', modifier: 'encryptPassword', required: true }
   fname: { type: 'string', description: 'First Name' },
   lname: { type: 'string', description: 'Last Name' },
   phone: { type: 'phone', min: 7, max: 10 },
@@ -28,7 +28,6 @@ const user = obey.model({
 The properties used can each be explained as:
 
 * `type`: The type of value, either native or custom, see [Types](#types)
-* `rule`: Similar to type, a custom method to check validity of value, see [Rules](#rules)
 * `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
 * `generator`: uses a method to create a default value if no value is supplied, see [Generators](#generators)
 * `default`: The default value if no value specified
@@ -79,39 +78,13 @@ The second argument is the method to run validation and gets passed a `context` 
 * `value`: The value to test
 * `fail`: A function accepting a failure message as an argument
 
-**Important:** The type must return the `context.value`
-
 The above would add a new type which would then be available for setting in the model configuration for any properties.
 
 ```javascript
 label: { type: 'lowerCaseOnly', /* ... */ }
 ```
 
-## Rules
-
-Rules allow more complex, custom validation methods. For example, checking that a value is unique in a datastore before calling a create method.
-
-### Creating Rules
-
-Rules can be added to the obey lib with the `obey.rule` method:
-
-```javascript
-obey.rule('uniqueEmail', (val) => {
-  if (val !== true) {
-    throw new Error('Was not what I expected')
-  }
-})
-```
-
-The above example would add a ruled named `uniqueEmail` which could be called like so:
-
-```javascript
-email: { type: 'email', rule: 'uniqueEmail' }
-```
-
-When the model is validated, the type check (if present) is run first to ensure proper type, then the rule is run to ensure the email is unique.
-
-**Rules can be synchronous or asynchronous (returning a Promise).**
+Types can be synchronous or asynchronous. In both cases they must either return (or resolve) the final value.
 
 ## Modifiers
 
@@ -127,7 +100,7 @@ obey.modifier('upperCase', (val) => val.toUpperCase())
 
 When the model is validated the value in any fields with the `upperCase` modifier will be transformed to uppercase.
 
-**Modifiers can be synchronous or asynchronous (returning a Promise).**
+Modifiers can be synchronous or asynchronous. In both cases they must either return (or resolve) the final value.
 
 ## Generators
 
@@ -149,7 +122,7 @@ created: { type: 'number', generator: 'timestamp' }
 
 When the model is validated, if no `created` property is provided the `timestamp` generator will assign the property a UTC timestamp.
 
-**Generators can be synchronous or asynchronous (returning a Promise).**
+Generators can be synchronous or asynchronous. In both cases they must either return (or resolve) the final value.
 
 ## Asynchronous Validation
 

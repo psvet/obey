@@ -2,11 +2,23 @@
 
 Asynchronous model validation library for those of us with better things to do.
 
+## Summary
+
+Data modelling is a core component to any application. At preset, most libraries and approaches utilize a simple I/O model with pass/fail results.
+
+Obey takes a more in-depth approach, covering not only validation, but also allowing for more verbose validation with asynchronous I/O operations, generation of default values and modification of values to allow for more seamless changes to models with lower impact to data consumers.
+
+## Installation
+
+Obey can be installed via NPM: `npm install obey --save`
+
 ## Creating a Model
 
-Suppose the following:
+The following demonstrates a basic model being created with Obey:
 
 ```javascript
+import obey from 'obey'
+
 const user = obey.model({
   id: { type: 'uuid', generator: 'uuid', required: true },
   email: { type: 'email', required: true },
@@ -55,15 +67,15 @@ user.validate(/* ...some data object */)
   })
 ```
 
-The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will simply resolve, any failures will reject and the array of errors will be returned.
+The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will simply resolve, any failures will reject and the `ValidationError` instance will be returned.
 
 ## Types
 
-Types are basic checks against native types, built-ins or custom. The library will check all native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well as a [list of built-in types](/src/types).
+Types are basic checks against native types, built-ins or custom. The library includes native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well others. A [list of built-in types](/src/types) is contained in the source as individual strategies.
 
 ### Adding New Types
 
-New types can be added to the obey lib with the `obey.type` method:
+New types can be added to the Obey lib with the `obey.type` method:
 
 ```javascript
 obey.type('lowerCaseOnly', context => {
@@ -94,7 +106,7 @@ Modifiers allow custom methods to return values which are modified/transformed v
 
 ### Creating Modifiers
 
-Modifiers can be added to the obey lib with the `obey.modifier` method:
+Modifiers can be added to the Obey lib with the `obey.modifier` method:
 
 ```javascript
 obey.modifier('upperCase', (val) => val.toUpperCase())
@@ -110,13 +122,13 @@ Generators allow custom methods to return values which set the value similar to 
 
 ### Creating Generators
 
-Generators can be added to the obey lib with the `obey.generator` method:
+Generators can be added to the Obey lib with the `obey.generator` method:
 
 ```javascript
 obey.generator('timestamp', () => new Date().getTime())
 ```
 
-The above example would add a generator named `timestamp` which could be called like so:
+The above example would add a generator named `timestamp` which could be assigned as shown below:
 
 ```javascript
 created: { type: 'number', generator: 'timestamp' }
@@ -128,7 +140,7 @@ Generators can be synchronous or asynchronous. In both cases they must either re
 
 ## Asynchronous Validation
 
-Crazy, right? Wrong. Model validation approaches are typically simple, synchronous, and their placement in line with so many asynchronous operations such as request handling, CRUD, and others, often results in adding synchronous validation into promise chains. With obey, the validation step just fits into the chain like so...
+Model validation approaches are typically simple, synchronous, and their placement in line with so many asynchronous operations such as request handling, CRUD, and others, often results in adding synchronous validation into promise chains. With Obey, the validation step just fits into the chain like so...
 
 ```javascript
 // Define a model somewhere in your code...
@@ -141,6 +153,10 @@ user.validate(/* ...some object... */)
   .catch(/* ...deal with the errors... */)
 ```
 
-Additionally, validation has remained simplistic, pass/fail, and flat, but the ability to auto-generate data or run more complex validation rules can further simplify processes in which model valiation is required.
+Additionally, validation has remained simplistic, pass/fail, and flat, but the ability to auto-generate data or run more complex validation rules can further simplify processes in which model valiation is required and prevent minor data errors from resulting in the requirement of further I/O.
 
 Validation which has intellegence and depth means less utilities, processes, and code are required for getting data through any process requiring valid data.
+
+## License
+
+Obey is developed and maintained by [TechnologyAdvice](http://www.technologyadvice.com) and released under the [MIT](LICENSE.txt) license.

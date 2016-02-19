@@ -16,7 +16,7 @@ const types = {
    */
   validator: function(schema, key, value) {
     const fail = message => {
-      this.errors.push(key, value, message)
+      this.errors.push({ key, value, message })
     }
     return types.check({ schema, key, value, fail })
   },

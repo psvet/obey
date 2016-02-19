@@ -39,8 +39,8 @@ const models = {
         let chain = Promise.resolve(obj[key])
         _.forEach(models.props, prop => {
           if (val[prop.name]) {
-            chain = chain.then(prop.fn.bind(context, schema, key)).then(res => {
-              return res === undefined ? val : res
+            chain = chain.then(prop.fn.bind(context, val, key, obj[key])).then(res => {
+              return res === undefined ? obj[key] : res
             })
           }
         })
@@ -48,7 +48,7 @@ const models = {
       })
       return Promise.props(validObj)
         .then(res => {
-          if (context.errors.length > 0) throw new Error(context.errors)
+          if (context.errors.length > 0) throw new Error(JSON.stringify(context.errors, null, 2))
           return res
         })
     }

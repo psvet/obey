@@ -34,7 +34,7 @@ const models = {
     return (obj) => {
       const context = { errors: [] }
       const validObj = {}
-      _.forEach(schema, (val, key) => {
+      _.forOwn(schema, (val, key) => {
         if (!val.type) throw new Error('Model properties must define a \'type\'')
         let chain = Promise.resolve(obj[key])
         _.forEach(models.props, prop => {
@@ -46,10 +46,11 @@ const models = {
         })
         validObj[key] = chain
       })
-      return Promise.props(() => {
-        if (context.errors.length === 0) throw new Error(context.errors)
-        return validObj
-      })
+      return Promise.props(validObj)
+        .then(res => {
+          if (context.errors.length > 0) throw new Error(context.errors)
+          return res
+        })
     }
   },
 

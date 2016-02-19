@@ -4,7 +4,13 @@ import modelFixtures from 'test/fixtures/models'
 
 describe('models', () => {
   describe('makeValidate', () => {
-    // where to begin?
+    it('builds a validate function with a basic configuration', () => {
+      const actual = models.makeValidate(modelFixtures.basic)
+      expect(actual).to.be.a.function
+    })
+    it('throws an error if model property is missing type', () => {
+      expect(models.makeValidate(modelFixtures.missingType)).to.throw('Model properties must define a \'type\'')
+    })
   })
   describe('build', () => {
     it('returns a new object with the schema and validate method', () => {

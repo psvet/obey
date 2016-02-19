@@ -27,7 +27,7 @@ describe('integration', () => {
         expect(e).to.be.instanceOf(ValidationError)
       })
     })
-    it('builds a model and validates when nested object present', () => {
+    it('builds a model and successfully validates when nested object present', () => {
       const testModel = obey.model(modelFixtures.basicNested)
       const testData = {
         name: 'fizz',
@@ -39,7 +39,22 @@ describe('integration', () => {
         expect(res).to.deep.equal(testData)
       })
     })
-    it('builds a model and returns object with default set', () => {
+    it('builds a model and fails validates when nested object present', () => {
+      const testModel = obey.model(modelFixtures.basicNested)
+      const testData = {
+        name: true,
+        someobj: {
+          foo: 5
+        }
+      }
+      return testModel.validate(testData).catch(err => {
+        expect(err.collection).to.deep.equal([
+          { key: 'name', value: true, message: 'Value must be a string' },
+          { key: 'foo', value: 5, message: 'Value must be a string' }
+        ])
+      })
+    })
+    it('builds a model and returns object with a default value set', () => {
       const testModel = obey.model(modelFixtures.basicDefault)
       const testData = {}
       return testModel.validate(testData).then(res => {

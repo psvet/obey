@@ -45,11 +45,13 @@ Using the example above, validation is done by calling the following:
 ```javascript
 user.validate(/* ...some data object */)
   .then((data) => {
-    // Passes back `data` object with passing validations and any
-    // generated or modified values
+    // Passes back `data` object, includes any defaults set,
+    // generated, or modified data
   })
-  .catch(errors => {
-    // Invalid, returns array of errors
+  .catch(error => {
+    // Returns instance of ValidationError
+    // `error.message` => String format error messages
+    // `error.collection` => Raw array of error objects
   })
 ```
 

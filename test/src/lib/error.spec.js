@@ -12,6 +12,6 @@ describe('ValidationError', () => {
     ]
     const err = new ValidationError(origError)
     expect(err.message).to.equal('foo (bar): Not ok\nfizz (buzz): Nope')
-    expect(err.object).to.deep.equal(origError)
+    expect(err.collection).to.deep.equal(origError)
   })
 })

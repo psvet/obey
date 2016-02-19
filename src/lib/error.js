@@ -22,7 +22,7 @@ const getMessages = (msgObjs) => {
 function ValidationError(message) {
   Object.defineProperty(this, 'name', { value: 'ValidationError' })
   Object.defineProperty(this, 'message', { value: getMessages(message).join('\n') })
-  Object.defineProperty(this, 'object', { value: message })
+  Object.defineProperty(this, 'collection', { value: message })
   Error.captureStackTrace(this, this.name)
 }
 

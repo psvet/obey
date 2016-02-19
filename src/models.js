@@ -35,12 +35,12 @@ const models = {
     return (obj) => {
       const context = { errors: [] }
       const validObj = {}
-      _.forOwn(schema, (val, key) => {
-        if (!val.type) throw new Error('Model properties must define a \'type\'')
+      _.forOwn(schema, (cfg, key) => {
+        if (!cfg.type) throw new Error('Model properties must define a \'type\'')
         let chain = Promise.resolve(obj[key])
         _.forEach(models.props, prop => {
-          if (val[prop.name]) {
-            chain = chain.then(prop.fn.bind(context, val, key, obj[key])).then(res => {
+          if (cfg[prop.name]) {
+            chain = chain.then(prop.fn.bind(context, cfg, key)).then(res => {
               return res === undefined ? obj[key] : res
             })
           }

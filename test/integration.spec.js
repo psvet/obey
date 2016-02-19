@@ -27,5 +27,24 @@ describe('integration', () => {
         expect(e).to.be.instanceOf(ValidationError)
       })
     })
+    it('builds a model and validates when nested object present', () => {
+      const testModel = obey.model(modelFixtures.basicNested)
+      const testData = {
+        name: 'fizz',
+        someobj: {
+          foo: 'buzz'
+        }
+      }
+      return testModel.validate(testData).then(res => {
+        expect(res).to.deep.equal(testData)
+      })
+    })
+    it('builds a model and returns object with default set', () => {
+      const testModel = obey.model(modelFixtures.basicDefault)
+      const testData = {}
+      return testModel.validate(testData).then(res => {
+        expect(res.name).to.equal('foo')
+      })
+    })
   })
 })

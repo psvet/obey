@@ -12,5 +12,18 @@ export default {
     fname: { type: 'string', required: true, min: 2, max: 20 },
     lname: { type: 'string', required: true, min: 2, max: 20 },
     type: { type: 'string', allowed: [ 'foo', 'bar' ] }
+  },
+  basicDefault: {
+    name: { type: 'string', default: 'foo' }
+  },
+  basicNested: {
+    name: { type: 'string' },
+    someobj: { type: 'object', keys: {
+      foo: { type: 'string' }
+    }}
+  },
+  // Test with generator
+  synchronousGenerator: {
+    name: { type: 'string', generator: 'genFoo' }
   }
 }

@@ -18,7 +18,7 @@ const types = {
     const fail = message => {
       this.errors.push({ key, value, message })
     }
-    return types.check({ schema, key, value, fail })
+    return types.check({ schema, key, value, fail, errors: this.errors })
   },
 
   /**

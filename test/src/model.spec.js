@@ -1,6 +1,6 @@
 /* global describe, it, expect */
 import models from 'src/models'
-import modelFixtures from 'test/fixtures/models'
+import modelFixtures from 'test/fixtures/core'
 
 describe('models', () => {
   describe('makeValidate', () => {

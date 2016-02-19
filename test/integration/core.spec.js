@@ -1,6 +1,6 @@
 /* global describe, it, expect */
 import obey from 'src/index'
-import modelFixtures from 'test/fixtures/models'
+import modelFixtures from 'test/fixtures/core'
 import ValidationError from 'src/lib/error'
 
 describe('integration:core', () => {
@@ -51,13 +51,6 @@ describe('integration:core', () => {
         { key: 'name', value: true, message: 'Value must be a string' },
         { key: 'foo', value: 5, message: 'Value must be a string' }
       ])
-    })
-  })
-  it('builds a model and returns object with a default value set', () => {
-    const testModel = obey.model(modelFixtures.basicDefault)
-    const testData = {}
-    return testModel.validate(testData).then(res => {
-      expect(res.name).to.equal('foo')
     })
   })
 })

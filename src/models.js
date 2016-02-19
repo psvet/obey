@@ -8,6 +8,7 @@ import types from './types'
 import modifiers from './modifiers'
 import generators from './generators'
 import validators from './lib/validators'
+import ValidationError from './lib/error'
 
 const models = {
   /**
@@ -48,7 +49,7 @@ const models = {
       })
       return Promise.props(validObj)
         .then(res => {
-          if (context.errors.length > 0) throw new Error(JSON.stringify(context.errors, null, 2))
+          if (context.errors.length > 0) throw new ValidationError(null, null, context.errors)
           return res
         })
     }

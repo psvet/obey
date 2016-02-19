@@ -20,17 +20,4 @@ describe('models', () => {
       expect(actual).to.have.property('validate')
     })
   })
-  describe('integration', () => {
-    it('builds a model and successfully validates passing object', () => {
-      const testModel = models.build(modelFixtures.basicExtended)
-      const testData = {
-        fname: 'John',
-        lname: 'Smith',
-        type: 'foo'
-      }
-      return testModel.validate(testData).then(res => {
-        expect(res).to.deep.equal(testData)
-      })
-    })
-  })
 })

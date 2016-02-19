@@ -49,7 +49,7 @@ const models = {
       })
       return Promise.props(validObj)
         .then(res => {
-          if (context.errors.length > 0) throw new ValidationError(null, null, context.errors)
+          if (context.errors.length > 0) throw new ValidationError(context.errors)
           return res
         })
     }

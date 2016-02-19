@@ -3,7 +3,7 @@ import obey from 'src/index'
 import modelFixtures from 'test/fixtures/models'
 import ValidationError from 'src/lib/error'
 
-describe.only('integration', () => {
+describe('integration', () => {
   describe('basic', () => {
     it('builds a model and successfully validates passing object', () => {
       const testModel = obey.model(modelFixtures.basicExtended)

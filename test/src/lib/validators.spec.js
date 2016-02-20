@@ -22,16 +22,41 @@ describe('validators', () => {
       expect(actual).to.equal('bar')
     })
   })
-  describe('allowed', () => {
-    it('creates an error object if value is not in allowed array', () => {
+  describe('allow', () => {
+    it('passes if value is in allow (array)', () => {
       const schema = {
-        allowed: [ 'foo', 'bar' ]
+        allow: [ 'foo', 'bar' ]
       }
-      validators.allowed.call(mockThis, schema, 'test', 'fizz')
+      validators.allow.call(mockThis, schema, 'test', 'foo')
+      expect(mockThis.errors.length).to.equal(0)
+    })
+    it('passes if value is in allow (single)', () => {
+      const schema = {
+        allow: 'foo'
+      }
+      validators.allow.call(mockThis, schema, 'test', 'foo')
+      expect(mockThis.errors.length).to.equal(0)
+    })
+    it('creates an error object if value is not in allow (array)', () => {
+      const schema = {
+        allow: [ 'foo', 'bar' ]
+      }
+      validators.allow.call(mockThis, schema, 'test', 'fizz')
       expect(mockThis.errors[0]).to.deep.equal({
         key: 'test',
         value: 'fizz',
         message: 'Value \'fizz\' is not allowed'
+      })
+    })
+    it('creates an error object if value is not in allow (single)', () => {
+      const schema = {
+        allow: 'foo'
+      }
+      validators.allow.call(mockThis, schema, 'test', 'bar')
+      expect(mockThis.errors[0]).to.deep.equal({
+        key: 'test',
+        value: 'bar',
+        message: 'Value \'bar\' is not allowed'
       })
     })
   })

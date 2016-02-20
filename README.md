@@ -47,7 +47,7 @@ The properties used can each be explained as:
 * `min`: The minimum character length for a string, lowest number, or minimum items in array
 * `max`: The maximum character length for a string, highest number, or maximum items in array
 * `required`: Enforces the field cannot be missing during validation
-* `allow`: Array of allowed values
+* `allow`: Array of allowed values or single allowed value
 * `description`: A description of the property
 
 ## Validating a Model

@@ -12,9 +12,9 @@ describe('integration:validators', () => {
       })
     })
   })
-  describe('allowed', () => {
+  describe('allow', () => {
     it('builds a model and fails validation due to value not being allowed', () => {
-      const testModel = obey.model(modelFixtures.allowed)
+      const testModel = obey.model(modelFixtures.allow)
       const testData = { name: 'quz' }
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{

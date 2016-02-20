@@ -2,8 +2,8 @@ export default {
   default: {
     name: { type: 'string', default: 'foo' }
   },
-  allowed: {
-    name: { type: 'string', allowed: [ 'foo', 'bar' ] }
+  allow: {
+    name: { type: 'string', allow: [ 'foo', 'bar' ] }
   },
   min: {
     name: { type: 'string', min: 10 }

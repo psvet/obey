@@ -19,8 +19,10 @@ const validators = {
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
    */
-  allowed: function(schema, key, value) {
-    if (schema.allowed.indexOf(value) === -1) {
+  allow: function(schema, key, value) {
+    if (Array.isArray(schema.allow) && schema.allow.indexOf(value) === -1) {
+      this.errors.push({ key, value, message: `Value '${value}' is not allowed` })
+    } else if (!Array.isArray(schema.allow) && schema.allow !== value) {
       this.errors.push({ key, value, message: `Value '${value}' is not allowed` })
     }
   },

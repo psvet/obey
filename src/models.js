@@ -19,7 +19,7 @@ const models = {
     { name: 'generator', fn: generators.validator },
     { name: 'default', fn: validators.default },
     { name: 'modifier', fn: modifiers.validator },
-    { name: 'allowed', fn: validators.allowed },
+    { name: 'allow', fn: validators.allow },
     { name: 'min', fn: validators.min },
     { name: 'max', fn: validators.max },
     { name: 'type', fn: types.validator },

@@ -1,8 +1,12 @@
-/* global describe, it, expect */
+/* global describe, it, expect, afterEach */
 import obey from 'src/index'
+import generators from 'src/generators'
 import modelFixtures from 'test/fixtures/generators'
 
 describe('integration:generators', () => {
+  afterEach(() => {
+    generators.lib = {}
+  })
   describe('synchronous', () => {
     it('generates a value synchronously when property has no value', () => {
       const testModel = obey.model(modelFixtures.synchronous)

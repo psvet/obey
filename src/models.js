@@ -29,18 +29,20 @@ const models = {
   /**
    * Builds validation methods against properties
    * @param {Object} schema The model configuration schema
+   * @param {String} (prefix) The parent key name on nested objects
    * @returns {Function}
    */
-  makeValidate: schema => {
+  makeValidate: (schema, prefix = false) => {
     return (obj) => {
       const context = { errors: [] }
       const validObj = {}
       _.forOwn(schema, (cfg, key) => {
         if (!cfg.type) throw new Error('Model properties must define a \'type\'')
+        let keyName = prefix ? `${prefix}.${key}` : key
         let chain = Promise.resolve(obj[key])
         _.forEach(models.props, prop => {
           if (cfg[prop.name]) {
-            chain = chain.then(prop.fn.bind(context, cfg, key)).then(res => {
+            chain = chain.then(prop.fn.bind(context, cfg, keyName)).then(res => {
               return res === undefined ? obj[key] : res
             })
           }

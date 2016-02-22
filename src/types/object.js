@@ -5,7 +5,7 @@ import ValidationError from '../lib/error'
 export default context => {
   // If object has keys that need validation, run build recursively
   if (context.schema.keys) {
-    return models.makeValidate(context.schema.keys)(context.value)
+    return models.makeValidate(context.schema.keys, context.key)(context.value)
       .catch(ValidationError, err => {
         err.collection.forEach(error => {
           context.errors.push(error)

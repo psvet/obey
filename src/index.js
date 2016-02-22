@@ -10,7 +10,7 @@ import generators from './generators'
 /**
  * This object exposes the top-level public api methods for obey
  */
-const obey = {
+export default {
   /**
    * Returns a composed model from a definition object
    * @param {Object} obj The definition object
@@ -39,5 +39,3 @@ const obey = {
    */
   generator: (name, fn) => generators.add(name, fn)
 }
-
-export default obey

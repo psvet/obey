@@ -2,9 +2,10 @@
   "name": "obey",
   "version": "0.0.1",
   "description": "Data modelling and validation library",
-  "main": "build/index.js",
+  "main": "index.js",
   "files": [
-    "build"
+    "build",
+    "index.js"
   ],
   "scripts": {
     "clean": "rm -rf node_modules",

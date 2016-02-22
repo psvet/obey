@@ -1,6 +1,6 @@
 # Obey
 
-Asynchronous model validation library for those of us with better things to do.
+Data model validation library for those of us with better things to do.
 
 ## Installation
 

@@ -14,12 +14,18 @@ The following demonstrates a basic model being created with Obey:
 import obey from 'obey'
 
 const user = obey.model({
-  id: { type: 'uuid', generator: 'uuid', required: true },
+  id: { type: 'uuid:v4', generator: 'uuid', required: true },
   email: { type: 'email', required: true },
   password: { type: 'string', modifier: 'encryptPassword', required: true }
   fname: { type: 'string', description: 'First Name' },
   lname: { type: 'string', description: 'Last Name' },
   phone: { type: 'phone', min: 7, max: 10 },
+  // Array
+  label: { type: 'array', values: {
+    type: 'object', keys: {
+      name: { type: 'string' }
+    }
+  }},
   // Nested object
   address: { type: 'object', keys: {
     street: { type: 'string', max: 45 },
@@ -27,7 +33,11 @@ const user = obey.model({
     state: { type: 'string', max: 2, modifier: 'upperCase' },
     zip: { type: 'number', min: 10000, max: 99999 }
   }},
-  type: { type: 'string', allow: [ 'user', 'admin' ], default: 'user' }
+  // Key-independent object validation
+  permissions: { type: 'object', values: {
+    type: 'string'
+  },
+  account: { type: 'string', allow: [ 'user', 'admin' ], default: 'user' }
 })
 ```
 

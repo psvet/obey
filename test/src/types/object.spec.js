@@ -6,7 +6,8 @@ describe('type:object', () => {
     const context = {
       schema: {
         keys: {}
-      }
+      },
+      fail: sinon.spy()
     }
     const actual = object(context)
     expect(actual).to.be.a.function
@@ -28,5 +29,39 @@ describe('type:object', () => {
     }
     object(context)
     expect(context.fail).to.not.be.called
+  })
+  it('creates no context errors for a passing object with values specification', () => {
+    const context = {
+      value: {
+        bar: 'quz'
+      },
+      fail: sinon.spy(),
+      schema: {
+        values: { type: 'string' }
+      },
+      errors: []
+    }
+    object(context).then(() => {
+      expect(context.errors.length).to.equal(0)
+    })
+  })
+  it('creates errors when an object with values specification fails', () => {
+    const context = {
+      key: 'someObj',
+      value: {
+        fizz: 'buzz',
+        bar: 13,
+        baz: true
+      },
+      fail: sinon.spy(),
+      schema: {
+        type: 'object',
+        values: { type: 'string' }
+      },
+      errors: []
+    }
+    object(context).then(() => {
+      expect(context.errors.length).to.equal(2)
+    })
   })
 })

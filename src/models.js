@@ -32,13 +32,13 @@ const models = {
    * @param {String} (prefix) The parent key name on nested objects
    * @returns {Function}
    */
-  makeValidate: (schema, prefix = false) => {
+  makeValidate: (schema, prefix = '') => {
     return (obj) => {
       const context = { errors: [] }
       const validObj = {}
       _.forOwn(schema, (cfg, key) => {
         if (!cfg.type) throw new Error('Model properties must define a \'type\'')
-        let keyName = prefix ? `${prefix}.${key}` : key
+        let keyName = `${prefix}${key}`
         let chain = Promise.resolve(obj[key])
         _.forEach(models.props, prop => {
           if (cfg[prop.name]) {

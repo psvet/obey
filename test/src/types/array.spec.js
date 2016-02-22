@@ -13,9 +13,37 @@ describe('type:array', () => {
   it('does not call context fail if type is an array', () => {
     const context = {
       value: [ 'foo' ],
-      fail: sinon.spy()
+      fail: sinon.spy(),
+      schema: {}
     }
     array(context)
     expect(context.fail).to.not.be.called
+  })
+  it('passes when the elements of an array match the type specification', () => {
+    const context = {
+      value: [ 'foo', 'bar' ],
+      fail: sinon.spy(),
+      schema: {
+        values: { type: 'string' }
+      },
+      errors: []
+    }
+    array(context).then(() => {
+      expect(context.errors.length).to.equal(0)
+    })
+  })
+  it('fails when an element of an array does not match the type specification', () => {
+    const context = {
+      value: [ 'foo', 73, 34 ],
+      fail: sinon.spy(),
+      schema: {
+        values: { type: 'string' }
+      },
+      key: 'someKey',
+      errors: []
+    }
+    return array(context).then(() => {
+      expect(context.errors.length).to.equal(2)
+    })
   })
 })

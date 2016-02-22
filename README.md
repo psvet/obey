@@ -14,7 +14,7 @@ The following demonstrates a basic model being created with Obey:
 import obey from 'obey'
 
 const user = obey.model({
-  id: { type: 'uuid:v4', generator: 'uuid', required: true },
+  id: { type: 'uuid', generator: 'uuid', required: true },
   email: { type: 'email', required: true },
   password: { type: 'string', modifier: 'encryptPassword', required: true }
   fname: { type: 'string', description: 'First Name' },
@@ -45,6 +45,7 @@ The properties used can each be explained as:
 
 * `type`: The type of value, either native or custom, see [Types](#types)
 * `keys`: Property of `object` type, indicates nested object properties
+* `values`: Defines value specification for arrays or key-independent object tests
 * `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
 * `generator`: uses a method to create a default value if no value is supplied, see [Generators](#generators)
 * `default`: The default value if no value specified

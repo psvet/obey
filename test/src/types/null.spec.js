@@ -10,4 +10,12 @@ describe('type:null', () => {
     nullFn(context)
     expect(context.fail).to.be.calledWith('Value must be null')
   })
+  it('does not call context.fail if type is null', () => {
+    const context = {
+      value: null,
+      fail: sinon.spy()
+    }
+    nullFn(context)
+    expect(context.fail).to.not.be.called
+  })
 })

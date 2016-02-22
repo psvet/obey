@@ -20,4 +20,13 @@ describe('type:object', () => {
     object(context)
     expect(context.fail).to.be.calledWith('Value must be an object')
   })
+  it('does not call context.fail if type is an object (with no keys prop)', () => {
+    const context = {
+      value: { foo: 'bar' },
+      fail: sinon.spy(),
+      schema: {}
+    }
+    object(context)
+    expect(context.fail).to.not.be.called
+  })
 })

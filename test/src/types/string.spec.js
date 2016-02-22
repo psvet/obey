@@ -10,4 +10,12 @@ describe('type:string', () => {
     string(context)
     expect(context.fail).to.be.calledWith('Value must be a string')
   })
+  it('does not call context.fail if type is a string', () => {
+    const context = {
+      value: 'foo',
+      fail: sinon.spy()
+    }
+    string(context)
+    expect(context.fail).to.not.be.called
+  })
 })

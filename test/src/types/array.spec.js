@@ -10,4 +10,12 @@ describe('type:array', () => {
     array(context)
     expect(context.fail).to.be.calledWith('Value must be an array')
   })
+  it('does not call context fail if type is an array', () => {
+    const context = {
+      value: [ 'foo' ],
+      fail: sinon.spy()
+    }
+    array(context)
+    expect(context.fail).to.not.be.called
+  })
 })

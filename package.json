@@ -12,7 +12,8 @@
     "test": "npm run lint && npm run cover",
     "mocha": "babel-node node_modules/.bin/_mocha",
     "cover": "babel-node node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha",
-    "lint": "eslint ./src ./test --fix"
+    "lint": "eslint ./src ./test --fix",
+    "prepublish": "npm test && npm run build"
   },
   "keywords": [
     "obey",

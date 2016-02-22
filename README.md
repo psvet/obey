@@ -2,12 +2,6 @@
 
 Asynchronous model validation library for those of us with better things to do.
 
-## Summary
-
-Data modelling is a core component to any application. At preset, most libraries and approaches utilize a simple I/O model with pass/fail results.
-
-Obey takes a more in-depth approach, covering not only validation, but also allowing for more verbose validation with asynchronous I/O operations, generation of default values and modification of values to allow for more seamless changes to models with lower impact to data consumers.
-
 ## Installation
 
 Obey can be installed via NPM: `npm install obey --save`

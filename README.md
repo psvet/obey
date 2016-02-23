@@ -1,3 +1,7 @@
+[![Circle CI](https://circleci.com/gh/TechnologyAdvice/obey.svg?style=svg)](https://circleci.com/gh/TechnologyAdvice/obey)
+[![Code Climate](https://codeclimate.com/github/TechnologyAdvice/obey/badges/gpa.svg)](https://codeclimate.com/github/TechnologyAdvice/obey)
+[![Test Coverage](https://codeclimate.com/github/TechnologyAdvice/obey/badges/coverage.svg)](https://codeclimate.com/github/TechnologyAdvice/obey/coverage)
+
 # Obey
 
 Data model validation library for those of us with better things to do.

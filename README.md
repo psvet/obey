@@ -1,6 +1,6 @@
-[![Circle CI](https://circleci.com/gh/TechnologyAdvice/obey.svg?style=svg)](https://circleci.com/gh/TechnologyAdvice/obey)
-[![Code Climate](https://codeclimate.com/github/TechnologyAdvice/obey/badges/gpa.svg)](https://codeclimate.com/github/TechnologyAdvice/obey)
-[![Test Coverage](https://codeclimate.com/github/TechnologyAdvice/obey/badges/coverage.svg)](https://codeclimate.com/github/TechnologyAdvice/obey/coverage)
+[![CircleCI](https://img.shields.io/circleci/project/TechnologyAdvice/obey.svg)](https://circleci.com/gh/TechnologyAdvice/obey)
+[![Code Climate](https://img.shields.io/codeclimate/github/TechnologyAdvice/obey.svg)](https://codeclimate.com/github/TechnologyAdvice/obey)
+[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/TechnologyAdvice/obey.svg)](https://codeclimate.com/github/TechnologyAdvice/obey/coverage)
 
 # Obey
 

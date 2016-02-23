@@ -25,9 +25,9 @@ const user = obey.model({
   lname: { type: 'string', description: 'Last Name' },
   phone: { type: 'phone', min: 7, max: 10 },
   // Array
-  label: { type: 'array', values: {
+  labels: { type: 'array', values: {
     type: 'object', keys: {
-      name: { type: 'string' }
+      label: { type: 'string' }
     }
   }},
   // Nested object

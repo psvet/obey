@@ -5,13 +5,13 @@ engines:
     config:
       languages:
       - javascript
+    checks:
+      Similar code:
+        enabled: false
   eslint:
     enabled: true
     checks:
       keyword-spacing:
-        enabled: false
-  checks:
-      Similar code:
         enabled: false
   fixme:
     enabled: true

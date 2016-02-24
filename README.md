@@ -10,14 +10,39 @@ Data model validation library for those of us with better things to do.
 
 Obey can be installed via NPM: `npm install obey --save`
 
-## Creating a Model
+## Creating Rules
 
-The following demonstrates a basic model being created with Obey:
+Rules are core definitions of how a value should be validated:
 
 ```javascript
 import obey from 'obey'
 
-const user = obey.model({
+const firstName = obey.rule({ type: 'string', min: 2, max: 45, required: true })
+```
+
+A rule creates a reference which then can be validated with data:
+
+```javascript
+firstName.validate('John')
+  .then((data) => {
+    // Passes back `data` value, includes any defaults set,
+    // generated, or modified data
+  })
+  .catch(error => {
+    // Returns instance of ValidationError
+    // `error.message` => String format error messages
+    // `error.collection` => Raw array of error objects
+  })
+```
+
+## Creating Models
+
+Models allow for creating validation rule schemas for entire objects. The following demonstrates a basic model being created with Obey:
+
+```javascript
+import obey from 'obey'
+
+const userModel = obey.model({
   id: { type: 'uuid', generator: 'uuid', required: true },
   email: { type: 'email', required: true },
   password: { type: 'string', modifier: 'encryptPassword', required: true }
@@ -45,6 +70,27 @@ const user = obey.model({
 })
 ```
 
+## Validating a Model
+
+Using the example above, validation is done by calling the following:
+
+```javascript
+userModel.validate({ /* some data object */ })
+  .then((data) => {
+    // Passes back `data` object, includes any defaults set,
+    // generated, or modified data
+  })
+  .catch(error => {
+    // Returns instance of ValidationError
+    // `error.message` => String format error messages
+    // `error.collection` => Raw array of error objects
+  })
+```
+
+The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will simply resolve, any failures will reject and the `ValidationError` instance will be returned.
+
+## Properties of Rules
+
 The properties used can each be explained as:
 
 * `type`: The type of value, either native or custom, see [Types](#types)
@@ -58,25 +104,6 @@ The properties used can each be explained as:
 * `required`: Enforces the field cannot be missing during validation
 * `allow`: Array of allowed values or single allowed value
 * `description`: A description of the property
-
-## Validating a Model
-
-Using the example above, validation is done by calling the following:
-
-```javascript
-user.validate(/* ...some data object */)
-  .then((data) => {
-    // Passes back `data` object, includes any defaults set,
-    // generated, or modified data
-  })
-  .catch(error => {
-    // Returns instance of ValidationError
-    // `error.message` => String format error messages
-    // `error.collection` => Raw array of error objects
-  })
-```
-
-The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will simply resolve, any failures will reject and the `ValidationError` instance will be returned.
 
 ## Types
 

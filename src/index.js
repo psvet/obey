@@ -2,6 +2,7 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 
+import rules from './rules'
 import models from './models'
 import types from './types'
 import modifiers from './modifiers'
@@ -11,6 +12,13 @@ import generators from './generators'
  * This object exposes the top-level public api methods for obey
  */
 export default {
+  /**
+   * Returns a composed rule from a definition object
+   * @param {Object} def The rule definition
+   * @returns {Object}
+   */
+  rule: def => rules.add(def),
+
   /**
    * Returns a composed model from a definition object
    * @param {Object} obj The definition object

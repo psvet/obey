@@ -4,6 +4,7 @@ machine:
 dependencies:
   override:
     - npm install -g codeclimate-test-reporter
+    - npm install -g snyk
 general:
   artifacts:
     - coverage

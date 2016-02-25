@@ -24,10 +24,18 @@ const rules = {
     { name: 'required', fn: validators.required }
   ],
 
-  makeValidate: (def) => {
-    return rules.validate.bind(null, def)
-  },
+  /**
+   * Binds rule definition in validate method
+   * @param {Object} def The rule definition object
+   */
+  makeValidate: def => rules.validate.bind(null, def),
 
+  /**
+   * Processes definition validation
+   * @param {Object} def The rule definition object
+   * @param {*} data The data to validate
+   * @param {String} (key) Key for tracking parent in nested iterations
+   */
   validate: (def, data, key = null) => {
     const context = { errors: [] }
     if (!def.type) throw new Error('Model properties must define a \'type\'')

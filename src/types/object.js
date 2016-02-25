@@ -13,7 +13,6 @@ export default context => {
     })
   }
   const prefix = context.key ? `${context.key}.` : ''
-  // If object has keys that need validation, run build recursively
   if (context.def.keys) {
     const promises = {}
     _.forOwn(context.def.keys, (keyDef, key) => {

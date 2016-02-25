@@ -5,6 +5,13 @@ describe('ValidationError', () => {
   it('creates a new instance of ValidationError', () => {
     expect(new ValidationError([])).to.be.instanceOf(ValidationError)
   })
+  it('creates an error without a key if key is not present', () => {
+    const origError = [
+      { value: 'foo', message: 'Not cool, bro' }
+    ]
+    const err = new ValidationError(origError)
+    expect(err.message).to.equal('foo: Not cool, bro')
+  })
   it('contains message and object (raw) properties', () => {
     const origError = [
       { key: 'foo', value: 'bar', message: 'Not ok' },

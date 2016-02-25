@@ -3,6 +3,7 @@
  */
 
 import _ from 'lodash'
+import rules from './rules'
 
 const models = {
   /**
@@ -11,11 +12,7 @@ const models = {
    * @param {String} (prefix) The parent key name on nested objects
    * @returns {Function}
    */
-  makeValidate: (schema, prefix = '') => {
-    return (obj) => {
-      const context = { errors: [] }
-      _.forOwn(schema, (def, key) => {})
-    }
+  /* makeValidate: (schema, prefix = '') => {
     /*return (obj) => {
       const context = { errors: [] }
       const validObj = {}
@@ -38,8 +35,8 @@ const models = {
           return res
         })
     }
-    */
-  },
+
+  }, */
 
   /**
    * Returns model object with schema obj and validate method
@@ -47,12 +44,14 @@ const models = {
    * @returns {Object}
    */
   build: obj => {
+    // Sanity check
+    if (!_.isObject(obj)) throw new Error('Model must be an object')
     // Setup model object
     const object = _.cloneDeep(obj)
     // Return built model
     return {
       object,
-      validate: models.makeValidate(object)
+      validate: data => rules.add({ type: 'object', keys: object }).validate(data)
     }
   }
 }

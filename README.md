@@ -4,7 +4,7 @@
 
 # Obey
 
-Data model validation library for those of us with better things to do.
+Data validation and modelling library for those of us with better things to do.
 
 ## Installation
 

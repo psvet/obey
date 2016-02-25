@@ -10,14 +10,14 @@ const generators = {
 
   /**
    * Validator method, used by model
-   * @param {Object} schema The property configuration
+   * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
    */
-  validator: function(schema, key, value) {
+  validator: function(def, key, value) {
     if (value !== undefined) return value
-    if (generators.lib[schema.generator]) return generators.lib[schema.generator]()
-    throw new Error(`Generator '${schema.generator}' does not exist`)
+    if (generators.lib[def.generator]) return generators.lib[def.generator]()
+    throw new Error(`Generator '${def.generator}' does not exist`)
   },
 
   /**

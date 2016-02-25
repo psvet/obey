@@ -123,7 +123,7 @@ obey.type('lowerCaseOnly', context => {
 
 The second argument is the method to run validation and gets passed a `context` object. This object has the following properties:
 
-* `schema`: The entire rule for the property in the model
+* `def`: The entire rule for the property in the model
 * `key`: The name of the property being tested
 * `value`: The value to test
 * `fail`: A function accepting a failure message as an argument

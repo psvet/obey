@@ -3,7 +3,6 @@
  */
 
 import rules from './rules'
-import models from './models'
 import types from './types'
 import modifiers from './modifiers'
 import generators from './generators'
@@ -17,14 +16,14 @@ export default {
    * @param {Object} def The rule definition
    * @returns {Object}
    */
-  rule: def => rules.add(def),
+  rule: def => rules.build(def),
 
   /**
    * Returns a composed model from a definition object
    * @param {Object} obj The definition object
    * @returns {Object}
    */
-  model: obj => models.build(obj),
+  model: obj => rules.build({ type: 'object', keys: obj }),
 
   /**
    * Creates and stores (or replaces) a type

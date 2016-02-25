@@ -1,19 +1,13 @@
 /* global expect, sinon, describe, it, before, after */
 import _ from 'lodash'
 import obey from 'src/index'
-import model from 'src/models'
 import types from 'src/types'
 import modifiers from 'src/modifiers'
 import generators from 'src/generators'
 
 describe('obey', () => {
   describe('model', () => {
-    before(() => sinon.spy(model, 'build'))
-    after(() => { model.build.restore() })
-    it('creates a composed model based on schema configuration', () => {
-      obey.model({})
-      expect(model.build).to.be.called
-    })
+    it('creates a composed model based on def configuration')
   })
   describe('type', () => {
     before(() => sinon.spy(types, 'add'))

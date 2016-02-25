@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import models from '../models'
+import rules from '../rules'
 import Promise from 'bluebird'
 import ValidationError from '../lib/error'
 
@@ -12,15 +12,20 @@ export default context => {
       context.errors.push(error)
     })
   }
+  const prefix = context.key ? `${context.key}.` : ''
   // If object has keys that need validation, run build recursively
-  if (context.schema.keys) {
-    return models.makeValidate(context.schema.keys, `${context.key}.`)(context.value)
-      .catch(ValidationError, getErrors)
+  if (context.def.keys) {
+    const promises = {}
+    _.forOwn(context.def.keys, (keyDef, key) => {
+      promises[key] = rules.validate(keyDef, context.value[key], `${prefix}${key}`)
+        .catch(ValidationError, getErrors)
+    })
+    return Promise.props(promises)
   }
-  if (context.schema.values) {
+  if (context.def.values) {
     const promises = {}
     _.forOwn(context.value, (val, key) => {
-      promises[key] = models.makeValidate({ [key]: context.schema.values }, `${context.key}.`)({ [key]: val })
+      promises[key] = rules.validate(context.def.values, val, `${prefix}${key}`)
         .catch(ValidationError, getErrors)
     })
     return Promise.props(promises)

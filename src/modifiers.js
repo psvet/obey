@@ -10,13 +10,13 @@ const modifiers = {
 
   /**
    * Validator method, used by model
-   * @param {Object} schema The property configuration
+   * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
    */
-  validator: function(schema, key, value) {
-    if (modifiers.lib[schema.modifier]) return modifiers.lib[schema.modifier](value)
-    throw new Error(`Modifier '${schema.modifier}' does not exist`)
+  validator: function(def, key, value) {
+    if (modifiers.lib[def.modifier]) return modifiers.lib[def.modifier](value)
+    throw new Error(`Modifier '${def.modifier}' does not exist`)
   },
 
   /**

@@ -4,13 +4,14 @@
 import types from './types'
 import modifiers from './modifiers'
 import generators from './generators'
+import Promise from 'bluebird'
 import validators from './lib/validators'
 import ValidationError from './lib/error'
 
 const rules = {
   /**
    * Acts as validation setup for, and respective order of operations
-   * of, properties for a schema-prop configuration
+   * of, properties for a def-prop configuration
    */
   props: [
     { name: 'generator', fn: generators.validator },
@@ -22,13 +23,38 @@ const rules = {
     { name: 'type', fn: types.validator },
     { name: 'required', fn: validators.required }
   ],
+
+  makeValidate: (def) => {
+    return rules.validate.bind(null, def)
+  },
+
+  validate: (def, data, key = null) => {
+    const context = { errors: [] }
+    if (!def.type) throw new Error('Model properties must define a \'type\'')
+    let chain = Promise.resolve(data)
+    rules.props.forEach(prop => {
+      if (def[prop.name]) {
+        chain = chain.then(prop.fn.bind(context, def, key)).then(res => {
+          return res === undefined ? data : res
+        })
+      }
+    })
+    return chain.then(res => {
+      if (context.errors.length > 0) throw new ValidationError(context.errors)
+      return res
+    })
+  },
+
   /**
    * Adds new rule
    * @param {Object} def The rule definition
    * @returns {Object}
    */
-  add: (def) => {
-    return def
+  build: (def) => {
+    return {
+      def,
+      validate: rules.makeValidate(def)
+    }
   }
 }
 

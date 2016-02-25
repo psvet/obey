@@ -10,7 +10,7 @@
 const getMessages = (msgObjs) => {
   const messages = []
   msgObjs.forEach(obj => {
-    messages.push(`${obj.key} (${obj.value}): ${obj.message}`)
+    messages.push((obj.key ? `${obj.key} ` : '') + `(${obj.value}): ${obj.message}`)
   })
   return messages
 }

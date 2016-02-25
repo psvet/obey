@@ -1,18 +1,25 @@
 /* global expect, sinon, describe, it, before, after */
 import _ from 'lodash'
 import obey from 'src/index'
-import model from 'src/models'
+import rules from 'src/rules'
 import types from 'src/types'
 import modifiers from 'src/modifiers'
 import generators from 'src/generators'
 
 describe('obey', () => {
+  describe('rule', () => {
+    before(() => sinon.spy(rules, 'build'))
+    after(() => { rules.build.restore })
+    it('creates a composed rule based on def configuration', () => {
+      obey.rule({})
+      expect(rules.build).to.be.calledWith({})
+    })
+  })
   describe('model', () => {
-    before(() => sinon.spy(model, 'build'))
-    after(() => { model.build.restore() })
-    it('creates a composed model based on schema configuration', () => {
+    after(() => { rules.build.restore })
+    it('creates a composed model based on def configuration', () => {
       obey.model({})
-      expect(model.build).to.be.called
+      expect(rules.build).to.be.calledWith({ type: 'object', keys: {} })
     })
   })
   describe('type', () => {

@@ -2,7 +2,7 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 
-import models from './models'
+import rules from './rules'
 import types from './types'
 import modifiers from './modifiers'
 import generators from './generators'
@@ -12,11 +12,18 @@ import generators from './generators'
  */
 export default {
   /**
+   * Returns a composed rule from a definition object
+   * @param {Object} def The rule definition
+   * @returns {Object}
+   */
+  rule: def => rules.build(def),
+
+  /**
    * Returns a composed model from a definition object
    * @param {Object} obj The definition object
    * @returns {Object}
    */
-  model: obj => models.build(obj),
+  model: obj => rules.build({ type: 'object', keys: obj }),
 
   /**
    * Creates and stores (or replaces) a type

@@ -4,7 +4,7 @@ import object from 'src/types/object'
 describe('type:object', () => {
   it('iterates sub-object if keys prop is present', () => {
     const context = {
-      schema: {
+      def: {
         keys: {}
       },
       fail: sinon.spy()
@@ -16,7 +16,7 @@ describe('type:object', () => {
     const context = {
       value: 'foo',
       fail: sinon.spy(),
-      schema: {}
+      def: {}
     }
     object(context)
     expect(context.fail).to.be.calledWith('Value must be an object')
@@ -25,7 +25,7 @@ describe('type:object', () => {
     const context = {
       value: { foo: 'bar' },
       fail: sinon.spy(),
-      schema: {}
+      def: {}
     }
     object(context)
     expect(context.fail).to.not.be.called
@@ -36,7 +36,7 @@ describe('type:object', () => {
         bar: 'quz'
       },
       fail: sinon.spy(),
-      schema: {
+      def: {
         values: { type: 'string' }
       },
       errors: []
@@ -54,7 +54,7 @@ describe('type:object', () => {
         baz: true
       },
       fail: sinon.spy(),
-      schema: {
+      def: {
         type: 'object',
         values: { type: 'string' }
       },

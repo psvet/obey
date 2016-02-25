@@ -23,7 +23,7 @@ describe('types', () => {
     let context = {}
     beforeEach(() => {
       context = {
-        schema: {
+        def: {
           type: 'string'
         },
         fail: () => null
@@ -34,7 +34,7 @@ describe('types', () => {
       expect(actual).to.be.a.function
     })
     it('throws an error if the specified type does not exist', () => {
-      context.schema.type = 'nope'
+      context.def.type = 'nope'
       expect(types.check.bind(null, context)).to.throw('Type \'nope\' does not exist')
     })
   })

@@ -14,7 +14,7 @@ describe('type:array', () => {
     const context = {
       value: [ 'foo' ],
       fail: sinon.spy(),
-      schema: {}
+      def: {}
     }
     array(context)
     expect(context.fail).to.not.be.called
@@ -23,7 +23,7 @@ describe('type:array', () => {
     const context = {
       value: [ 'foo', 'bar' ],
       fail: sinon.spy(),
-      schema: {
+      def: {
         values: { type: 'string' }
       },
       errors: []
@@ -36,7 +36,7 @@ describe('type:array', () => {
     const context = {
       value: [ 'foo', 73, 34 ],
       fail: sinon.spy(),
-      schema: {
+      def: {
         values: { type: 'string' }
       },
       key: 'someKey',

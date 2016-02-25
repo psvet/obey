@@ -20,6 +20,8 @@ import obey from 'obey'
 const firstName = obey.rule({ type: 'string', min: 2, max: 45, required: true })
 ```
 
+#### Validating with a Rule
+
 A rule creates a reference which then can be validated with data:
 
 ```javascript
@@ -37,7 +39,7 @@ firstName.validate('John')
 
 ## Creating Models
 
-Models allow for creating validation rule schemas for entire objects. The following demonstrates a basic model being created with Obey:
+Models allow for creating validation rules for entire object schemas. The following demonstrates a basic model being created with Obey:
 
 ```javascript
 import obey from 'obey'
@@ -70,9 +72,9 @@ const userModel = obey.model({
 })
 ```
 
-## Validating a Model
+#### Validating with a Model
 
-Using the example above, validation is done by calling the following:
+Using the example above, validation is done, similar to validating with a rule, by calling the `validate` method and supplying data:
 
 ```javascript
 userModel.validate({ /* some data object */ })
@@ -87,7 +89,7 @@ userModel.validate({ /* some data object */ })
   })
 ```
 
-The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will simply resolve, any failures will reject and the `ValidationError` instance will be returned.
+The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will resolve with the data, any failures will reject and the `ValidationError` instance will be returned.
 
 ## Properties of Rules
 
@@ -107,7 +109,7 @@ The properties used can each be explained as:
 
 ## Types
 
-Types are basic checks against native types, built-ins or custom. The library includes native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well others. A [list of built-in types](/src/types) is contained in the source as individual strategies.
+Types are basic checks against native types, built-ins or customs. The library includes native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well other common types. A [list of built-in types](/src/types) is contained in the source.
 
 ### Adding New Types
 
@@ -121,20 +123,22 @@ obey.type('lowerCaseOnly', context => {
 })
 ```
 
-The second argument is the method to run validation and gets passed a `context` object. This object has the following properties:
+The second argument is the method to run validation and gets passed a `context` object by the library. This object has the following properties:
 
 * `def`: The entire rule for the property in the model
-* `key`: The name of the property being tested
+* `key`: The name of the property being tested (if an element in a model/object)
 * `value`: The value to test
 * `fail`: A function accepting a failure message as an argument
 
 The above would add a new type which would then be available for setting in the model configuration for any properties.
 
 ```javascript
-label: { type: 'lowerCaseOnly', /* ... */ }
+label: { type: 'lowerCaseOnly', /* ...additional config... */ }
 ```
 
-Types can be synchronous or asynchronous. In both cases they must either return (or resolve) the final value.
+Types can be synchronous or asynchronous. Types _can_ return/resolve a value, though it is not required and is recommended any coercion be handled with a modifier.
+
+Regardless of if a value is returned/resolved, asynchronous types must resolve. Errors should be handled with the `context.fail()` method.
 
 ## Modifiers
 
@@ -145,10 +149,10 @@ Modifiers allow custom methods to return values which are modified/transformed v
 Modifiers can be added to the Obey lib with the `obey.modifier` method:
 
 ```javascript
-obey.modifier('upperCase', (val) => val.toUpperCase())
+obey.modifier('upperCase', val => val.toUpperCase())
 ```
 
-When the model is validated the value in any fields with the `upperCase` modifier will be transformed to uppercase.
+When the model is validated, the value in any fields with the `upperCase` modifier will be transformed to uppercase.
 
 Modifiers can be synchronous or asynchronous. In both cases they must either return (or resolve) the final value.
 
@@ -176,22 +180,20 @@ Generators can be synchronous or asynchronous. In both cases they must either re
 
 ## Asynchronous Validation
 
-Model validation approaches are typically simple, synchronous, and their placement in line with so many asynchronous operations such as request handling, CRUD, and others, often results in adding synchronous validation into promise chains. With Obey, the validation step just fits into the chain like so...
+The goal with Obey is to provide more than just standard type/regex checks against data to validate values and models. The ability to write both synchronous and asynchronous checks, generators, and modifiers, and include data coercion in the validation simplifies the process of validation and checking before moving onto data source interactions.
+
+Additionally, with the widespread use of promises, this structure fits well in the scheme of data processing in general:
 
 ```javascript
 // Define a model somewhere in your code...
 const user = obey.model(/* ...Model Definition... */)
 
 // Use it to validate before creating a record...
-user.validate(/* ...some object... */)
+user.validate(/* ...some data object... */)
   .then(createUser)
-  .then(/* ...respond, or something... */)
-  .catch(/* ...deal with the errors... */)
+  .then(/* ...response or other action... */)
+  .catch(/* ...handle errors... */)
 ```
-
-Additionally, validation has remained simplistic, pass/fail, and flat, but the ability to auto-generate data or run more complex validation rules can further simplify processes in which model valiation is required and prevent minor data errors from resulting in the requirement of further I/O.
-
-Validation which has intellegence and depth means less utilities, processes, and code are required for getting data through any process requiring valid data.
 
 ## License
 

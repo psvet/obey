@@ -10,11 +10,6 @@ import ValidationError from './lib/error'
 
 const rules = {
   /**
-   * Strict mode flag, default `true`
-   */
-  strict: true,
-
-  /**
    * Acts as validation setup for, and respective order of operations
    * of, properties for a def-prop configuration
    */
@@ -65,7 +60,7 @@ const rules = {
    * @returns {Object}
    */
   build: (def, strict) => {
-    if (!strict && !def.hasOwnProperty('strict')) def.strict = false
+    if (strict === false && !def.hasOwnProperty('strict')) def.strict = false
     return {
       def,
       validate: rules.makeValidate(def)

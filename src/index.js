@@ -12,11 +12,6 @@ import generators from './generators'
  */
 export default {
   /**
-   * Sets strict mode for object checking
-   * @param {Boolean} flag Denotes whether or not strict-checking is enforced
-   */
-  strict: flag => { rules.strict = flag },
-  /**
    * Returns a composed rule from a definition object
    * @param {Object} def The rule definition
    * @returns {Object}

@@ -107,17 +107,29 @@ The properties used can each be explained as:
 * `max`: The maximum character length for a string, highest number, or maximum items in array
 * `required`: Enforces the field cannot be missing during validation
 * `allow`: Array of allowed values or single allowed value
+* `strict`: Enable or disable strict checking of an object, see (#strict-mode)
 * `description`: A description of the property
 
 ## Strict Mode
 
 By default, Obey enforces strict matching on objects; meaning an object must define any keys that will be present in the data object being validated.
 
-To disable strict mode simply set to false:
+To disable strict mode globally simply set to false:
 
 ```javascript
 obey.strict(false)
 ```
+
+Obey also allows rules and models to have strict mode overwritten independently:
+
+```javascript
+// Set indivudal rule
+obey.rule({ /* Rule definition */ }, false)
+// Set for model
+obey.model({ /* Model definition */}, false)
+```
+
+The methods above are for general overrides, to (for example) set strict mode to false on a single object in a model, adding `strict: false` to the definition will overrid for that single object.
 
 ## Types
 

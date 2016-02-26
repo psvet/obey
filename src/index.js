@@ -21,14 +21,14 @@ export default {
    * @param {Object} def The rule definition
    * @returns {Object}
    */
-  rule: def => rules.build(def),
+  rule: (def, strict = true) => rules.build(def, strict),
 
   /**
    * Returns a composed model from a definition object
    * @param {Object} obj The definition object
    * @returns {Object}
    */
-  model: obj => rules.build({ type: 'object', keys: obj }),
+  model: (obj, strict = true) => rules.build({ type: 'object', keys: obj }, strict),
 
   /**
    * Creates and stores (or replaces) a type

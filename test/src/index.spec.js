@@ -21,6 +21,10 @@ describe('obey', () => {
       obey.model({})
       expect(rules.build).to.be.calledWith({ type: 'object', keys: {}, strict: true })
     })
+    it('creates a composed model based on def config with strict set to false', () => {
+      obey.model({}, false)
+      expect(rules.build).to.be.calledWith({ type: 'object', keys: {}, strict: false })
+    })
   })
   describe('type', () => {
     before(() => sinon.spy(types, 'add'))

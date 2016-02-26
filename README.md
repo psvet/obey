@@ -109,6 +109,16 @@ The properties used can each be explained as:
 * `allow`: Array of allowed values or single allowed value
 * `description`: A description of the property
 
+## Strict Mode
+
+By default, Obey enforces strict matching on objects; meaning an object must define any keys that will be present in the data object being validated.
+
+To disable strict mode simply set to false:
+
+```javascript
+obey.strict(false)
+```
+
 ## Types
 
 Types are basic checks against native types, built-ins or customs. The library includes native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well other common types. A [list of built-in types](/src/types) is contained in the source.

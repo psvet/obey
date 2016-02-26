@@ -10,6 +10,11 @@ import ValidationError from './lib/error'
 
 const rules = {
   /**
+   * Strict mode flag, default `true`
+   */
+  strict: true,
+
+  /**
    * Acts as validation setup for, and respective order of operations
    * of, properties for a def-prop configuration
    */

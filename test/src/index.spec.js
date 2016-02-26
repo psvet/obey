@@ -7,6 +7,15 @@ import modifiers from 'src/modifiers'
 import generators from 'src/generators'
 
 describe('obey', () => {
+  describe('strict', () => {
+    after(() => {
+      rules.strict = true
+    })
+    it('sets the strict mode for object key checking', () => {
+      obey.strict(false)
+      expect(rules.strict).to.be.false
+    })
+  })
   describe('rule', () => {
     before(() => sinon.spy(rules, 'build'))
     after(() => { rules.build.restore })

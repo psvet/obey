@@ -21,9 +21,10 @@ export default {
   /**
    * Returns a composed model from a definition object
    * @param {Object} obj The definition object
+   * @param {Boolean} (strict) Whether or not to enforce strict validation
    * @returns {Object}
    */
-  model: obj => rules.build({ type: 'object', keys: obj }),
+  model: (obj, strict = true) => rules.build({ type: 'object', keys: obj, strict }),
 
   /**
    * Creates and stores (or replaces) a type

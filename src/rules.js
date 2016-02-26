@@ -58,7 +58,7 @@ const rules = {
    * @param {Object} def The rule definition
    * @returns {Object}
    */
-  build: (def) => {
+  build: def => {
     return {
       def,
       validate: rules.makeValidate(def)

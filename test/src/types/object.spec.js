@@ -64,4 +64,45 @@ describe('type:object', () => {
       expect(context.errors.length).to.equal(2)
     })
   })
+  it('creates an error if key in data is not present in definition (strict = true)', () => {
+    const context = {
+      key: 'someObj',
+      value: {
+        foo: 'bar',
+        fizz: 'buzz'
+      },
+      def: {
+        type: 'object',
+        keys: {
+          fizz: { type: 'string' }
+        }
+      },
+      errors: [],
+      fail: sinon.spy()
+    }
+    object(context).then(() => {
+      expect(context.fail).to.be.calledWith('\'foo\' is not an allowed property')
+    })
+  })
+  it('allows non-defined properties to be passed (strict = false)', () => {
+    const context = {
+      key: 'someObj',
+      value: {
+        foo: 'bar',
+        fizz: 'buzz'
+      },
+      def: {
+        type: 'object',
+        keys: {
+          fizz: { type: 'string' }
+        },
+        strict: false
+      },
+      errors: [],
+      fail: sinon.spy()
+    }
+    object(context).then(() => {
+      expect(context.fail).to.not.be.called
+    })
+  })
 })

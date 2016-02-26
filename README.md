@@ -114,16 +114,17 @@ The properties used can each be explained as:
 
 By default, Obey enforces strict matching on objects; meaning an object must define any keys that will be present in the data object being validated.
 
-To disable strict mode on a rule or object:
+To disable strict mode on a rule or object set the `strict` property to false:
 
 ```javascript
-// Set indivudal rule
-obey.rule({ /* Rule definition */ }, false)
-// Set for model
-obey.model({ /* Model definition */}, false)
+foo: { type: 'object', strict: false, keys: { /* ... */ } }
 ```
 
-The methods above are for general overrides, to (for example) set strict mode to false on a single object in a model, adding `strict: false` to the definition will override for that single object.
+To disable strict mode on a model pass the (optional) strict argument as `false`:
+
+```javascript
+const model = obey.model({ /* definition */ }, false)
+```
 
 ## Types
 

@@ -14,6 +14,15 @@ export default context => {
   }
   const prefix = context.key ? `${context.key}.` : ''
   if (context.def.keys) {
+    // Ensure strict key match
+    if (!context.def.hasOwnProperty('strict') || context.def.strict) {
+      _.forOwn(context.value, (val, key) => {
+        if (!context.def.keys[key]) {
+          context.errors.push({ key, val, message: `'${key}' is not an allowed property` })
+        }
+      })
+    }
+    // Build validation checks
     const promises = {}
     _.forOwn(context.def.keys, (keyDef, key) => {
       promises[key] = rules.validate(keyDef, context.value[key], `${prefix}${key}`)

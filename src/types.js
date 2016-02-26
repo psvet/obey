@@ -15,6 +15,7 @@ const types = {
    * @param {*} value The value being validated
    */
   validator: function(def, key, value) {
+    this.errors = this.errors || []
     const fail = message => {
       this.errors.push({ key, value, message })
     }

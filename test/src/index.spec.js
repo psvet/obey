@@ -19,7 +19,7 @@ describe('obey', () => {
     after(() => { rules.build.restore })
     it('creates a composed model based on def configuration', () => {
       obey.model({})
-      expect(rules.build).to.be.calledWith({ type: 'object', keys: {} })
+      expect(rules.build).to.be.calledWith({ type: 'object', keys: {}, strict: true })
     })
   })
   describe('type', () => {

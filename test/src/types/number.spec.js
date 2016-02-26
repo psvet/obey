@@ -10,6 +10,14 @@ describe('type:number', () => {
     number(context)
     expect(context.fail).to.be.calledWith('Value must be a number')
   })
+  it('call context.fail if type is NaN', () => {
+    const context = {
+      value: NaN,
+      fail: sinon.spy()
+    }
+    number(context)
+    expect(context.fail).to.be.calledWith('Value must be a number')
+  })
   it('does not call context.fail if type is a number', () => {
     const context = {
       value: 73,

@@ -81,7 +81,7 @@ describe('type:object', () => {
       fail: sinon.spy()
     }
     object(context).then(() => {
-      expect(context.errors.length).to.equal(1)
+      expect(context.fail).to.be.calledWith('\'foo\' is not an allowed property')
     })
   })
   it('allows non-defined properties to be passed (strict = false)', () => {
@@ -102,7 +102,7 @@ describe('type:object', () => {
       fail: sinon.spy()
     }
     object(context).then(() => {
-      expect(context.errors.length).to.equal(0)
+      expect(context.fail).to.not.be.called
     })
   })
 })

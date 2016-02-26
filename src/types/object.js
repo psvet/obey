@@ -18,7 +18,7 @@ export default context => {
     if (!context.def.hasOwnProperty('strict') || context.def.strict) {
       _.forOwn(context.value, (val, key) => {
         if (!context.def.keys[key]) {
-          context.errors.push({ key, val, message: `'${key}' is not an allowed property` })
+          context.fail(`'${key}' is not an allowed property`)
         }
       })
     }

@@ -56,11 +56,9 @@ const rules = {
   /**
    * Adds new rule
    * @param {Object} def The rule definition
-   * @param {Boolean} (strict) Override for strict comparison
    * @returns {Object}
    */
-  build: (def, strict) => {
-    if (strict === false && !def.hasOwnProperty('strict')) def.strict = false
+  build: def => {
     return {
       def,
       validate: rules.makeValidate(def)

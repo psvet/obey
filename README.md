@@ -107,7 +107,7 @@ The properties used can each be explained as:
 * `max`: The maximum character length for a string, highest number, or maximum items in array
 * `required`: Enforces the field cannot be missing during validation
 * `allow`: Array of allowed values or single allowed value
-* `strict`: Enable or disable strict checking of an object, see (#strict-mode)
+* `strict`: Enable or disable strict checking of an object, see [Strict Mode](#strict-mode)
 * `description`: A description of the property
 
 ## Strict Mode

@@ -9,6 +9,20 @@ const types = {
   strategies: {},
 
   /**
+   * Checks for and applies sub-type to definition
+   * @param {Object} def The rule defintion
+   * @returns {Object}
+   */
+  checkSubType: def => {
+    if (def.type.indexOf(':') >= 0) {
+      const fullType = def.type.split(':')
+      def.type = fullType[0]
+      def.sub = fullType[1]
+    }
+    return def
+  },
+
+  /**
    * Validator method, used by model
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
@@ -18,7 +32,8 @@ const types = {
     const fail = message => {
       this.errors.push({ key, value, message })
     }
-    return types.check({ def, key, value, fail, errors: this.errors })
+    // Execute check
+    return types.check({ def: types.checkSubType(def), key, value, fail, errors: this.errors })
   },
 
   /**

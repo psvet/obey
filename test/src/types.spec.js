@@ -2,9 +2,19 @@
 import types from 'src/types.js'
 
 describe('types', () => {
+  describe('checkSubType', () => {
+    it('returns the original definition if no sub-type specified', () => {
+      const actual = types.checkSubType({ type: 'foo' })
+      expect(actual).to.deep.equal({ type: 'foo' })
+    })
+    it('returns the definition with specific type and sub if sub-type specified', () => {
+      const actual = types.checkSubType({ type: 'foo:bar' })
+      expect(actual).to.deep.equal({ type: 'foo', sub: 'bar' })
+    })
+  })
   describe('validator', () => {
     it('builds a fail method and returns types.check', () => {
-      const actual = types.validator.call({ errors: [] }, {}, 'foo', 'bar')
+      const actual = types.validator.call({ errors: [] }, { type: 'string' }, 'foo', 'bar')
       expect(actual).to.be.a.function
     })
   })

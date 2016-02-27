@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import ipv4 from 'src/types/ipv4'
+import ipv4 from 'src/types/ip'
 
 describe('type:ipv4', () => {
   it('calls context.fail if type is not a valid ipv4', () => {

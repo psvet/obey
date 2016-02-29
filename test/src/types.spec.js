@@ -5,7 +5,7 @@ describe('types', () => {
   describe('checkSubType', () => {
     it('returns the original definition if no sub-type specified', () => {
       const actual = types.checkSubType({ type: 'foo' })
-      expect(actual).to.deep.equal({ type: 'foo' })
+      expect(actual).to.deep.equal({ type: 'foo', sub: 'default' })
     })
     it('returns the definition with specific type and sub if sub-type specified', () => {
       const actual = types.checkSubType({ type: 'foo:bar' })

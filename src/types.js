@@ -18,6 +18,8 @@ const types = {
       const fullType = def.type.split(':')
       def.type = fullType[0]
       def.sub = fullType[1]
+    } else {
+      def.sub = 'default'
     }
     return def
   },

@@ -143,14 +143,22 @@ The above would specify the general type `phone` with sub-type `numeric` (only a
 New types can be added to the Obey lib with the `obey.type` method:
 
 ```javascript
-obey.type('lowerCaseOnly', context => {
-  if (!context.value.test(/^([a-z])*$/) {
-    context.fail(`${context.key} must be lowercase`)
+obey.type('password', {
+  default: context => {
+    if (context.value.length < 6) {
+      context.fail(`${context.key} must contain at least 6 characters`)
+    }
+  },
+  strong: context => {
+    if (!context.value.test((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/))) {
+      context.fail(`${context.key} must contain a number, letter, and special character`)
+    }
   }
 })
 ```
 
-The second argument is the method to run validation and gets passed a `context` object by the library. This object has the following properties:
+The type method accepts a `name` and a definition object. The definition object contains keys that indicate the subtype (or `default` if no sub-type specified).
+Each method will be passed a `context` object at runtime. This object has the following properties:
 
 * `def`: The entire rule for the property in the model
 * `sub`: The sub-type (if provided)
@@ -161,7 +169,11 @@ The second argument is the method to run validation and gets passed a `context` 
 The above would add a new type which would then be available for setting in the model configuration for any properties.
 
 ```javascript
-label: { type: 'lowerCaseOnly', /* ...additional config... */ }
+password: { type: 'password', /* ...additional config... */ }
+
+/* ...or... */
+
+password: { type: 'password:strong',  /* ...additional config... */ }
 ```
 
 Types can be synchronous or asynchronous. Types _can_ return/resolve a value, though it is not required and is recommended any coercion be handled with a modifier.

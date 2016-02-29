@@ -15,8 +15,8 @@ const types = {
    * @returns {Object}
    */
   checkSubType: def => {
-    if (def.type.indexOf(':') >= 0) {
-      const fullType = def.type.split(':')
+    const fullType = def.type.split(':')
+    if (fullType.length === 2) {
       def.type = fullType[0]
       def.sub = fullType[1]
     } else {
@@ -71,10 +71,9 @@ const types = {
     // Ensure subtype
     if (!types.strategies[context.def.type][context.def.sub]) {
       throw new Error(`Type '${context.def.type}:${context.def.sub}' does not exist`)
-    } else {
-      return Promise.resolve(types.strategies[context.def.type][context.def.sub](context))
-        .then(res => res === undefined ? context.value : res)
     }
+    return Promise.resolve(types.strategies[context.def.type][context.def.sub](context))
+      .then(res => res === undefined ? context.value : res)
   }
 }
 

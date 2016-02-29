@@ -8,6 +8,24 @@
 
 Data validation and modelling library for those of us with better things to do.
 
+- [Installation](#installation)
+- [Creating Rules](#creating-rules)
+    - [Validating with a Rule](#validating-with-a-rule)
+- [Creating Models](#creating-models)
+    - [Validating with a Model](#validating-with-a-model)
+- [Properties of Rules](#properties-of-rules)
+- [Strict Mode](#strict-mode)
+- [Types](#types)
+  - [Adding New Types](#adding-new-types)
+    - [Adding Single-Method Type](#adding-single-method-type)
+    - [Adding Type with Subs](#adding-type-with-subs)
+- [Modifiers](#modifiers)
+  - [Creating Modifiers](#creating-modifiers)
+- [Generators](#generators)
+  - [Creating Generators](#creating-generators)
+- [Asynchronous Validation](#asynchronous-validation)
+- [License](#license)
+
 ## Installation
 
 Obey can be installed via NPM: `npm install obey --save`

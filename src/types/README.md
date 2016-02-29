@@ -16,7 +16,11 @@ Checks for valid email, includes valid characters, `@` separator for address and
 
 ## IP
 
-Checks for valid IP Address.
+Checks for valid IP Address:
+
+* `ip`: Default, checks IPv4 format
+* `ip:v4`: Checks IPv4 format
+* `ip:v6`: Checks IPv6 format
 
 ## Number
 

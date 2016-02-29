@@ -128,7 +128,9 @@ const model = obey.model({ /* definition */ }, false)
 
 ## Types
 
-Types are basic checks against native types, built-ins or customs. The library includes native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well other common types. A [list of built-in types](/src/types) is contained in the source.
+**Reference: [Type Documentaion](/src/types)**
+
+Types are basic checks against native types, built-ins or customs. The library includes native types (`boolean`, `number`, `string`, `array`, and `object`) as well other common types. A [list of built-in types](/src/types) is contained in the source.
 
 The `type` definition can also specify a sub-type, for example:
 

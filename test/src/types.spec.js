@@ -47,5 +47,9 @@ describe('types', () => {
       context.def.type = 'nope'
       expect(types.check.bind(null, context)).to.throw('Type \'nope\' does not exist')
     })
+    it('throws an error if the specified subtype does not exist', () => {
+      context.def.sub = 'nope'
+      expect(types.check.bind(null, context)).to.throw('Type \'string:nope\' does not exist')
+    })
   })
 })

@@ -66,8 +66,13 @@ const types = {
         }
       }
     }
-    return Promise.resolve(types.strategies[context.def.type](context))
-      .then(res => res === undefined ? context.value : res)
+    // Ensure subtype
+    if (!types.strategies[context.def.type][context.def.sub]) {
+      throw new Error(`Type '${context.def.type}:${context.def.sub} does not exist`)
+    } else {
+      return Promise.resolve(types.strategies[context.def.type](context))
+        .then(res => res === undefined ? context.value : res)
+    }
   }
 }
 

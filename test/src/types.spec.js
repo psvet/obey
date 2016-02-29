@@ -1,4 +1,5 @@
 /* global describe, it, expect, beforeEach */
+/* eslint no-unused-vars: 0 */
 import types from 'src/types.js'
 
 describe('types', () => {
@@ -19,14 +20,13 @@ describe('types', () => {
     })
   })
   describe('add', () => {
-    it('adds a new type to the strategies', () => {
-      types.add('lowerCaseOnly', context => {
-        if (!context.value.test(/^([a-z])*$/)) {
-          context.fail('Value must be lowercase')
-        }
-        return context.val
-      })
-      expect(types.strategies.lowerCaseOnly).to.be.a.function
+    it('adds a new type as a function to the strategies', () => {
+      types.add('testFn', context => null)
+      expect(types.strategies.testFn.default).to.be.a.function
+    })
+    it('adds a new type as an object to the strageties', () => {
+      types.add('testObj', { foo: () => null })
+      expect(types.strategies.testObj.foo).to.be.a.function
     })
   })
   describe('check', () => {

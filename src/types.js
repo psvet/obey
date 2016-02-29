@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
+import _ from 'lodash'
 
 const types = {
   /**
@@ -41,10 +42,11 @@ const types = {
   /**
    * Add (or override) type in the lib
    * @param {String} name The name of the type
+   * @param {Object|Function} handler
    * @param {String} fn The type strategy method
    */
-  add: (name, fn) => {
-    types.strategies[name] = fn
+  add: (name, handler) => {
+    types.strategies[name] = _.isFunction(handler) ? { default: handler } : handler
   },
 
   /**

@@ -142,7 +142,19 @@ The above would specify the general type `phone` with sub-type `numeric` (only a
 
 ### Adding New Types
 
-New types can be added to the Obey lib with the `obey.type` method:
+New types can be added to the Obey lib with the `obey.type` method. Types can be added as single methods or objects supporting sub-types:
+
+#### Adding Single-Method Type
+
+```javascript
+obey.type('lowerCaseOnly', context => {
+  if (!/[a-z]/.test(context.value)) {
+    context.fail(`${context.key} must be lowercase`)
+  }
+})
+```
+
+#### Adding Type with Subs
 
 ```javascript
 obey.type('password', {
@@ -159,7 +171,8 @@ obey.type('password', {
 })
 ```
 
-The type method accepts a `name` and a definition object. The definition object contains keys that indicate the subtype (or `default` if no sub-type specified).
+The definition object contains keys that indicate the subtype (or `default` if no sub-type specified).
+
 Each method will be passed a `context` object at runtime. This object has the following properties:
 
 * `def`: The entire rule for the property in the model

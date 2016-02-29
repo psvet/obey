@@ -68,9 +68,9 @@ const types = {
     }
     // Ensure subtype
     if (!types.strategies[context.def.type][context.def.sub]) {
-      throw new Error(`Type '${context.def.type}:${context.def.sub} does not exist`)
+      throw new Error(`Type '${context.def.type}:${context.def.sub}' does not exist`)
     } else {
-      return Promise.resolve(types.strategies[context.def.type](context))
+      return Promise.resolve(types.strategies[context.def.type][context.def.sub](context))
         .then(res => res === undefined ? context.value : res)
     }
   }

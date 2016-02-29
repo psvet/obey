@@ -7,7 +7,7 @@ describe('type:array', () => {
       value: 'foo',
       fail: sinon.spy()
     }
-    array(context)
+    array.default(context)
     expect(context.fail).to.be.calledWith('Value must be an array')
   })
   it('does not call context fail if type is an array', () => {
@@ -16,7 +16,7 @@ describe('type:array', () => {
       fail: sinon.spy(),
       def: {}
     }
-    array(context)
+    array.default(context)
     expect(context.fail).to.not.be.called
   })
   it('passes when the elements of an array match the type specification', () => {
@@ -28,7 +28,7 @@ describe('type:array', () => {
       },
       errors: []
     }
-    array(context).then(() => {
+    return array.default(context).then(() => {
       expect(context.errors.length).to.equal(0)
     })
   })
@@ -42,7 +42,7 @@ describe('type:array', () => {
       key: 'someKey',
       errors: []
     }
-    return array(context).then(() => {
+    return array.default(context).then(() => {
       expect(context.errors.length).to.equal(2)
     })
   })

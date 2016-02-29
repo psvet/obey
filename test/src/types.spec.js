@@ -1,4 +1,4 @@
-/* global describe, it, expect, beforeEach, afterEach */
+/* global describe, it, expect, beforeEach */
 import types from 'src/types.js'
 
 describe('types', () => {
@@ -34,7 +34,8 @@ describe('types', () => {
     beforeEach(() => {
       context = {
         def: {
-          type: 'string'
+          type: 'string',
+          sub: 'default'
         },
         fail: () => null
       }

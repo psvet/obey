@@ -7,7 +7,7 @@ describe('type:email', () => {
       value: 'foo',
       fail: sinon.spy()
     }
-    email(context)
+    email.default(context)
     expect(context.fail).to.be.calledWith('Value must be a valid email')
   })
   it('does not call context.fail if type is a valid email', () => {
@@ -15,7 +15,7 @@ describe('type:email', () => {
       value: 'jsmith@gmail.com',
       fail: sinon.spy()
     }
-    email(context)
+    email.default(context)
     expect(context.fail).to.not.be.called
   })
 })

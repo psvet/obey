@@ -18,10 +18,6 @@ Checks for valid email, includes valid characters, `@` separator for address and
 
 Checks for valid IP Address.
 
-## Null
-
-Checks for native type `null`
-
 ## Number
 
 Checks for native type `number`
@@ -33,10 +29,6 @@ Checks for native type `object`
 ## String
 
 Checks for native type `string`
-
-## Undefined
-
-Checks for native type `undefined`
 
 ## URL
 

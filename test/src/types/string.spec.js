@@ -7,7 +7,7 @@ describe('type:string', () => {
       value: true,
       fail: sinon.spy()
     }
-    string(context)
+    string.default(context)
     expect(context.fail).to.be.calledWith('Value must be a string')
   })
   it('does not call context.fail if type is a string', () => {
@@ -15,7 +15,7 @@ describe('type:string', () => {
       value: 'foo',
       fail: sinon.spy()
     }
-    string(context)
+    string.default(context)
     expect(context.fail).to.not.be.called
   })
 })

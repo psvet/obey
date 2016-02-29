@@ -7,7 +7,7 @@ describe('type:url', () => {
       value: 'foo',
       fail: sinon.spy()
     }
-    url(context)
+    url.default(context)
     expect(context.fail).to.be.calledWith('Value must be a valid URL')
   })
   it('does not call context.fail if type is a valid URL', () => {
@@ -15,7 +15,7 @@ describe('type:url', () => {
       value: 'https://www.google.com/test',
       fail: sinon.spy()
     }
-    url(context)
+    url.default(context)
     expect(context.fail).to.not.be.called
   })
 })

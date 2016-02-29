@@ -1,12 +1,29 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
+import _ from 'lodash'
 
 const types = {
   /**
    * Library of type strategies
    */
   strategies: {},
+
+  /**
+   * Checks for and applies sub-type to definition
+   * @param {Object} def The rule defintion
+   * @returns {Object}
+   */
+  checkSubType: def => {
+    const fullType = def.type.split(':')
+    if (fullType.length === 2) {
+      def.type = fullType[0]
+      def.sub = fullType[1]
+    } else {
+      def.sub = 'default'
+    }
+    return def
+  },
 
   /**
    * Validator method, used by model
@@ -18,16 +35,18 @@ const types = {
     const fail = message => {
       this.errors.push({ key, value, message })
     }
-    return types.check({ def, key, value, fail, errors: this.errors })
+    // Execute check
+    return types.check({ def: types.checkSubType(def), key, value, fail, errors: this.errors })
   },
 
   /**
    * Add (or override) type in the lib
    * @param {String} name The name of the type
+   * @param {Object|Function} handler
    * @param {String} fn The type strategy method
    */
-  add: (name, fn) => {
-    types.strategies[name] = fn
+  add: (name, handler) => {
+    types.strategies[name] = _.isFunction(handler) ? { default: handler } : handler
   },
 
   /**
@@ -49,7 +68,11 @@ const types = {
         }
       }
     }
-    return Promise.resolve(types.strategies[context.def.type](context))
+    // Ensure subtype
+    if (!types.strategies[context.def.type][context.def.sub]) {
+      throw new Error(`Type '${context.def.type}:${context.def.sub}' does not exist`)
+    }
+    return Promise.resolve(types.strategies[context.def.type][context.def.sub](context))
       .then(res => res === undefined ? context.value : res)
   }
 }

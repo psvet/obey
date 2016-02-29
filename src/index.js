@@ -29,9 +29,9 @@ export default {
   /**
    * Creates and stores (or replaces) a type
    * @param {String} name The name of the type
-   * @param {Function} fn The type evaluation method
+   * @param {Object|Function} handler The type method or object of methods
    */
-  type: (name, fn) => types.add(name, fn),
+  type: (name, handler) => types.add(name, handler),
 
   /**
    * Creates and stores a modifier

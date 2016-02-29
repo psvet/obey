@@ -9,7 +9,7 @@ describe('type:object', () => {
       },
       fail: sinon.spy()
     }
-    const actual = object(context)
+    const actual = object.default(context)
     expect(actual).to.be.a.function
   })
   it('calls context.fail if type is not an object', () => {
@@ -18,7 +18,7 @@ describe('type:object', () => {
       fail: sinon.spy(),
       def: {}
     }
-    object(context)
+    object.default(context)
     expect(context.fail).to.be.calledWith('Value must be an object')
   })
   it('does not call context.fail if type is an object (with no keys prop)', () => {
@@ -27,7 +27,7 @@ describe('type:object', () => {
       fail: sinon.spy(),
       def: {}
     }
-    object(context)
+    object.default(context)
     expect(context.fail).to.not.be.called
   })
   it('creates no context errors for a passing object with values specification', () => {
@@ -41,7 +41,7 @@ describe('type:object', () => {
       },
       errors: []
     }
-    object(context).then(() => {
+    object.default(context).then(() => {
       expect(context.errors.length).to.equal(0)
     })
   })
@@ -60,7 +60,7 @@ describe('type:object', () => {
       },
       errors: []
     }
-    object(context).then(() => {
+    object.default(context).then(() => {
       expect(context.errors.length).to.equal(2)
     })
   })
@@ -80,7 +80,7 @@ describe('type:object', () => {
       errors: [],
       fail: sinon.spy()
     }
-    object(context).then(() => {
+    object.default(context).then(() => {
       expect(context.fail).to.be.calledWith('\'foo\' is not an allowed property')
     })
   })
@@ -101,7 +101,7 @@ describe('type:object', () => {
       errors: [],
       fail: sinon.spy()
     }
-    object(context).then(() => {
+    object.default(context).then(() => {
       expect(context.fail).to.not.be.called
     })
   })

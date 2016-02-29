@@ -7,7 +7,7 @@ describe('type:number', () => {
       value: 'foo',
       fail: sinon.spy()
     }
-    number(context)
+    number.default(context)
     expect(context.fail).to.be.calledWith('Value must be a number')
   })
   it('call context.fail if type is NaN', () => {
@@ -15,7 +15,7 @@ describe('type:number', () => {
       value: NaN,
       fail: sinon.spy()
     }
-    number(context)
+    number.default(context)
     expect(context.fail).to.be.calledWith('Value must be a number')
   })
   it('does not call context.fail if type is a number', () => {
@@ -23,7 +23,7 @@ describe('type:number', () => {
       value: 73,
       fail: sinon.spy()
     }
-    number(context)
+    number.default(context)
     expect(context.fail).to.not.be.called
   })
 })

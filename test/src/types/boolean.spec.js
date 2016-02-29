@@ -7,7 +7,7 @@ describe('type:boolean', () => {
       value: 'foo',
       fail: sinon.spy()
     }
-    boolean(context)
+    boolean.default(context)
     expect(context.fail).to.be.calledWith('Value must be a boolean')
   })
   it('does not call context.fail if type is a boolean', () => {
@@ -15,7 +15,7 @@ describe('type:boolean', () => {
       value: true,
       fail: sinon.spy()
     }
-    boolean(context)
+    boolean.default(context)
     expect(context.fail).to.not.be.called
   })
 })

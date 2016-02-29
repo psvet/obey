@@ -52,7 +52,7 @@ const userModel = obey.model({
   password: { type: 'string', modifier: 'encryptPassword', required: true }
   fname: { type: 'string', description: 'First Name' },
   lname: { type: 'string', description: 'Last Name' },
-  phone: { type: 'phone', min: 7, max: 10 },
+  phone: { type: 'phone:numeric', min: 7, max: 10 },
   // Array
   labels: { type: 'array', values: {
     type: 'object', keys: {
@@ -97,7 +97,7 @@ The validate method returns a promise (for more information see [Asynchronous Va
 
 The properties used can each be explained as:
 
-* `type`: The type of value, either native or custom, see [Types](#types)
+* `type`: The type of value with (optional) sub-type see [Types](#types)
 * `keys`: Property of `object` type, indicates nested object properties
 * `values`: Defines value specification for arrays or key-independent object tests
 * `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
@@ -128,23 +128,55 @@ const model = obey.model({ /* definition */ }, false)
 
 ## Types
 
-Types are basic checks against native types, built-ins or customs. The library includes native types (`boolean`, `null`, `undefined`, `number`, `string`, `array`, and `object`) as well other common types. A [list of built-in types](/src/types) is contained in the source.
+**Reference: [Type Documentaion](/src/types)**
+
+Types are basic checks against native types, built-ins or customs. The library includes native types (`boolean`, `number`, `string`, `array`, and `object`) as well other common types. A [list of built-in types](/src/types) is contained in the source.
+
+The `type` definition can also specify a sub-type, for example:
+
+```javascript
+phone: { type: 'phone:numeric' }
+```
+
+The above would specify the general type `phone` with sub-type `numeric` (only allowing numbers).
 
 ### Adding New Types
 
-New types can be added to the Obey lib with the `obey.type` method:
+New types can be added to the Obey lib with the `obey.type` method. Types can be added as single methods or objects supporting sub-types:
+
+#### Adding Single-Method Type
 
 ```javascript
 obey.type('lowerCaseOnly', context => {
-  if (!context.value.test(/^([a-z])*$/) {
+  if (!/[a-z]/.test(context.value)) {
     context.fail(`${context.key} must be lowercase`)
   }
 })
 ```
 
-The second argument is the method to run validation and gets passed a `context` object by the library. This object has the following properties:
+#### Adding Type with Subs
+
+```javascript
+obey.type('password', {
+  default: context => {
+    if (context.value.length < 6) {
+      context.fail(`${context.key} must contain at least 6 characters`)
+    }
+  },
+  strong: context => {
+    if (!context.value.test((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/))) {
+      context.fail(`${context.key} must contain a number, letter, and be at least 8 characters`)
+    }
+  }
+})
+```
+
+The definition object contains keys that indicate the subtype (or `default` if no sub-type specified).
+
+Each method will be passed a `context` object at runtime. This object has the following properties:
 
 * `def`: The entire rule for the property in the model
+* `sub`: The sub-type (if provided)
 * `key`: The name of the property being tested (if an element in a model/object)
 * `value`: The value to test
 * `fail`: A function accepting a failure message as an argument
@@ -152,7 +184,11 @@ The second argument is the method to run validation and gets passed a `context` 
 The above would add a new type which would then be available for setting in the model configuration for any properties.
 
 ```javascript
-label: { type: 'lowerCaseOnly', /* ...additional config... */ }
+password: { type: 'password', /* ...additional config... */ }
+
+/* ...or... */
+
+password: { type: 'password:strong',  /* ...additional config... */ }
 ```
 
 Types can be synchronous or asynchronous. Types _can_ return/resolve a value, though it is not required and is recommended any coercion be handled with a modifier.

@@ -151,7 +151,7 @@ obey.type('password', {
   },
   strong: context => {
     if (!context.value.test((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/))) {
-      context.fail(`${context.key} must contain a number, letter, and special character`)
+      context.fail(`${context.key} must contain a number, letter, and be at least 8 characters`)
     }
   }
 })

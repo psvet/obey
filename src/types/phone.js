@@ -1,13 +1,7 @@
 const phone = {
   default: context => {
-    const defaultPhoneRegEx = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+    const defaultPhoneRegEx = /^\(?\d{3}\)?([-. ]?)\d{3}\1\d{4}$/
     if (!defaultPhoneRegEx.test(context.value)) {
-      context.fail('Value must be a valid phone number')
-    }
-  },
-  international: context => {
-    const intlPhoneRegEx = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/
-    if (!intlPhoneRegEx.test(context.value)) {
       context.fail('Value must be a valid phone number')
     }
   },

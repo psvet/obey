@@ -35,8 +35,7 @@ Checks for native type `object`
 Checks for valid phone numbers:
 
 * `phone`: Default, valid with or without separators
-* `phone:international`: Checks value for format `+XX-XXXX-XXXX`
-* `phone:numeric`: Check value for numeric phone number, 8-10 digits
+* `phone:numeric`: Check value for numeric phone number, 7-10 digits
 
 ## String
 

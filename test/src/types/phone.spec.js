@@ -18,22 +18,6 @@ describe('type:phone', () => {
     phone.default(context)
     expect(context.fail).to.not.be.called
   })
-  it('calls context.fail if value is not a valid international phone number', () => {
-    const context = {
-      value: 'foo',
-      fail: sinon.spy()
-    }
-    phone.international(context)
-    expect(context.fail).to.be.calledWith('Value must be a valid phone number')
-  })
-  it('does not call context fail if value is a valid phone number', () => {
-    const context = {
-      value: '+12-2345-6789',
-      fail: sinon.spy()
-    }
-    phone.international(context)
-    expect(context.fail).to.not.be.called
-  })
   it('calls context.fail if value is not a valid numeric phone number', () => {
     const context = {
       value: 'foo',

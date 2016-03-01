@@ -5,7 +5,7 @@ const string = {
     }
   },
   alphanumeric: context => {
-    const alphaNumRegEx = /^[a-z0-9]*$/
+    const alphaNumRegEx = /^[a-zA-Z0-9]*$/
     if (!alphaNumRegEx.test(context.value)) {
       context.fail('Value must contain only letters and/or numbers')
     }

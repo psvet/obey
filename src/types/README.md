@@ -30,9 +30,20 @@ Checks for native type `number`
 
 Checks for native type `object`
 
+## Phone
+
+Checks for valid phone numbers:
+
+* `phone`: Default, valid with or without separators
+* `phone:international`: Checks value for format `+XX-XXXX-XXXX`
+* `phone:numeric`: Check value for numeric phone number, 8-10 digits
+
 ## String
 
-Checks for native type `string`
+Checks for valid string types:
+
+* `string`: Default, `typeof` should be `string`
+* `string:alphanumeric`: Checks value contains only alpha-numeric characters
 
 ## URL
 
@@ -40,4 +51,12 @@ Checks for valid URL
 
 ## UUID
 
-Checks for valid URL
+Checks for valid v4 UUID
+
+## Zip
+
+Checks for valid zip/postal codes:
+
+* `zip`: Default, checks generic postal code
+* `zip:us`: Checks US zip code format
+* `zip:ca`: Checks Canadian zip code format

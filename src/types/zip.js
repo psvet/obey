@@ -1,19 +1,21 @@
 const zip = {
+  _regex: {
+    default: /^(?:[A-Z0-9]+([- ]?[A-Z0-9]+)*)?$/,
+    us: /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/,
+    ca: /^([A-Z][0-9][A-Z])\s*([0-9][A-Z][0-9])$/
+  },
   default: context => {
-    const defaultZipRegex = /^(?:[A-Z0-9]+([- ]?[A-Z0-9]+)*)?$/
-    if (!defaultZipRegex.test(context.value)) {
+    if (!context.value.match(zip._regex.default)) {
       context.fail('Value must be a valid zip code')
     }
   },
   us: context => {
-    const usZipRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/
-    if (!usZipRegex.test(context.value)) {
+    if (!context.value.match(zip._regex.us)) {
       context.fail('Value must be a valid US zip code')
     }
   },
   ca: context => {
-    const caZipRegex = /^([A-Z][0-9][A-Z])\s*([0-9][A-Z][0-9])$/
-    if (!caZipRegex.test(context.value)) {
+    if (!context.value.match(zip._regex.ca)) {
       context.fail('Value must be a valid Canadian zip code')
     }
   }

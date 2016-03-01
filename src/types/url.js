@@ -1,7 +1,9 @@
 const url = {
+  _regex: {
+    default: /^((http|https|ftp):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+  },
   default: context => {
-    const urlRegEx = /^((http|https|ftp):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
-    if (!urlRegEx.test(context.value)) {
+    if (!context.value.match(url._regex.default)) {
       context.fail('Value must be a valid URL')
     }
   }

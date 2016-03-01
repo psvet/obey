@@ -1,7 +1,9 @@
 const email = {
+  _regex: {
+    default: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+  },
   default: context => {
-    const emailRegEx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
-    if (!emailRegEx.test(context.value)) {
+    if (!context.value.match(email._regex.default)) {
       context.fail('Value must be a valid email')
     }
   }

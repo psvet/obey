@@ -1,13 +1,15 @@
 const phone = {
+  _regex: {
+    default: /^\(?\d{3}\)?([-. ]?)\d{3}\1\d{4}$/,
+    numeric: /\d{7,10}/
+  },
   default: context => {
-    const defaultPhoneRegEx = /^\(?\d{3}\)?([-. ]?)\d{3}\1\d{4}$/
-    if (!defaultPhoneRegEx.test(context.value)) {
+    if (!context.value.match(phone._regex.default)) {
       context.fail('Value must be a valid phone number')
     }
   },
   numeric: context => {
-    const numericPhoneRegEx = /\d{7,10}/
-    if (!numericPhoneRegEx.test(context.value)) {
+    if (!context.value.match(phone._regex.numeric)) {
       context.fail('Value must be a numeric phone number')
     }
   }

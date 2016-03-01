@@ -166,7 +166,7 @@ Types can be synchronous or asynchronous. For example, if a unique email is requ
 
 ```javascript
 obey.type('uniqueEmail', context => {
-  return datasource.find({ email: context.value })
+  return someDataSource.find({ email: context.value })
     .then(record => {
       if (record.length >= 1) {
         context.fail(`${context.key} already exists`)

@@ -8,7 +8,7 @@ const string = {
     }
   },
   alphanumeric: context => {
-    if (!context.value.match(string._regex.alphanumeric)) {
+    if (context.value && !context.value.match(string._regex.alphanumeric)) {
       context.fail('Value must contain only letters and/or numbers')
     }
   }

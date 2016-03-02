@@ -4,12 +4,12 @@ const phone = {
     numeric: /\d{7,10}/
   },
   default: context => {
-    if (!context.value.match(phone._regex.default)) {
+    if (context.value && !context.value.match(phone._regex.default)) {
       context.fail('Value must be a valid phone number')
     }
   },
   numeric: context => {
-    if (!context.value.match(phone._regex.numeric)) {
+    if (context.value && !context.value.match(phone._regex.numeric)) {
       context.fail('Value must be a numeric phone number')
     }
   }

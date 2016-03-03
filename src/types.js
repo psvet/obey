@@ -32,11 +32,12 @@ const types = {
    * @param {*} value The value being validated
    */
   validator: function(def, key, value) {
+    const parsedDef = types.checkSubType(def)
     const fail = message => {
-      this.errors.push({ key, value, message })
+      this.errors.push({ type: def.type, sub: def.sub, key, value, message })
     }
     // Execute check
-    return types.check({ def: types.checkSubType(def), key, value, fail, errors: this.errors })
+    return types.check({ def: parsedDef, key, value, fail, errors: this.errors })
   },
 
   /**

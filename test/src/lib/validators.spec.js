@@ -43,6 +43,8 @@ describe('validators', () => {
       }
       validators.allow.call(mockThis, def, 'test', 'fizz')
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'allow',
+        sub: [ 'foo', 'bar' ],
         key: 'test',
         value: 'fizz',
         message: 'Value \'fizz\' is not allowed'
@@ -54,6 +56,8 @@ describe('validators', () => {
       }
       validators.allow.call(mockThis, def, 'test', 'bar')
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'allow',
+        sub: 'foo',
         key: 'test',
         value: 'bar',
         message: 'Value \'bar\' is not allowed'
@@ -65,6 +69,8 @@ describe('validators', () => {
       const def = { min: 3 }
       validators.min.call(mockThis, def, 'test', [ 'foo' ])
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'min',
+        sub: 3,
         key: 'test',
         value: [ 'foo' ],
         message: 'Length must be greater than 3'
@@ -74,6 +80,8 @@ describe('validators', () => {
       const def = { min: 5 }
       validators.min.call(mockThis, def, 'test', 'foo')
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'min',
+        sub: 5,
         key: 'test',
         value: 'foo',
         message: 'Length must be greater than 5'
@@ -83,6 +91,8 @@ describe('validators', () => {
       const def = { min: 10 }
       validators.min.call(mockThis, def, 'test', 5)
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'min',
+        sub: 10,
         key: 'test',
         value: 5,
         message: 'Value must be greater than 10'
@@ -94,6 +104,8 @@ describe('validators', () => {
       const def = { max: 1 }
       validators.max.call(mockThis, def, 'test', [ 'foo', 'bar' ])
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'max',
+        sub: 1,
         key: 'test',
         value: [ 'foo', 'bar' ],
         message: 'Length must be less than 1'
@@ -103,6 +115,8 @@ describe('validators', () => {
       const def = { max: 2 }
       validators.max.call(mockThis, def, 'test', 'foo')
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'max',
+        sub: 2,
         key: 'test',
         value: 'foo',
         message: 'Length must be less than 2'
@@ -112,6 +126,8 @@ describe('validators', () => {
       const def = { max: 5 }
       validators.max.call(mockThis, def, 'test', 10)
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'max',
+        sub: 5,
         key: 'test',
         value: 10,
         message: 'Value must be less than 5'
@@ -123,6 +139,8 @@ describe('validators', () => {
       const def = { required: true }
       validators.required.call(mockThis, def, 'test', undefined)
       expect(mockThis.errors[0]).to.deep.equal({
+        type: 'required',
+        sub: 'default',
         key: 'test',
         value: undefined,
         message: 'Property \'test\' is required'

@@ -12,6 +12,10 @@ const array = {
     if (context.def.empty && context.value.length === 0) {
       return context.value
     }
+    // If empty (and not empty allowed), fail
+    if (!context.def.empty && context.value.length === 0) {
+      return context.fail('Value must not be empty array')
+    }
     // Specific array sub-validation
     if (!context.def.values) return true
     const promises = context.value.map((elem, idx) => {

@@ -18,6 +18,8 @@ describe('integration:validators', () => {
       const testData = { name: 'quz' }
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
+          type: 'allow',
+          sub: [ 'foo', 'bar' ],
           key: 'name',
           value: 'quz',
           message: 'Value \'quz\' is not allowed'
@@ -31,6 +33,8 @@ describe('integration:validators', () => {
       const testData = { name: 'foo' }
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
+          type: 'min',
+          sub: 10,
           key: 'name',
           value: 'foo',
           message: 'Length must be greater than 10'
@@ -44,6 +48,8 @@ describe('integration:validators', () => {
       const testData = { name: 'foobarrrrr' }
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
+          type: 'max',
+          sub: 5,
           key: 'name',
           value: 'foobarrrrr',
           message: 'Length must be less than 5'
@@ -57,10 +63,14 @@ describe('integration:validators', () => {
       const testData = {}
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
+          type: 'string',
+          sub: 'default',
           key: 'name',
           value: undefined,
           message: 'Value must be a string'
         }, {
+          type: 'required',
+          sub: 'default',
           key: 'name',
           value: undefined,
           message: 'Property \'name\' is required'

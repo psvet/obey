@@ -80,6 +80,24 @@ userModel.validate({ /* some data */ })
 
 The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will resolve with the data, any failures will reject and the `ValidationError` instance will be returned.
 
+### Validation Error Handling
+
+Validation errors are collected and thrown after all validation has run. This is as opposed to blocking, or stopping, on the first failure.
+
+As shown in the example above, the `catch` will contain an instance of `ValidationError` with two properties; `message` and `collection`. The `message` simply contains the description of all errors.
+
+The `collection` is an array of objects containing details on each of the validation errors. For example, if a `type` evaluation for `phone:numeric` was performed and the value failed the following would be contained as an object in the array:
+
+```javascript
+{
+  type: 'phone', // The type evaluation performed
+  sub: 'numeric', // The sub-type (if applicable)
+  key: 'primaryPhone', // Name of the property in the model
+  value: '(555) 123-4567', // The value evaluated
+  message: 'Value must be a numeric phone number' // Message
+}
+```
+
 ## Definition Properties
 
 When setting definitions for rules or model properties, the following are supported:

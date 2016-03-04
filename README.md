@@ -59,7 +59,7 @@ const userModel = obey.model({
   email: { type: 'email', required: true },
   password: { type: 'string', modifier: 'encryptPassword', required: true },
   fname: { type: 'string', description: 'First Name' },
-  lname: { type: 'string', description: 'Last Name' },
+  lname: { type: 'string', description: 'Last Name', empty: true },
   phone: { type: 'phone:numeric', min: 7, max: 10 },
   // Array
   labels: { type: 'array', values: {
@@ -128,6 +128,7 @@ When setting definitions for rules or model properties, the following are suppor
 * `values`: Defines value specification for arrays or key-independent objects
 * `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
 * `generator`: uses a method to create a default value if no value is supplied, see [Generators](#generators)
+* `empty`: Set to `true` allows empty string or array, (default `false`)
 * `default`: The default value if no value specified
 * `min`: The minimum character length for a string, lowest number, or minimum items in array
 * `max`: The maximum character length for a string, highest number, or maximum items in array

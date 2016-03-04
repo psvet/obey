@@ -19,6 +19,29 @@ describe('type:array', () => {
     array.default(context)
     expect(context.fail).to.not.be.called
   })
+  it('allows an empty array to pass if empty flag is set to true', () => {
+    const context = {
+      value: [],
+      fail: sinon.spy(),
+      def: {
+        empty: true
+      }
+    }
+    array.default(context)
+    expect(context.fail).to.not.be.called
+  })
+  it('fails an empty array when empty flag is not set', () => {
+    const context = {
+      value: [],
+      fail: sinon.spy(),
+      def: {
+        values: { type: 'string' }
+      },
+      errors: []
+    }
+    array.default(context)
+    expect(context.fail).to.be.calledWith('Value must not be empty array')
+  })
   it('passes when the elements of an array match the type specification', () => {
     const context = {
       value: [ 'foo', 'bar' ],

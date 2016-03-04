@@ -18,6 +18,10 @@ describe('types', () => {
       const actual = types.validator.call({ errors: [] }, { type: 'string' }, 'foo', 'bar')
       expect(actual).to.be.a.function
     })
+    it('allows an empty string to pass (via return) when empty flag is set', () => {
+      const actual = types.validator.call({ errors: [] }, { type: 'string', empty: true }, 'foo', '')
+      expect(actual).to.equal('')
+    })
   })
   describe('add', () => {
     it('adds a new type as a function to the strategies', () => {

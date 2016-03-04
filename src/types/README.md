@@ -1,6 +1,10 @@
 # Types
 
-Below is a list of supported, built-in types for the Obey library.
+Below is a list of supported, built-in types for the Obey library
+
+## Any
+
+Supports any data type or format
 
 ## Array
 

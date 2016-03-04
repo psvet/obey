@@ -26,7 +26,7 @@ const types = {
   },
 
   /**
-   * Validator method, used by model
+   * Validator method, used by rules
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
@@ -35,6 +35,10 @@ const types = {
     const parsedDef = types.checkSubType(def)
     const fail = message => {
       this.errors.push({ type: def.type, sub: def.sub, key, value, message })
+    }
+    // Handle `empty` prop for string values
+    if (def.empty && typeof value === 'string' && def.type !== 'array' && value.length === 0) {
+      return value
     }
     // Execute check
     return types.check({ def: parsedDef, key, value, fail, errors: this.errors })

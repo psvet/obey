@@ -19,6 +19,17 @@ describe('type:array', () => {
     array.default(context)
     expect(context.fail).to.not.be.called
   })
+  it('allows an empty array to pass if empty flag is set to true', () => {
+    const context = {
+      value: [],
+      fail: sinon.spy(),
+      def: {
+        empty: true
+      }
+    }
+    array.default(context)
+    expect(context.fail).to.not.be.called
+  })
   it('passes when the elements of an array match the type specification', () => {
     const context = {
       value: [ 'foo', 'bar' ],

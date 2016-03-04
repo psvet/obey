@@ -90,11 +90,11 @@ The `collection` is an array of objects containing details on each of the valida
 
 ```javascript
 {
-  type: 'phone',
-  sub: 'numeric',
-  key: 'primaryPhone',
-  value: '(555) 123-4567',
-  message: 'Value must be a numeric phone number'
+  type: 'phone', // The type evaluation performed
+  sub: 'numeric', // The sub-type (if applicable)
+  key: 'primaryPhone', // Name of the property in the model
+  value: '(555) 123-4567', // The value evaluated
+  message: 'Value must be a numeric phone number' // Message
 }
 ```
 

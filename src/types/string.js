@@ -3,7 +3,7 @@ const string = {
     alphanumeric: /^[a-zA-Z0-9]*$/
   },
   default: context => {
-    if (typeof context.value !== 'string') {
+    if (typeof context.value !== 'string' || context.value.length === 0) {
       context.fail('Value must be a string')
     }
   },

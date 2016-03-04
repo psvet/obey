@@ -53,4 +53,44 @@ describe('integration:core', () => {
       ])
     })
   })
+  it('builds a model and passes with empty string (allowed with flag)', () => {
+    const testModel = obey.model(modelFixtures.basicEmpty)
+    const testData = {
+      name: ''
+    }
+    return testModel.validate(testData)
+      .then(data => {
+        expect(data.name).to.equal('')
+      })
+  })
+  it('builds a model and fails with empty string (not allowed with flag)', () => {
+    const testModel = obey.model(modelFixtures.basicNoEmpty)
+    const testData = {
+      name: ''
+    }
+    return testModel.validate(testData)
+      .catch(err => {
+        expect(err.message).to.equal('name (): Value must be a string')
+      })
+  })
+  it('builds a model and passes with empty array (allowed with flag)', () => {
+    const testModel = obey.model(modelFixtures.basicEmptyArray)
+    const testData = {
+      names: []
+    }
+    return testModel.validate(testData)
+      .then(data => {
+        expect(data.names).to.deep.equal([])
+      })
+  })
+  it('builds a model and fails with empty array (not allowed with flag)', () => {
+    const testModel = obey.model(modelFixtures.basicNoEmptyArray)
+    const testData = {
+      names: []
+    }
+    return testModel.validate(testData)
+      .catch(err => {
+        expect(err.message).to.equal('names (): Value must not be empty array')
+      })
+  })
 })

@@ -15,5 +15,17 @@ export default {
     someobj: { type: 'object', keys: {
       foo: { type: 'string' }
     }}
+  },
+  basicEmpty: {
+    name: { type: 'string', empty: true }
+  },
+  basicNoEmpty: {
+    name: { type: 'string' }
+  },
+  basicEmptyArray: {
+    names: { type: 'array', empty: true }
+  },
+  basicNoEmptyArray: {
+    names: { type: 'array' }
   }
 }

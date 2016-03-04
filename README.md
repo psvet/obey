@@ -8,6 +8,27 @@ Asynchronous Data Modelling and Validation.
 ![Dependencies](https://img.shields.io/david/technologyadvice/obey.svg)
 [![Known Vulnerabilities](https://snyk.io/test/npm/obey/badge.svg)](https://snyk.io/test/npm/obey)
 
+## Contents
+
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Rules](#rules)
+- [Models](#models)
+- [Validation](#validation)
+  - [Validation Error Handling](#validation-error-handling)
+- [Definition Properties](#definition-properties)
+- [Types](#types)
+  - [Adding New Types](#adding-new-types)
+    - [Adding Single-Method Type](#adding-single-method-type)
+    - [Adding Type with Subs](#adding-type-with-subs)
+- [Modifiers](#modifiers)
+  - [Creating Modifiers](#creating-modifiers)
+- [Generators](#generators)
+  - [Creating Generators](#creating-generators)
+- [Strict Mode](#strict-mode)
+- [Asynchronous Validation](#asynchronous-validation)
+- [License](#license)
+
 ## Introduction
 
 Obey is a library for creating asynchronous data models and rules. The core goal of the project is to provide methods for managing data models both through synchronous and asynchronous validation and alignment using [JavaScript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).

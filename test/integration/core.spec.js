@@ -69,6 +69,9 @@ describe('integration:core', () => {
       name: ''
     }
     return testModel.validate(testData)
+      .then(() => {
+        throw new Error('Should have thrown')
+      })
       .catch(err => {
         expect(err.message).to.equal('name (): Value must be a string')
       })
@@ -89,6 +92,9 @@ describe('integration:core', () => {
       names: []
     }
     return testModel.validate(testData)
+      .then(() => {
+        throw new Error('Should have thrown')
+      })
       .catch(err => {
         expect(err.message).to.equal('names (): Value must not be empty array')
       })

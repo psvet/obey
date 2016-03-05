@@ -8,6 +8,8 @@ engines:
     checks:
       Similar code:
         enabled: false
+      Identical code:
+        enabled: false
   eslint:
     enabled: true
     checks:

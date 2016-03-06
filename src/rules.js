@@ -20,9 +20,21 @@ const rules = {
     { name: 'allow', fn: validators.allow },
     { name: 'min', fn: validators.min },
     { name: 'max', fn: validators.max },
-    { name: 'type', fn: types.validator },
-    { name: 'required', fn: validators.required }
+    { name: 'type', fn: types.validator }
   ],
+
+  applyProps: (def, value) => {
+    let applyProps = []
+    // Not required and undefined, only return generator and default
+    if (!def.required && value === undefined) {
+      rules.props.forEach(prop => {
+        if (prop.name === 'generator' || prop.name === 'default') applyProps.push(prop)
+      })
+      return applyProps
+    }
+    // Return all
+    return rules.props
+  },
 
   /**
    * Binds rule definition in validate method
@@ -40,7 +52,7 @@ const rules = {
     const context = { errors: [] }
     if (!def.type) throw new Error('Model properties must define a \'type\'')
     let chain = Promise.resolve(data)
-    rules.props.forEach(prop => {
+    rules.applyProps(def, data).forEach(prop => {
       if (def[prop.name]) {
         chain = chain.then(prop.fn.bind(context, def, key)).then(res => {
           return res === undefined ? data : res

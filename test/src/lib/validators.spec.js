@@ -134,17 +134,4 @@ describe('validators', () => {
       })
     })
   })
-  describe('required', () => {
-    it('creates an error object if a required value is not supplied', () => {
-      const def = { required: true }
-      validators.required.call(mockThis, def, 'test', undefined)
-      expect(mockThis.errors[0]).to.deep.equal({
-        type: 'required',
-        sub: 'default',
-        key: 'test',
-        value: undefined,
-        message: 'Property \'test\' is required'
-      })
-    })
-  })
 })

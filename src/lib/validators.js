@@ -59,18 +59,6 @@ const validators = {
     } else if (typeof value === 'number' && value > def.max) {
       this.errors.push({ type, sub, key, value, message: `Value must be less than ${def.max}` })
     }
-  },
-
-  /**
-   * Validator requires method, used by model
-   * @param {Object} def The property configuration
-   * @param {String} key The key name of the property
-   * @param {*} value The value being validated
-   */
-  required: function(def, key, value) {
-    if (def.required && !value) {
-      this.errors.push({ type: 'required', sub: 'default', key, value, message: `Property '${key}' is required` })
-    }
   }
 }
 

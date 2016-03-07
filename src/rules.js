@@ -13,27 +13,22 @@ const rules = {
    * Acts as validation setup for, and respective order of operations
    * of, properties for a def-prop configuration
    */
-  props: [
-    { name: 'generator', fn: generators.validator },
-    { name: 'default', fn: validators.default },
-    { name: 'modifier', fn: modifiers.validator },
-    { name: 'allow', fn: validators.allow },
-    { name: 'min', fn: validators.min },
-    { name: 'max', fn: validators.max },
-    { name: 'type', fn: types.validator }
-  ],
-
-  applyProps: (def, value) => {
-    let applyProps = []
-    // Not required and undefined, only return generator and default
-    if (!def.required && value === undefined) {
-      rules.props.forEach(prop => {
-        if (prop.name === 'generator' || prop.name === 'default') applyProps.push(prop)
-      })
-      return applyProps
-    }
-    // Return all
-    return rules.props
+  props: {
+    // Default props
+    default: [
+      { name: 'generator', fn: generators.validator },
+      { name: 'default', fn: validators.default },
+      { name: 'modifier', fn: modifiers.validator },
+      { name: 'allow', fn: validators.allow },
+      { name: 'min', fn: validators.min },
+      { name: 'max', fn: validators.max },
+      { name: 'type', fn: types.validator }
+    ],
+    // When no value/undefined
+    noVal: [
+      { name: 'generator', fn: generators.validator },
+      { name: 'default', fn: validators.default }
+    ]
   },
 
   /**
@@ -50,9 +45,10 @@ const rules = {
    */
   validate: (def, data, key = null) => {
     const context = { errors: [] }
+    const props = !def.required && data === undefined ? rules.props.noVal : rules.props.default
     if (!def.type) throw new Error('Model properties must define a \'type\'')
     let chain = Promise.resolve(data)
-    rules.applyProps(def, data).forEach(prop => {
+    props.forEach(prop => {
       if (def[prop.name]) {
         chain = chain.then(prop.fn.bind(context, def, key)).then(res => {
           return res === undefined ? data : res

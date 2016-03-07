@@ -40,7 +40,8 @@ const rules = {
     // When no value/undefined
     noVal: [
       allProps.generator,
-      allProps.default
+      allProps.default,
+      allProps.modifier
     ]
   },
 

@@ -132,7 +132,7 @@ When setting definitions for rules or model properties, the following are suppor
 * `default`: The default value if no value specified
 * `min`: The minimum character length for a string, lowest number, or minimum items in array
 * `max`: The maximum character length for a string, highest number, or maximum items in array
-* `required`: Enforces the field cannot be missing during validation (default `false`)
+* `required`: Enforces the value cannot be `undefined` during validation (default `false`)
 * `allow`: Array of allowed values or single allowed value
 * `strict`: Enable or disable strict checking of an object, see [Strict Mode](#strict-mode)
 * `description`: A description of the property

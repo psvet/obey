@@ -40,6 +40,11 @@ const types = {
     if (def.empty && typeof value === 'string' && def.type !== 'array' && value.length === 0) {
       return value
     }
+    // Don't run if undefined on required
+    if (def.required && value === undefined) {
+      this.errors.push({ type: 'required', sub: 'default', key, value, message: `Property '${key}' is required` })
+      return value
+    }
     // Execute check
     return types.check({ def: parsedDef, key, value, fail, errors: this.errors })
   },

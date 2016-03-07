@@ -46,7 +46,7 @@ describe('integration:core', () => {
     return testModel.validate(testData)
       .then(() => { throw new Error('Should fail') })
       .catch((err) => {
-        expect(err.message).to.equal('lname (undefined): Value must be a string')
+        expect(err.message).to.equal('lname (undefined): Property \'lname\' is required')
       })
   })
   it('builds a model and successfully validates when nested object present', () => {

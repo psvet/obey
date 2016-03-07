@@ -57,25 +57,4 @@ describe('integration:validators', () => {
       })
     })
   })
-  describe('required', () => {
-    it('builds a model and fails validation because value is required', () => {
-      const testModel = obey.model(modelFixtures.required)
-      const testData = {}
-      return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
-          type: 'string',
-          sub: 'default',
-          key: 'name',
-          value: undefined,
-          message: 'Value must be a string'
-        }, {
-          type: 'required',
-          sub: 'default',
-          key: 'name',
-          value: undefined,
-          message: 'Property \'name\' is required'
-        }])
-      })
-    })
-  })
 })

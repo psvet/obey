@@ -8,21 +8,42 @@ import Promise from 'bluebird'
 import validators from './lib/validators'
 import ValidationError from './lib/error'
 
+/**
+ * Defines all definition property checks available
+ */
+const allProps = {
+  generator: { name: 'generator', fn: generators.validator },
+  default: { name: 'default', fn: validators.default },
+  modifier: { name: 'modifier', fn: modifiers.validator },
+  allow: { name: 'allow', fn: validators.allow },
+  min: { name: 'min', fn: validators.min },
+  max: { name: 'max', fn: validators.max },
+  type: { name: 'type', fn: types.validator }
+}
+
 const rules = {
   /**
    * Acts as validation setup for, and respective order of operations
    * of, properties for a def-prop configuration
    */
-  props: [
-    { name: 'generator', fn: generators.validator },
-    { name: 'default', fn: validators.default },
-    { name: 'modifier', fn: modifiers.validator },
-    { name: 'allow', fn: validators.allow },
-    { name: 'min', fn: validators.min },
-    { name: 'max', fn: validators.max },
-    { name: 'type', fn: types.validator },
-    { name: 'required', fn: validators.required }
-  ],
+  props: {
+    // Default props
+    default: [
+      allProps.generator,
+      allProps.default,
+      allProps.modifier,
+      allProps.allow,
+      allProps.min,
+      allProps.max,
+      allProps.type
+    ],
+    // When no value/undefined
+    noVal: [
+      allProps.generator,
+      allProps.default,
+      allProps.modifier
+    ]
+  },
 
   /**
    * Binds rule definition in validate method
@@ -38,9 +59,10 @@ const rules = {
    */
   validate: (def, data, key = null) => {
     const context = { errors: [] }
+    const props = !def.required && data === undefined ? rules.props.noVal : rules.props.default
     if (!def.type) throw new Error('Model properties must define a \'type\'')
     let chain = Promise.resolve(data)
-    rules.props.forEach(prop => {
+    props.forEach(prop => {
       if (def[prop.name]) {
         chain = chain.then(prop.fn.bind(context, def, key)).then(res => {
           return res === undefined ? data : res

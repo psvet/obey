@@ -26,6 +26,29 @@ describe('integration:core', () => {
       expect(e).to.be.instanceOf(ValidationError)
     })
   })
+  it('builds a model and passes when non-required field is undefined', () => {
+    const testModel = obey.model(modelFixtures.basicExtended)
+    const testData = {
+      fname: 'John'
+    }
+    return testModel.validate(testData)
+      .then((res) => {
+        expect(res.fname).to.equal('John')
+        expect(res.lname).to.be.undefined
+        expect(res.type).to.be.undefined
+      })
+  })
+  it('builds a model and fails when required field is undefined', () => {
+    const testModel = obey.model(modelFixtures.basicRequired)
+    const testData = {
+      fname: 'John'
+    }
+    return testModel.validate(testData)
+      .then(() => { throw new Error('Should fail') })
+      .catch((err) => {
+        expect(err.message).to.equal('lname (undefined): Value must be a string')
+      })
+  })
   it('builds a model and successfully validates when nested object present', () => {
     const testModel = obey.model(modelFixtures.basicNested)
     const testData = {

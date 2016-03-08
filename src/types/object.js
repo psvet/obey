@@ -3,13 +3,8 @@ import rules from '../rules'
 import Promise from 'bluebird'
 import ValidationError from '../lib/error'
 
-const removeEmpty = obj => {
-  let resObj = {}
-  _.forOwn(obj, (val, key) => {
-    if (val !== undefined) resObj[key] = val
-  })
-  return resObj
-}
+// Removes empty (undefined) props from object
+const removeEmpty = obj => _(obj).omitBy(_.isUndefined).value()
 
 const object = {
   default: context => {

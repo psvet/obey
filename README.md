@@ -77,7 +77,7 @@ const userModel = obey.model({
   // Key-independent object validation
   permissions: { type: 'object', values: {
     type: 'string'
-  },
+  }},
   account: { type: 'string', allow: [ 'user', 'admin' ], default: 'user' }
 })
 ```
@@ -88,7 +88,7 @@ Using the example above, validation is done by calling the `validate` method and
 
 ```javascript
 userModel.validate({ /* some data */ })
-  .then((data) => {
+  .then(data => {
     // Passes back `data` object, includes any defaults set,
     // generated, or modified data
   })

@@ -1,6 +1,6 @@
 {
   "name": "obey",
-  "version": "0.11.2",
+  "version": "0.11.3",
   "description": "Data modelling and validation library",
   "main": "index.js",
   "files": [

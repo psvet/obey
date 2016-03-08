@@ -18,6 +18,12 @@ describe('rules', () => {
           expect(data).to.equal('foo')
         })
     })
+    it('processes global props even when falsey', () => {
+      return rules.validate({ type: 'number', default: 0 }, undefined)
+        .then(data => {
+          expect(data).to.equal(0)
+        })
+    })
   })
   describe('build', () => {
     it('returns an object with the original definition and validate method', () => {

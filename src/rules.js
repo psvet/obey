@@ -63,7 +63,7 @@ const rules = {
     if (!def.type) throw new Error('Model properties must define a \'type\'')
     let chain = Promise.resolve(data)
     props.forEach(prop => {
-      if (def[prop.name]) {
+      if (def.hasOwnProperty(prop.name)) {
         chain = chain.then(prop.fn.bind(context, def, key)).then(res => {
           return res === undefined ? data : res
         })

@@ -69,12 +69,14 @@ describe('integration:core', () => {
         foo: 5
       }
     }
-    return testModel.validate(testData).catch(err => {
-      expect(err.collection).to.deep.equal([
-        { type: 'string', sub: 'default', key: 'name', value: true, message: 'Value must be a string' },
-        { type: 'string', sub: 'default', key: 'someobj.foo', value: 5, message: 'Value must be a string' }
-      ])
-    })
+    return testModel.validate(testData)
+      .then(() => { throw new Error('Should fail') })
+      .catch(err => {
+        expect(err.collection).to.deep.equal([
+          { type: 'string', sub: 'default', key: 'name', value: true, message: 'Value must be a string' },
+          { type: 'string', sub: 'default', key: 'someobj.foo', value: 5, message: 'Value must be a string' }
+        ])
+      })
   })
   it('builds a model and passes with empty string (allowed with flag)', () => {
     const testModel = obey.model(modelFixtures.basicEmpty)

@@ -3,6 +3,16 @@ import rules from '../rules'
 import Promise from 'bluebird'
 import ValidationError from '../lib/error'
 
+const removeEmpty = obj => {
+  let resObj = {}
+  _.forOwn(obj, (val, key) => {
+    if (val !== undefined) {
+      resObj[key] = val
+    }
+  })
+  return resObj
+}
+
 const object = {
   default: context => {
     if (!_.isObject(context.value)) {
@@ -32,7 +42,7 @@ const object = {
           }
         }
       })
-      return Promise.props(promises)
+      return Promise.props(promises).then(res => removeEmpty(res))
     }
     if (context.def.values) {
       const promises = {}
@@ -40,7 +50,7 @@ const object = {
         promises[key] = rules.validate(context.def.values, val, `${prefix}${key}`)
           .catch(ValidationError, getErrors)
       })
-      return Promise.props(promises)
+      return Promise.props(promises).then(res => removeEmpty(res))
     }
     return context.value
   }

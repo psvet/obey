@@ -6,9 +6,7 @@ import ValidationError from '../lib/error'
 const removeEmpty = obj => {
   let resObj = {}
   _.forOwn(obj, (val, key) => {
-    if (val !== undefined) {
-      resObj[key] = val
-    }
+    if (val !== undefined) resObj[key] = val
   })
   return resObj
 }
@@ -42,7 +40,7 @@ const object = {
           }
         }
       })
-      return Promise.props(promises).then(res => removeEmpty(res))
+      return Promise.props(promises).then(removeEmpty)
     }
     if (context.def.values) {
       const promises = {}
@@ -50,7 +48,7 @@ const object = {
         promises[key] = rules.validate(context.def.values, val, `${prefix}${key}`)
           .catch(ValidationError, getErrors)
       })
-      return Promise.props(promises).then(res => removeEmpty(res))
+      return Promise.props(promises).then(removeEmpty)
     }
     return context.value
   }

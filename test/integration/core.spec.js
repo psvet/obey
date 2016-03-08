@@ -38,6 +38,19 @@ describe('integration:core', () => {
         expect(res.type).to.be.undefined
       })
   })
+  it('builds a models and passes with response including supplied undefined value', () => {
+    const testModel = obey.model(modelFixtures.basicExtended)
+    const testData = {
+      fname: 'John',
+      lname: undefined
+    }
+    return testModel.validate(testData)
+      .then((res) => {
+        expect(res.fname).to.equal('John')
+        expect(res).to.have.property('lname')
+        expect(res).to.not.have.property('type')
+      })
+  })
   it('builds a model and fails when required field is undefined', () => {
     const testModel = obey.model(modelFixtures.basicRequired)
     const testData = {

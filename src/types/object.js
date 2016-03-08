@@ -3,9 +3,6 @@ import rules from '../rules'
 import Promise from 'bluebird'
 import ValidationError from '../lib/error'
 
-// Removes empty (undefined) props from object
-const removeEmpty = obj => _(obj).omitBy(_.isUndefined).value()
-
 const object = {
   default: context => {
     if (!_.isObject(context.value)) {
@@ -19,9 +16,14 @@ const object = {
     const prefix = context.key ? `${context.key}.` : ''
     if (context.def.keys) {
       // Build validation checks
+      const missingKeys = []
       const promises = {}
       _.forOwn(context.def.keys, (keyDef, key) => {
         promises[key] = rules.validate(keyDef, context.value[key], `${prefix}${key}`)
+          .then(val => {
+            if (!context.value.hasOwnProperty(key) && val === undefined) missingKeys.push(key)
+            return val
+          })
           .catch(ValidationError, getErrors)
       })
       // Check undefined keys
@@ -35,7 +37,10 @@ const object = {
           }
         }
       })
-      return Promise.props(promises).then(removeEmpty)
+      return Promise.props(promises).then(obj => {
+        missingKeys.forEach(key => delete obj[key])
+        return obj
+      })
     }
     if (context.def.values) {
       const promises = {}
@@ -43,7 +48,7 @@ const object = {
         promises[key] = rules.validate(context.def.values, val, `${prefix}${key}`)
           .catch(ValidationError, getErrors)
       })
-      return Promise.props(promises).then(removeEmpty)
+      return Promise.props(promises)
     }
     return context.value
   }

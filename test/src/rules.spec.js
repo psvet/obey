@@ -19,7 +19,7 @@ describe('rules', () => {
         })
     })
     it('processes global props even when falsey', () => {
-      return rules.validate({ type: 'number', default: 0}, undefined)
+      return rules.validate({ type: 'number', default: 0 }, undefined)
         .then(data => {
           expect(data).to.equal(0)
         })

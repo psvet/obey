@@ -16,9 +16,14 @@ const object = {
     const prefix = context.key ? `${context.key}.` : ''
     if (context.def.keys) {
       // Build validation checks
+      const missingKeys = []
       const promises = {}
       _.forOwn(context.def.keys, (keyDef, key) => {
         promises[key] = rules.validate(keyDef, context.value[key], `${prefix}${key}`)
+          .then(val => {
+            if (!context.value.hasOwnProperty(key) && val === undefined) missingKeys.push(key)
+            return val
+          })
           .catch(ValidationError, getErrors)
       })
       // Check undefined keys
@@ -32,7 +37,10 @@ const object = {
           }
         }
       })
-      return Promise.props(promises)
+      return Promise.props(promises).then(obj => {
+        missingKeys.forEach(key => delete obj[key])
+        return obj
+      })
     }
     if (context.def.values) {
       const promises = {}

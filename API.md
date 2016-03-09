@@ -1,8 +1,8 @@
 ## Objects
 
 <dl>
-<dt><a href="#generators">generators</a> : <code>object</code></dt>
-<dd><p>Generators allow for methods which generate values during validation when a
+<dt><a href="#creators">creators</a> : <code>object</code></dt>
+<dd><p>Creators allow for methods which create values during validation when a
 value is not supplied</p>
 </dd>
 <dt><a href="#obey">obey</a> : <code>object</code></dt>
@@ -49,34 +49,34 @@ existing collection. This function is curried.</p>
 </dd>
 </dl>
 
-<a name="generators"></a>
-## generators : <code>object</code>
-Generators allow for methods which generate values during validation when a
+<a name="creators"></a>
+## creators : <code>object</code>
+Creators allow for methods which create values during validation when a
 value is not supplied
 
 **Kind**: global namespace  
 
-* [generators](#generators) : <code>object</code>
-    * [.lib](#generators.lib)
-    * [.execute(def, key, value)](#generators.execute) ⇒ <code>function</code>
-    * [.add(name, fn)](#generators.add)
+* [creators](#creators) : <code>object</code>
+    * [.lib](#creators.lib)
+    * [.execute(def, key, value)](#creators.execute) ⇒ <code>function</code>
+    * [.add(name, fn)](#creators.add)
 
-<a name="generators.lib"></a>
-### generators.lib
-**Kind**: static property of <code>[generators](#generators)</code>  
+<a name="creators.lib"></a>
+### creators.lib
+**Kind**: static property of <code>[creators](#creators)</code>  
 **Properties**
 
 | Name | Type | Description |
 | --- | --- | --- |
-| Library | <code>Object</code> | of generators |
+| Library | <code>Object</code> | of creators |
 
-<a name="generators.execute"></a>
-### generators.execute(def, key, value) ⇒ <code>function</code>
-Execute method calls the appropriate generator and returns the method or
-throws and error if the generator does not exist
+<a name="creators.execute"></a>
+### creators.execute(def, key, value) ⇒ <code>function</code>
+Execute method calls the appropriate creator and returns the method or
+throws and error if the creator does not exist
 
-**Kind**: static method of <code>[generators](#generators)</code>  
-**Returns**: <code>function</code> - The generator function  
+**Kind**: static method of <code>[creators](#creators)</code>  
+**Returns**: <code>function</code> - The creator function  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -84,16 +84,16 @@ throws and error if the generator does not exist
 | key | <code>String</code> | The key name of the property |
 | value | <code>\*</code> | The value being validated |
 
-<a name="generators.add"></a>
-### generators.add(name, fn)
-Adds a generator to the library
+<a name="creators.add"></a>
+### creators.add(name, fn)
+Adds a creator to the library
 
-**Kind**: static method of <code>[generators](#generators)</code>  
+**Kind**: static method of <code>[creators](#creators)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> | The name of the generator |
-| fn | <code>function</code> | The generator's method |
+| name | <code>String</code> | The name of the creator |
+| fn | <code>function</code> | The creator's method |
 
 <a name="obey"></a>
 ## obey : <code>object</code>
@@ -107,7 +107,7 @@ well as the API for all other modules
     * [.model(obj, (strict))](#obey.model) ⇒ <code>Object</code>
     * [.type(name, handler)](#obey.type)
     * [.modifier(name, fn)](#obey.modifier)
-    * [.generator(name, fn)](#obey.generator)
+    * [.creator(name, fn)](#obey.creator)
 
 <a name="obey.rule"></a>
 ### obey.rule(def) ⇒ <code>Object</code>
@@ -152,16 +152,16 @@ Creates and stores a modifier
 | name | <code>String</code> | The modifier's name |
 | fn | <code>function</code> | The method for the modifier |
 
-<a name="obey.generator"></a>
-### obey.generator(name, fn)
-Creates and stores a generator
+<a name="obey.creator"></a>
+### obey.creator(name, fn)
+Creates and stores a creator
 
 **Kind**: static method of <code>[obey](#obey)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> | The generator's name |
-| fn | <code>function</code> | The method for the generator |
+| name | <code>String</code> | The creator's name |
+| fn | <code>function</code> | The method for the creator |
 
 <a name="modifiers"></a>
 ## modifiers : <code>object</code>

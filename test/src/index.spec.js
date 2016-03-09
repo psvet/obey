@@ -4,7 +4,7 @@ import obey from 'src/index'
 import rules from 'src/rules'
 import types from 'src/types'
 import modifiers from 'src/modifiers'
-import generators from 'src/generators'
+import creators from 'src/creators'
 
 describe('obey', () => {
   describe('rule', () => {
@@ -42,12 +42,12 @@ describe('obey', () => {
       expect(modifiers.add).to.be.called
     })
   })
-  describe('generator', () => {
-    before(() => sinon.spy(generators, 'add'))
-    after(() => { generators.add.restore() })
-    it('adds a new generator to the obey library', () => {
-      obey.generator('name', () => _.noop())
-      expect(generators.add).to.be.called
+  describe('creator', () => {
+    before(() => sinon.spy(creators, 'add'))
+    after(() => { creators.add.restore() })
+    it('adds a new creator to the obey library', () => {
+      obey.creator('name', () => _.noop())
+      expect(creators.add).to.be.called
     })
   })
 })

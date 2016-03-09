@@ -5,7 +5,7 @@
 import rules from './rules'
 import types from './types'
 import modifiers from './modifiers'
-import generators from './generators'
+import creators from './creators'
 import validators from './lib/validators'
 import ValidationError from './lib/error'
 
@@ -18,7 +18,7 @@ export default {
   /**
    * API, exposes modules to make lib API accessible
    */
-  rules, types, modifiers, generators, validators, ValidationError,
+  rules, types, modifiers, creators, validators, ValidationError,
 
   /**
    * Returns a composed rule from a definition object
@@ -54,10 +54,10 @@ export default {
   modifier: (name, fn) => modifiers.add(name, fn),
 
   /**
-   * Creates and stores a generator
+   * Creates and stores a creator
    * @memberof obey
-   * @param {String} name The generator's name
-   * @param {Function} fn The method for the generator
+   * @param {String} name The creator's name
+   * @param {Function} fn The method for the creator
    */
-  generator: (name, fn) => generators.add(name, fn)
+  creator: (name, fn) => creators.add(name, fn)
 }

@@ -3,7 +3,7 @@
  */
 import types from './types'
 import modifiers from './modifiers'
-import generators from './generators'
+import creators from './creators'
 import Promise from 'bluebird'
 import validators from './lib/validators'
 import ValidationError from './lib/error'
@@ -13,7 +13,7 @@ import ValidationError from './lib/error'
  * Defines all definition property checks available
  */
 const allProps = {
-  generator: { name: 'generator', fn: generators.execute },
+  creator: { name: 'creator', fn: creators.execute },
   default: { name: 'default', fn: validators.default },
   modifier: { name: 'modifier', fn: modifiers.execute },
   allow: { name: 'allow', fn: validators.allow },
@@ -35,7 +35,7 @@ const rules = {
   props: {
     // Default props
     default: [
-      allProps.generator,
+      allProps.creator,
       allProps.default,
       allProps.modifier,
       allProps.allow,
@@ -45,7 +45,7 @@ const rules = {
     ],
     // When no value/undefined
     noVal: [
-      allProps.generator,
+      allProps.creator,
       allProps.default,
       allProps.modifier
     ]

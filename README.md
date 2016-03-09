@@ -298,7 +298,7 @@ user.validate(/* ...some data object... */)
 
 ## Contributing
 
-Contibutions to Obey are welcomed and encouraged. If you would like to make a contribution please fork the repository and submit a PR with changes. Acceptance of PR's is based on a review by core contributors. To increase the likelyhood of acceptance please ensure the following:
+Contibutions to Obey are welcomed and encouraged. If you would like to make a contribution please fork the repository and submit a PR with changes. Acceptance of PR's is based on a review by core contributors. To increase the likelihood of acceptance please ensure the following:
 
 * The PR states the reason for the modification/addition to the API **in detail**
 * All tests are passing and coverage is at, or near, 100%

@@ -4,8 +4,8 @@
 import _ from 'lodash'
 
 /**
- * Types determine and execute the appropriate validation to be performed on an
- * object during validation
+ * Types determine and execute the appropriate validation to be performed on the
+ * data during validation
  * @namespace types
  */
 const types = {

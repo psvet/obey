@@ -3,14 +3,19 @@
  */
 import _ from 'lodash'
 
+/**
+ * @namespace types
+ */
 const types = {
   /**
-   * Library of type strategies
+   * @memberof types
+   * @property {Object} Contains type strategies
    */
   strategies: {},
 
   /**
    * Checks for and applies sub-type to definition
+   * @memberof types
    * @param {Object} def The rule defintion
    * @returns {Object}
    */
@@ -27,6 +32,7 @@ const types = {
 
   /**
    * Validator method, used by rules
+   * @memberof types
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
@@ -51,6 +57,7 @@ const types = {
 
   /**
    * Add (or override) type in the lib
+   * @memberof types
    * @param {String} name The name of the type
    * @param {Object|Function} handler
    * @param {String} fn The type strategy method
@@ -61,6 +68,7 @@ const types = {
 
   /**
    * Process basic type validation
+   * @memberof types
    * @param {String} type The type to check
    * @param {*} val The value to check
    * @returns {Boolean}

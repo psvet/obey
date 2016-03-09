@@ -21,10 +21,13 @@ const allProps = {
   type: { name: 'type', fn: types.validator }
 }
 
+/**
+ * @namespace rules
+ */
 const rules = {
   /**
-   * Acts as validation setup for, and respective order of operations
-   * of, properties for a def-prop configuration
+   * @memberof rules
+   * @property {Object} Validation property setup and order of operations
    */
   props: {
     // Default props
@@ -47,12 +50,14 @@ const rules = {
 
   /**
    * Binds rule definition in validate method
+   * @memberof rules
    * @param {Object} def The rule definition object
    */
   makeValidate: def => rules.validate.bind(null, def),
 
   /**
    * Processes definition validation
+   * @memberof rules
    * @param {Object} def The rule definition object
    * @param {*} data The data to validate
    * @param {String} (key) Key for tracking parent in nested iterations
@@ -77,6 +82,7 @@ const rules = {
 
   /**
    * Adds new rule
+   * @memberof rules
    * @param {Object} def The rule definition
    * @returns {Object}
    */

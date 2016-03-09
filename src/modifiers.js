@@ -2,14 +2,19 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 
+/**
+ * @namespace modifiers
+ */
 const modifiers = {
   /**
-   * Library of modifiers
+   * @memberof modifiers
+   * @property {Object} Library of modifiers
    */
   lib: {},
 
   /**
    * Validator method, used by model
+   * @memberof modifiers
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
@@ -21,6 +26,7 @@ const modifiers = {
 
   /**
    * Adds new modifier
+   * @memberof modifiers
    * @param {String} name The name of the modifier
    * @param {Function} fn The modifier's method
    */

@@ -2,14 +2,19 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 
+/**
+ * @namespace generators
+ */
 const generators = {
   /**
-   * Library of generators
+   * @memberof generators
+   * @property {Object} Library of generators
    */
   lib: {},
 
   /**
    * Validator method, used by model
+   * @memberof generators
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
@@ -22,6 +27,7 @@ const generators = {
 
   /**
    * Adds a generator to the library
+   * @memberof generators
    * @param {String} name The name of the generator
    * @param {Function} fn The generator's method
    */

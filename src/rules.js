@@ -67,6 +67,7 @@ const rules = {
    * @param {String} (key) Key for tracking parent in nested iterations
    */
   validate: (def, data, key = null) => {
+    let curData = data
     const context = { errors: [] }
     const props = !def.required && data === undefined ? rules.props.noVal : rules.props.default
     if (!def.type) throw new Error('Model properties must define a \'type\'')
@@ -74,7 +75,8 @@ const rules = {
     props.forEach(prop => {
       if (def.hasOwnProperty(prop.name)) {
         chain = chain.then(prop.fn.bind(context, def, key)).then(res => {
-          return res === undefined ? data : res
+          if (res !== undefined) curData = res
+          return curData
         })
       }
     })

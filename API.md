@@ -18,8 +18,8 @@ when validation occurs</p>
 properties during validation</p>
 </dd>
 <dt><a href="#types">types</a> : <code>object</code></dt>
-<dd><p>Types determine and execute the appropriate validation to be performed on an
-object during validation</p>
+<dd><p>Types determine and execute the appropriate validation to be performed on the
+data during validation</p>
 </dd>
 </dl>
 
@@ -266,8 +266,8 @@ Adds new rule to the lib
 
 <a name="types"></a>
 ## types : <code>object</code>
-Types determine and execute the appropriate validation to be performed on an
-object during validation
+Types determine and execute the appropriate validation to be performed on the
+data during validation
 
 **Kind**: global namespace  
 

@@ -12,6 +12,7 @@ Asynchronous Data Modelling and Validation.
 
 - [Introduction](#introduction)
 - [Installation](#installation)
+- [API Documentaion](#api-documentation)
 - [Rules](#rules)
 - [Models](#models)
 - [Validation](#validation)
@@ -27,15 +28,20 @@ Asynchronous Data Modelling and Validation.
   - [Creating Generators](#creating-generators)
 - [Strict Mode](#strict-mode)
 - [Asynchronous Validation](#asynchronous-validation)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
 
-Obey is a library for creating asynchronous data models and rules. The core goal of the project is to provide methods for managing data models both through synchronous and asynchronous validation and alignment using [JavaScript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+Obey is a library for creating asynchronous data models and rules. The core goal of the project is to provide methods for managing data models both through synchronous and asynchronous validation and alignment using [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
 ## Installation
 
 Obey can be installed via [NPM](https://www.npmjs.com/package/obey): `npm install obey --save`
+
+## API Documentation
+
+Detailed [API Documentation](API.md) is available for assistance in using, modifying, or [contibuting](#contributing) to the Obey library.
 
 ## Rules
 
@@ -289,6 +295,16 @@ user.validate(/* ...some data object... */)
   .then(/* ...response or other action... */)
   .catch(/* ...handle errors... */)
 ```
+
+## Contributing
+
+Contibutions to Obey are welcomed and encouraged. If you would like to make a contribution please fork the repository and submit a PR with changes. Acceptance of PR's is based on a review by core contributors. To increase the likelyhood of acceptance please ensure the following:
+
+* The PR states the reason for the modification/addition to the API **in detail**
+* All tests are passing and coverage is at, or near, 100%
+* The code submitted follows the conventions used throughout the library
+* JSDoc3 is in place and generates via `npm run doc`
+* Any needed documentation on the `README` is supplied
 
 ## License
 

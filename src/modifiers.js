@@ -3,6 +3,8 @@
  */
 
 /**
+ * Modifiers allow for coercion/modification of a value present in the object
+ * when validation occurs
  * @namespace modifiers
  */
 const modifiers = {
@@ -19,7 +21,7 @@ const modifiers = {
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
    */
-  validator: function(def, key, value) {
+  execute: function(def, key, value) {
     if (modifiers.lib[def.modifier]) return modifiers.lib[def.modifier](value)
     throw new Error(`Modifier '${def.modifier}' does not exist`)
   },

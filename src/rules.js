@@ -9,19 +9,22 @@ import validators from './lib/validators'
 import ValidationError from './lib/error'
 
 /**
+ * @memberof rules
  * Defines all definition property checks available
  */
 const allProps = {
-  generator: { name: 'generator', fn: generators.validator },
+  generator: { name: 'generator', fn: generators.execute },
   default: { name: 'default', fn: validators.default },
-  modifier: { name: 'modifier', fn: modifiers.validator },
+  modifier: { name: 'modifier', fn: modifiers.execute },
   allow: { name: 'allow', fn: validators.allow },
   min: { name: 'min', fn: validators.min },
   max: { name: 'max', fn: validators.max },
-  type: { name: 'type', fn: types.validator }
+  type: { name: 'type', fn: types.validate }
 }
 
 /**
+ * Rules is responsible for determining the execution of schema definition
+ * properties during validation
  * @namespace rules
  */
 const rules = {

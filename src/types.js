@@ -4,6 +4,8 @@
 import _ from 'lodash'
 
 /**
+ * Types determine and execute the appropriate validation to be performed on an
+ * object during validation
  * @namespace types
  */
 const types = {
@@ -37,7 +39,7 @@ const types = {
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
    */
-  validator: function(def, key, value) {
+  validate: function(def, key, value) {
     const parsedDef = types.checkSubType(def)
     const fail = message => {
       this.errors.push({ type: def.type, sub: def.sub, key, value, message })

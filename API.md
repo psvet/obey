@@ -2,24 +2,30 @@
 
 <dl>
 <dt><a href="#generators">generators</a> : <code>object</code></dt>
-<dd></dd>
+<dd><p>Generators allow for methods which generate values during validation when a
+value is not supplied</p>
+</dd>
 <dt><a href="#obey">obey</a> : <code>object</code></dt>
-<dd><p>This object exposes the top-level public api methods for obey</p>
+<dd><p>The main object for Obey; exposes the core API methods for standard use as
+well as the API for all other modules</p>
 </dd>
 <dt><a href="#modifiers">modifiers</a> : <code>object</code></dt>
-<dd></dd>
+<dd><p>Modifiers allow for coercion/modification of a value present in the object
+when validation occurs</p>
+</dd>
 <dt><a href="#rules">rules</a> : <code>object</code></dt>
-<dd></dd>
+<dd><p>Rules is responsible for determining the execution of schema definition
+properties during validation</p>
+</dd>
 <dt><a href="#types">types</a> : <code>object</code></dt>
-<dd></dd>
+<dd><p>Types determine and execute the appropriate validation to be performed on an
+object during validation</p>
+</dd>
 </dl>
 
 ## Constants
 
 <dl>
-<dt><a href="#allProps">allProps</a></dt>
-<dd><p>Defines all definition property checks available</p>
-</dd>
 <dt><a href="#addErrors">addErrors</a></dt>
 <dd><p>Adds the error array from a ValidationError&#39;s collection into a parent context&#39;s
 existing collection. This function is curried.</p>
@@ -45,11 +51,14 @@ existing collection. This function is curried.</p>
 
 <a name="generators"></a>
 ## generators : <code>object</code>
+Generators allow for methods which generate values during validation when a
+value is not supplied
+
 **Kind**: global namespace  
 
 * [generators](#generators) : <code>object</code>
     * [.lib](#generators.lib)
-    * [.validator(def, key, value)](#generators.validator)
+    * [.execute(def, key, value)](#generators.execute)
     * [.add(name, fn)](#generators.add)
 
 <a name="generators.lib"></a>
@@ -61,8 +70,8 @@ existing collection. This function is curried.</p>
 | --- | --- | --- |
 | Library | <code>Object</code> | of generators |
 
-<a name="generators.validator"></a>
-### generators.validator(def, key, value)
+<a name="generators.execute"></a>
+### generators.execute(def, key, value)
 Validator method, used by model
 
 **Kind**: static method of <code>[generators](#generators)</code>  
@@ -86,7 +95,8 @@ Adds a generator to the library
 
 <a name="obey"></a>
 ## obey : <code>object</code>
-This object exposes the top-level public api methods for obey
+The main object for Obey; exposes the core API methods for standard use as
+well as the API for all other modules
 
 **Kind**: global namespace  
 
@@ -153,11 +163,14 @@ Creates and stores a generator
 
 <a name="modifiers"></a>
 ## modifiers : <code>object</code>
+Modifiers allow for coercion/modification of a value present in the object
+when validation occurs
+
 **Kind**: global namespace  
 
 * [modifiers](#modifiers) : <code>object</code>
     * [.lib](#modifiers.lib)
-    * [.validator(def, key, value)](#modifiers.validator)
+    * [.execute(def, key, value)](#modifiers.execute)
     * [.add(name, fn)](#modifiers.add)
 
 <a name="modifiers.lib"></a>
@@ -169,8 +182,8 @@ Creates and stores a generator
 | --- | --- | --- |
 | Library | <code>Object</code> | of modifiers |
 
-<a name="modifiers.validator"></a>
-### modifiers.validator(def, key, value)
+<a name="modifiers.execute"></a>
+### modifiers.execute(def, key, value)
 Validator method, used by model
 
 **Kind**: static method of <code>[modifiers](#modifiers)</code>  
@@ -194,6 +207,9 @@ Adds new modifier
 
 <a name="rules"></a>
 ## rules : <code>object</code>
+Rules is responsible for determining the execution of schema definition
+properties during validation
+
 **Kind**: global namespace  
 
 * [rules](#rules) : <code>object</code>
@@ -245,12 +261,15 @@ Adds new rule
 
 <a name="types"></a>
 ## types : <code>object</code>
+Types determine and execute the appropriate validation to be performed on an
+object during validation
+
 **Kind**: global namespace  
 
 * [types](#types) : <code>object</code>
     * [.strategies](#types.strategies)
     * [.checkSubType(def)](#types.checkSubType) ⇒ <code>Object</code>
-    * [.validator(def, key, value)](#types.validator)
+    * [.validate(def, key, value)](#types.validate)
     * [.add(name, handler, fn)](#types.add)
     * [.check(type, val)](#types.check) ⇒ <code>Boolean</code>
 
@@ -273,8 +292,8 @@ Checks for and applies sub-type to definition
 | --- | --- | --- |
 | def | <code>Object</code> | The rule defintion |
 
-<a name="types.validator"></a>
-### types.validator(def, key, value)
+<a name="types.validate"></a>
+### types.validate(def, key, value)
 Validator method, used by rules
 
 **Kind**: static method of <code>[types](#types)</code>  
@@ -308,11 +327,6 @@ Process basic type validation
 | type | <code>String</code> | The type to check |
 | val | <code>\*</code> | The value to check |
 
-<a name="allProps"></a>
-## allProps
-Defines all definition property checks available
-
-**Kind**: global constant  
 <a name="addErrors"></a>
 ## addErrors
 Adds the error array from a ValidationError's collection into a parent context's

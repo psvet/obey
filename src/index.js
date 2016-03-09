@@ -10,7 +10,8 @@ import validators from './lib/validators'
 import ValidationError from './lib/error'
 
 /**
- * This object exposes the top-level public api methods for obey
+ * The main object for Obey; exposes the core API methods for standard use as
+ * well as the API for all other modules
  * @namespace obey
  */
 export default {

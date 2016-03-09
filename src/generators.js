@@ -3,6 +3,8 @@
  */
 
 /**
+ * Generators allow for methods which generate values during validation when a
+ * value is not supplied
  * @namespace generators
  */
 const generators = {
@@ -19,7 +21,7 @@ const generators = {
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
    */
-  validator: function(def, key, value) {
+  execute: function(def, key, value) {
     if (value !== undefined) return value
     if (generators.lib[def.generator]) return generators.lib[def.generator]()
     throw new Error(`Generator '${def.generator}' does not exist`)

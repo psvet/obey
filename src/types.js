@@ -3,14 +3,21 @@
  */
 import _ from 'lodash'
 
+/**
+ * Types determine and execute the appropriate validation to be performed on the
+ * data during validation
+ * @namespace types
+ */
 const types = {
   /**
-   * Library of type strategies
+   * @memberof types
+   * @property {Object} Contains type strategies
    */
   strategies: {},
 
   /**
    * Checks for and applies sub-type to definition
+   * @memberof types
    * @param {Object} def The rule defintion
    * @returns {Object}
    */
@@ -26,12 +33,15 @@ const types = {
   },
 
   /**
-   * Validator method, used by rules
+   * Sets up the `fail` method and handles `empty` or `undefined` values. If neither
+   * empty or undefined, calls the appropriate `type` and executes validation
+   * @memberof types
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
+   * @returns {*} The value if empty or undefined, check method if value requires type validation
    */
-  validator: function(def, key, value) {
+  validate: function(def, key, value) {
     const parsedDef = types.checkSubType(def)
     const fail = message => {
       this.errors.push({ type: def.type, sub: def.sub, key, value, message })
@@ -50,7 +60,8 @@ const types = {
   },
 
   /**
-   * Add (or override) type in the lib
+   * Add (or override) a type in the library
+   * @memberof types
    * @param {String} name The name of the type
    * @param {Object|Function} handler
    * @param {String} fn The type strategy method
@@ -60,10 +71,12 @@ const types = {
   },
 
   /**
-   * Process basic type validation
+   * Ensures that the strategy exists, loads if not already in memory, then ensures
+   * subtype and returns the applied type strategy
+   * @memberof types
    * @param {String} type The type to check
    * @param {*} val The value to check
-   * @returns {Boolean}
+   * @returns {Object} The type execution function promise resolution
    */
   check: context => {
     if (!types.strategies[context.def.type]) {

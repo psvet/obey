@@ -5,14 +5,14 @@ describe('modifiers', () => {
   afterEach(() => {
     modifiers.lib = {}
   })
-  describe('validator', () => {
+  describe('execute', () => {
     it('returns the modifier method if exists', () => {
       modifiers.add('test', () => 'foo')
-      const actual = modifiers.validator({ modifier: 'test' }, 'foo', 'bar')
+      const actual = modifiers.execute({ modifier: 'test' }, 'foo', 'bar')
       expect(actual).to.be.a.function
     })
     it('throws an error if the modifier does not exist', () => {
-      expect(modifiers.validator.bind(null, { modifier: 'nope' })).to.throw('Modifier \'nope\' does not exist')
+      expect(modifiers.execute.bind(null, { modifier: 'nope' })).to.throw('Modifier \'nope\' does not exist')
     })
   })
   describe('add', () => {

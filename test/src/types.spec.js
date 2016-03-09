@@ -13,13 +13,13 @@ describe('types', () => {
       expect(actual).to.deep.equal({ type: 'foo', sub: 'bar' })
     })
   })
-  describe('validator', () => {
+  describe('validate', () => {
     it('builds a fail method and returns types.check', () => {
-      const actual = types.validator.call({ errors: [] }, { type: 'string' }, 'foo', 'bar')
+      const actual = types.validate.call({ errors: [] }, { type: 'string' }, 'foo', 'bar')
       expect(actual).to.be.a.function
     })
     it('allows an empty string to pass (via return) when empty flag is set', () => {
-      const actual = types.validator.call({ errors: [] }, { type: 'string', empty: true }, 'foo', '')
+      const actual = types.validate.call({ errors: [] }, { type: 'string', empty: true }, 'foo', '')
       expect(actual).to.equal('')
     })
   })

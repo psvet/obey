@@ -9,22 +9,28 @@ import validators from './lib/validators'
 import ValidationError from './lib/error'
 
 /**
+ * @memberof rules
  * Defines all definition property checks available
  */
 const allProps = {
-  generator: { name: 'generator', fn: generators.validator },
+  generator: { name: 'generator', fn: generators.execute },
   default: { name: 'default', fn: validators.default },
-  modifier: { name: 'modifier', fn: modifiers.validator },
+  modifier: { name: 'modifier', fn: modifiers.execute },
   allow: { name: 'allow', fn: validators.allow },
   min: { name: 'min', fn: validators.min },
   max: { name: 'max', fn: validators.max },
-  type: { name: 'type', fn: types.validator }
+  type: { name: 'type', fn: types.validate }
 }
 
+/**
+ * Rules is responsible for determining the execution of schema definition
+ * properties during validation
+ * @namespace rules
+ */
 const rules = {
   /**
-   * Acts as validation setup for, and respective order of operations
-   * of, properties for a def-prop configuration
+   * @memberof rules
+   * @property {Object} Validation property setup and order of operations
    */
   props: {
     // Default props
@@ -47,14 +53,17 @@ const rules = {
 
   /**
    * Binds rule definition in validate method
+   * @memberof rules
    * @param {Object} def The rule definition object
    */
   makeValidate: def => rules.validate.bind(null, def),
 
   /**
-   * Processes definition validation
+   * Iterates over the properties present in the rule definition and sets the
+   * appropriate bindings to required methods
+   * @memberof rules
    * @param {Object} def The rule definition object
-   * @param {*} data The data to validate
+   * @param {*} data The data (value) to validate
    * @param {String} (key) Key for tracking parent in nested iterations
    */
   validate: (def, data, key = null) => {
@@ -76,7 +85,8 @@ const rules = {
   },
 
   /**
-   * Adds new rule
+   * Adds new rule to the lib
+   * @memberof rules
    * @param {Object} def The rule definition
    * @returns {Object}
    */

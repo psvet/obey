@@ -6,13 +6,23 @@ import rules from './rules'
 import types from './types'
 import modifiers from './modifiers'
 import generators from './generators'
+import validators from './lib/validators'
+import ValidationError from './lib/error'
 
 /**
- * This object exposes the top-level public api methods for obey
+ * The main object for Obey; exposes the core API methods for standard use as
+ * well as the API for all other modules
+ * @namespace obey
  */
 export default {
   /**
+   * API, exposes modules to make lib API accessible
+   */
+  rules, types, modifiers, generators, validators, ValidationError,
+
+  /**
    * Returns a composed rule from a definition object
+   * @memberof obey
    * @param {Object} def The rule definition
    * @returns {Object}
    */
@@ -20,6 +30,7 @@ export default {
 
   /**
    * Returns a composed model from a definition object
+   * @memberof obey
    * @param {Object} obj The definition object
    * @param {Boolean} (strict) Whether or not to enforce strict validation
    * @returns {Object}
@@ -28,6 +39,7 @@ export default {
 
   /**
    * Creates and stores (or replaces) a type
+   * @memberof obey
    * @param {String} name The name of the type
    * @param {Object|Function} handler The type method or object of methods
    */
@@ -35,6 +47,7 @@ export default {
 
   /**
    * Creates and stores a modifier
+   * @memberof obey
    * @param {String} name The modifier's name
    * @param {Function} fn The method for the modifier
    */
@@ -42,6 +55,7 @@ export default {
 
   /**
    * Creates and stores a generator
+   * @memberof obey
    * @param {String} name The generator's name
    * @param {Function} fn The method for the generator
    */

@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
+    "doc": "node_modules/.bin/jsdoc2md \"src/**/*.js\" > API.md",
     "build": "babel ./src --out-dir ./build",
-    "test": "snyk test && npm run lint && npm run cover",
+    "test": "snyk test && npm run lint && npm run cover && npm run doc",
     "mocha": "babel-node node_modules/.bin/_mocha",
     "cover": "babel-node node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha",
     "lint": "eslint ./src ./test --fix",
@@ -43,6 +44,7 @@
     "chai-as-promised": "^5.2.0",
     "eslint": "~2.1.0",
     "isparta": "~4.0.0",
+    "jsdoc-to-markdown": "^1.3.3",
     "mocha": "~2.2.5",
     "pre-commit": "~1.1.1",
     "sinon": "~1.15.4",

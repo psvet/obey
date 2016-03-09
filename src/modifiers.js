@@ -2,25 +2,35 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 
+/**
+ * Modifiers allow for coercion/modification of a value present in the object
+ * when validation occurs
+ * @namespace modifiers
+ */
 const modifiers = {
   /**
-   * Library of modifiers
+   * @memberof modifiers
+   * @property {Object} Library of modifiers
    */
   lib: {},
 
   /**
-   * Validator method, used by model
+   * Execute method calls the appropriate modifier and passes in the value or
+   * throws an error if the modifier does not exist
+   * @memberof modifiers
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
+   * @returns {Function} The modifier function
    */
-  validator: function(def, key, value) {
+  execute: function(def, key, value) {
     if (modifiers.lib[def.modifier]) return modifiers.lib[def.modifier](value)
     throw new Error(`Modifier '${def.modifier}' does not exist`)
   },
 
   /**
-   * Adds new modifier
+   * Adds new modifier to the library
+   * @memberof modifiers
    * @param {String} name The name of the modifier
    * @param {Function} fn The modifier's method
    */

@@ -303,7 +303,7 @@ Contibutions to Obey are welcomed and encouraged. If you would like to make a co
 * The PR states the reason for the modification/addition to the API **in detail**
 * All tests are passing and coverage is at, or near, 100%
 * The code submitted follows the conventions used throughout the library
-* JSDoc3 is in place and generates via `npm run doc`
+* [JSDoc](http://usejsdoc.org/) is in place and generates via `npm run doc`
 * Any needed documentation on the `README` is supplied
 
 ## License

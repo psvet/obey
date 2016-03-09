@@ -59,10 +59,11 @@ const rules = {
   makeValidate: def => rules.validate.bind(null, def),
 
   /**
-   * Processes definition validation
+   * Iterates over the properties present in the rule definition and sets the
+   * appropriate bindings to required methods
    * @memberof rules
    * @param {Object} def The rule definition object
-   * @param {*} data The data to validate
+   * @param {*} data The data (value) to validate
    * @param {String} (key) Key for tracking parent in nested iterations
    */
   validate: (def, data, key = null) => {
@@ -84,7 +85,7 @@ const rules = {
   },
 
   /**
-   * Adds new rule
+   * Adds new rule to the lib
    * @memberof rules
    * @param {Object} def The rule definition
    * @returns {Object}

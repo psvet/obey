@@ -15,11 +15,13 @@ const modifiers = {
   lib: {},
 
   /**
-   * Validator method, used by model
+   * Execute method calls the appropriate modifier and passes in the value or
+   * throws an error if the modifier does not exist
    * @memberof modifiers
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
+   * @returns {Function} The modifier function
    */
   execute: function(def, key, value) {
     if (modifiers.lib[def.modifier]) return modifiers.lib[def.modifier](value)
@@ -27,7 +29,7 @@ const modifiers = {
   },
 
   /**
-   * Adds new modifier
+   * Adds new modifier to the library
    * @memberof modifiers
    * @param {String} name The name of the modifier
    * @param {Function} fn The modifier's method

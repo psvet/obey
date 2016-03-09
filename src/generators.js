@@ -15,11 +15,13 @@ const generators = {
   lib: {},
 
   /**
-   * Validator method, used by model
+   * Execute method calls the appropriate generator and returns the method or
+   * throws and error if the generator does not exist
    * @memberof generators
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
+   * @returns {Function} The generator function
    */
   execute: function(def, key, value) {
     if (value !== undefined) return value

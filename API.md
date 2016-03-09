@@ -58,7 +58,7 @@ value is not supplied
 
 * [generators](#generators) : <code>object</code>
     * [.lib](#generators.lib)
-    * [.execute(def, key, value)](#generators.execute)
+    * [.execute(def, key, value)](#generators.execute) ⇒ <code>function</code>
     * [.add(name, fn)](#generators.add)
 
 <a name="generators.lib"></a>
@@ -71,10 +71,12 @@ value is not supplied
 | Library | <code>Object</code> | of generators |
 
 <a name="generators.execute"></a>
-### generators.execute(def, key, value)
-Validator method, used by model
+### generators.execute(def, key, value) ⇒ <code>function</code>
+Execute method calls the appropriate generator and returns the method or
+throws and error if the generator does not exist
 
 **Kind**: static method of <code>[generators](#generators)</code>  
+**Returns**: <code>function</code> - The generator function  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -170,7 +172,7 @@ when validation occurs
 
 * [modifiers](#modifiers) : <code>object</code>
     * [.lib](#modifiers.lib)
-    * [.execute(def, key, value)](#modifiers.execute)
+    * [.execute(def, key, value)](#modifiers.execute) ⇒ <code>function</code>
     * [.add(name, fn)](#modifiers.add)
 
 <a name="modifiers.lib"></a>
@@ -183,10 +185,12 @@ when validation occurs
 | Library | <code>Object</code> | of modifiers |
 
 <a name="modifiers.execute"></a>
-### modifiers.execute(def, key, value)
-Validator method, used by model
+### modifiers.execute(def, key, value) ⇒ <code>function</code>
+Execute method calls the appropriate modifier and passes in the value or
+throws an error if the modifier does not exist
 
 **Kind**: static method of <code>[modifiers](#modifiers)</code>  
+**Returns**: <code>function</code> - The modifier function  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -196,7 +200,7 @@ Validator method, used by model
 
 <a name="modifiers.add"></a>
 ### modifiers.add(name, fn)
-Adds new modifier
+Adds new modifier to the library
 
 **Kind**: static method of <code>[modifiers](#modifiers)</code>  
 
@@ -239,19 +243,20 @@ Binds rule definition in validate method
 
 <a name="rules.validate"></a>
 ### rules.validate(def, data, (key))
-Processes definition validation
+Iterates over the properties present in the rule definition and sets the
+appropriate bindings to required methods
 
 **Kind**: static method of <code>[rules](#rules)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | def | <code>Object</code> | The rule definition object |
-| data | <code>\*</code> | The data to validate |
+| data | <code>\*</code> | The data (value) to validate |
 | (key) | <code>String</code> | Key for tracking parent in nested iterations |
 
 <a name="rules.build"></a>
 ### rules.build(def) ⇒ <code>Object</code>
-Adds new rule
+Adds new rule to the lib
 
 **Kind**: static method of <code>[rules](#rules)</code>  
 
@@ -269,9 +274,9 @@ object during validation
 * [types](#types) : <code>object</code>
     * [.strategies](#types.strategies)
     * [.checkSubType(def)](#types.checkSubType) ⇒ <code>Object</code>
-    * [.validate(def, key, value)](#types.validate)
+    * [.validate(def, key, value)](#types.validate) ⇒ <code>\*</code>
     * [.add(name, handler, fn)](#types.add)
-    * [.check(type, val)](#types.check) ⇒ <code>Boolean</code>
+    * [.check(type, val)](#types.check) ⇒ <code>Object</code>
 
 <a name="types.strategies"></a>
 ### types.strategies
@@ -293,10 +298,12 @@ Checks for and applies sub-type to definition
 | def | <code>Object</code> | The rule defintion |
 
 <a name="types.validate"></a>
-### types.validate(def, key, value)
-Validator method, used by rules
+### types.validate(def, key, value) ⇒ <code>\*</code>
+Sets up the `fail` method and handles `empty` or `undefined` values. If neither
+empty or undefined, calls the appropriate `type` and executes validation
 
 **Kind**: static method of <code>[types](#types)</code>  
+**Returns**: <code>\*</code> - The value if empty or undefined, check method if value requires type validation  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -306,7 +313,7 @@ Validator method, used by rules
 
 <a name="types.add"></a>
 ### types.add(name, handler, fn)
-Add (or override) type in the lib
+Add (or override) a type in the library
 
 **Kind**: static method of <code>[types](#types)</code>  
 
@@ -317,10 +324,12 @@ Add (or override) type in the lib
 | fn | <code>String</code> | The type strategy method |
 
 <a name="types.check"></a>
-### types.check(type, val) ⇒ <code>Boolean</code>
-Process basic type validation
+### types.check(type, val) ⇒ <code>Object</code>
+Ensures that the strategy exists, loads if not already in memory, then ensures
+subtype and returns the applied type strategy
 
 **Kind**: static method of <code>[types](#types)</code>  
+**Returns**: <code>Object</code> - The type execution function promise resolution  
 
 | Param | Type | Description |
 | --- | --- | --- |

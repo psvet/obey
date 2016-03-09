@@ -33,11 +33,13 @@ const types = {
   },
 
   /**
-   * Validator method, used by rules
+   * Sets up the `fail` method and handles `empty` or `undefined` values. If neither
+   * empty or undefined, calls the appropriate `type` and executes validation
    * @memberof types
    * @param {Object} def The property configuration
    * @param {String} key The key name of the property
    * @param {*} value The value being validated
+   * @returns {*} The value if empty or undefined, check method if value requires type validation
    */
   validate: function(def, key, value) {
     const parsedDef = types.checkSubType(def)
@@ -58,7 +60,7 @@ const types = {
   },
 
   /**
-   * Add (or override) type in the lib
+   * Add (or override) a type in the library
    * @memberof types
    * @param {String} name The name of the type
    * @param {Object|Function} handler
@@ -69,11 +71,12 @@ const types = {
   },
 
   /**
-   * Process basic type validation
+   * Ensures that the strategy exists, loads if not already in memory, then ensures
+   * subtype and returns the applied type strategy
    * @memberof types
    * @param {String} type The type to check
    * @param {*} val The value to check
-   * @returns {Boolean}
+   * @returns {Object} The type execution function promise resolution
    */
   check: context => {
     if (!types.strategies[context.def.type]) {

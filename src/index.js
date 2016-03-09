@@ -6,11 +6,18 @@ import rules from './rules'
 import types from './types'
 import modifiers from './modifiers'
 import generators from './generators'
+import validators from './lib/validators'
+import ValidationError from './lib/error'
 
 /**
  * This object exposes the top-level public api methods for obey
  */
 export default {
+  /**
+   * API, exposes modules to make lib API accessible
+   */
+  rules, types, modifiers, generators, validators, ValidationError,
+
   /**
    * Returns a composed rule from a definition object
    * @param {Object} def The rule definition

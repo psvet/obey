@@ -5,6 +5,7 @@ dependencies:
   override:
     - npm install -g codeclimate-test-reporter
     - npm install -g snyk
+    - npm install -g jsdoc2md
 general:
   artifacts:
     - coverage

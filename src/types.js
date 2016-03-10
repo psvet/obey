@@ -80,6 +80,9 @@ const types = {
    */
   check: context => {
     if (!types.strategies[context.def.type]) {
+      if (context.def.type.match(/[\/\\]/)) {
+        throw new Error(`Illegal type name: ${context.def.type}`)
+      }
       try {
         types.strategies[context.def.type] = require(`./types/${context.def.type}`).default
       } catch (e) {

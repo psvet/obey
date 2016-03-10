@@ -5,7 +5,7 @@
 import rules from './rules'
 import types from './types'
 import modifiers from './modifiers'
-import generators from './generators'
+import creators from './creators'
 import validators from './lib/validators'
 import ValidationError from './lib/error'
 
@@ -18,7 +18,7 @@ export default {
   /**
    * API, exposes modules to make lib API accessible
    */
-  rules, types, modifiers, generators, validators, ValidationError,
+  rules, types, modifiers, creators, validators, ValidationError,
 
   /**
    * Returns a composed rule from a definition object
@@ -32,7 +32,7 @@ export default {
    * Returns a composed model from a definition object
    * @memberof obey
    * @param {Object} obj The definition object
-   * @param {Boolean} (strict) Whether or not to enforce strict validation
+   * @param {boolean} [strict=true] Whether or not to enforce strict validation
    * @returns {Object}
    */
   model: (obj, strict = true) => rules.build({ type: 'object', keys: obj, strict }),
@@ -40,24 +40,24 @@ export default {
   /**
    * Creates and stores (or replaces) a type
    * @memberof obey
-   * @param {String} name The name of the type
-   * @param {Object|Function} handler The type method or object of methods
+   * @param {string} name The name of the type
+   * @param {Object|function} handler The type method or object of methods
    */
   type: (name, handler) => types.add(name, handler),
 
   /**
    * Creates and stores a modifier
    * @memberof obey
-   * @param {String} name The modifier's name
-   * @param {Function} fn The method for the modifier
+   * @param {string} name The modifier's name
+   * @param {function} fn The method for the modifier
    */
   modifier: (name, fn) => modifiers.add(name, fn),
 
   /**
-   * Creates and stores a generator
+   * Creates and stores a creator
    * @memberof obey
-   * @param {String} name The generator's name
-   * @param {Function} fn The method for the generator
+   * @param {string} name The creator's name
+   * @param {function} fn The method for the creator
    */
-  generator: (name, fn) => generators.add(name, fn)
+  creator: (name, fn) => creators.add(name, fn)
 }

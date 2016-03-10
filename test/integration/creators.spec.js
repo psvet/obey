@@ -1,25 +1,25 @@
 /* global describe, it, expect, afterEach */
 import obey from 'src/index'
-import generators from 'src/generators'
-import modelFixtures from 'test/fixtures/generators'
+import creators from 'src/creators'
+import modelFixtures from 'test/fixtures/creators'
 
-describe('integration:generators', () => {
+describe('integration:creators', () => {
   afterEach(() => {
-    generators.lib = {}
+    creators.lib = {}
   })
   describe('synchronous', () => {
-    it('generates a value synchronously when property has no value', () => {
+    it('creates a value synchronously when property has no value', () => {
       const testModel = obey.model(modelFixtures.synchronous)
-      obey.generator('syncGenerator', () => 'foo')
+      obey.creator('syncCreator', () => 'foo')
       return testModel.validate({}).then(res => {
         expect(res.name).to.equal('foo')
       })
     })
   })
   describe('asynchronous', () => {
-    it('generates a value asynchronously when property has no value', () => {
+    it('creates a value asynchronously when property has no value', () => {
       const testModel = obey.model(modelFixtures.asynchronous)
-      obey.generator('asyncGenerator', () => {
+      obey.creator('asyncCreator', () => {
         return new Promise((resolve) => {
           setTimeout(() => resolve('foo'), 300)
         })

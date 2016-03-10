@@ -19,7 +19,7 @@ describe('types', () => {
       expect(actual).to.be.a.function
     })
     it('allows an empty string to pass (via return) when empty flag is set', () => {
-      const actual = types.validate.call({ errors: [] }, { type: 'string', empty: true }, 'foo', '')
+      const actual = types.validate.call({ errors: [] }, { type: 'string', empty: true }, '', 'foo')
       expect(actual).to.equal('')
     })
   })
@@ -55,6 +55,10 @@ describe('types', () => {
     it('throws an error if the specified subtype does not exist', () => {
       context.def.sub = 'nope'
       expect(types.check.bind(null, context)).to.throw('Type \'string:nope\' does not exist')
+    })
+    it('throws an error if the type contains path characters', () => {
+      context.def.type = '../creators'
+      expect(types.check.bind(null, context)).to.throw('Illegal type name: ../creators')
     })
   })
 })

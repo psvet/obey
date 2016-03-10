@@ -1,6 +1,5 @@
 import rules from '../rules'
 import Promise from 'bluebird'
-import ValidationError from '../lib/error'
 
 const array = {
   default: context => {
@@ -19,12 +18,7 @@ const array = {
     // Specific array sub-validation
     if (!context.def.values) return true
     const promises = context.value.map((elem, idx) => {
-      return rules.validate(context.def.values, elem, `${context.key}[${idx}]`)
-        .catch(ValidationError, err => {
-          err.collection.forEach(error => {
-            context.errors.push(error)
-          })
-        })
+      return rules.validate(context.def.values, elem, `${context.key}[${idx}]`, context.errors, false)
     })
     return Promise.all(promises)
   }

@@ -24,8 +24,8 @@ Asynchronous Data Modelling and Validation.
     - [Adding Type with Subs](#adding-type-with-subs)
 - [Modifiers](#modifiers)
   - [Creating Modifiers](#creating-modifiers)
-- [Generators](#generators)
-  - [Creating Generators](#creating-generators)
+- [Creators](#creators)
+  - [Creating Creators](#creating-creators)
 - [Strict Mode](#strict-mode)
 - [Asynchronous Validation](#asynchronous-validation)
 - [Contributing](#contributing)
@@ -61,7 +61,7 @@ const firstName = obey.rule({ type: 'string', min: 2, max: 45, required: true })
 import obey from 'obey'
 
 const userModel = obey.model({
-  id: { type: 'uuid', generator: 'uuid', required: true },
+  id: { type: 'uuid', creator: 'uuid', required: true },
   email: { type: 'email', required: true },
   password: { type: 'string', modifier: 'encryptPassword', required: true },
   fname: { type: 'string', description: 'First Name' },
@@ -133,7 +133,7 @@ When setting definitions for rules or model properties, the following are suppor
 * `keys`: Property of `object` type, indicates nested object properties
 * `values`: Defines value specification for arrays or key-independent objects
 * `modifier`: uses a method and accepts a passed value to modify or transform data, see [Modifiers](#modifiers)
-* `generator`: uses a method to create a default value if no value is supplied, see [Generators](#generators)
+* `creator`: uses a method to create a default value if no value is supplied, see [Creators](#creators)
 * `empty`: Set to `true` allows empty string or array, (default `false`)
 * `default`: The default value if no value specified
 * `min`: The minimum character length for a string, lowest number, or minimum items in array
@@ -241,27 +241,27 @@ When the model is validated, the value in any fields with the `upperCase` modifi
 
 Similar to types, modifiers may be synchronous (returning a value) or asynchronous (returning a promise).
 
-## Generators
+## Creators
 
-> Generators allow custom methods to return values which set the value similar to the `default` property. When validating, if a value is not provided the generator assigned will be used to set the value.
+> Creators allow custom methods to return values which set the value similar to the `default` property. When validating, if a value is not provided the creator assigned will be used to set the value.
 
-### Creating Generators
+### Creating Creators
 
-Generators can be added to the Obey lib with the `obey.generator` method:
-
-```javascript
-obey.generator('timestamp', () => new Date().getTime())
-```
-
-The above example would add a generator named `timestamp` which could be assigned as shown below:
+Creators can be added to the Obey lib with the `obey.creator` method:
 
 ```javascript
-created: { type: 'number', generator: 'timestamp' }
+obey.creator('timestamp', () => new Date().getTime())
 ```
 
-When the model is validated, if no `created` property is provided the `timestamp` generator will assign the property a UTC timestamp.
+The above example would add a creator named `timestamp` which could be assigned as shown below:
 
-Similar to modifiers, generators may be synchronous (returning a value) or asynchronous (returning a promise).
+```javascript
+created: { type: 'number', creator: 'timestamp' }
+```
+
+When the model is validated, if no `created` property is provided the `timestamp` creator will assign the property a UTC timestamp.
+
+Similar to modifiers, creators may be synchronous (returning a value) or asynchronous (returning a promise).
 
 ## Strict Mode
 
@@ -281,7 +281,7 @@ const model = obey.model({ /* definition */ }, false)
 
 ## Asynchronous Validation
 
-The goal with Obey is to provide more than just standard type/regex checks against data to validate values and models. The ability to write both synchronous and asynchronous checks, generators, and modifiers, and include data coercion in the validation simplifies the process of validation and checking before moving onto data source interactions.
+The goal with Obey is to provide more than just standard type/regex checks against data to validate values and models. The ability to write both synchronous and asynchronous checks, creators, and modifiers, and include data coercion in the validation simplifies the process of validation and checking before moving onto data source interactions.
 
 Additionally, with the widespread use of promises, this structure fits well in the scheme of data processing in general:
 

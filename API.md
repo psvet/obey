@@ -245,7 +245,7 @@ Rejects with a ValidationError if applicable.
 | --- | --- | --- | --- |
 | def | <code>Object</code> |  | The rule definition object |
 | data | <code>\*</code> |  | The data (value) to validate |
-| [key] | <code>string</code> |  | Key for tracking parent in nested iterations |
+| [key] | <code>string</code> &#124; <code>null</code> | <code>null</code> | Key for tracking parent in nested iterations |
 | [errors] | <code>Array.&lt;{type: string, sub: string, key: string, value: \*, message: string}&gt;</code> | <code>[]</code> | An error array to which any additional error objects will be added. If not specified, a new array will be created. |
 | [rejectOnFail] | <code>boolean</code> | <code>true</code> | If true, resulting promise will reject if the errors array is not empty; otherwise ValidationErrors will not cause a rejection |
 

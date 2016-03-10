@@ -64,7 +64,7 @@ const rules = {
    * @memberof rules
    * @param {Object} def The rule definition object
    * @param {*} data The data (value) to validate
-   * @param {string} [key] Key for tracking parent in nested iterations
+   * @param {string|null} [key=null] Key for tracking parent in nested iterations
    * @param {Array<{type: string, sub: string, key: string, value: *, message: string}>} [errors=[]] An error array
    * to which any additional error objects will be added. If not specified, a new array will be created.
    * @param {boolean} [rejectOnFail=true] If true, resulting promise will reject if the errors array is not empty;

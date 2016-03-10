@@ -64,24 +64,31 @@ const rules = {
    * @memberof rules
    * @param {Object} def The rule definition object
    * @param {*} data The data (value) to validate
-   * @param {String} (key) Key for tracking parent in nested iterations
+   * @param {string} [key] Key for tracking parent in nested iterations
+   * @param {Array<{type: string, sub: string, key: string, value: *, message: string}>} [errors=[]] An error array
+   * to which any additional error objects will be added. If not specified, a new array will be created.
+   * @param {boolean} [rejectOnFail=true] If true, resulting promise will reject if the errors array is not empty;
+   * otherwise ValidationErrors will not cause a rejection
+   * @returns {Promise.<*>} Resolves with the resulting data, with any defaults, creators, and modifiers applied.
+   * Rejects with a ValidationError if applicable.
    */
-  validate: (def, data, key = null) => {
+  validate: (def, data, key = null, errors = [], rejectOnFail = true) => {
     let curData = data
-    const context = { errors: [] }
     const props = !def.required && data === undefined ? rules.props.noVal : rules.props.default
     if (!def.type) throw new Error('Model properties must define a \'type\'')
     let chain = Promise.resolve(data)
     props.forEach(prop => {
       if (def.hasOwnProperty(prop.name)) {
-        chain = chain.then(prop.fn.bind(context, def, key)).then(res => {
-          if (res !== undefined) curData = res
-          return curData
-        })
+        chain = chain
+          .then(val => prop.fn(def, key, val, errors))
+          .then(res => {
+            if (res !== undefined) curData = res
+            return curData
+          })
       }
     })
     return chain.then(res => {
-      if (context.errors.length > 0) throw new ValidationError(context.errors)
+      if (rejectOnFail && errors.length > 0) throw new ValidationError(errors)
       return res
     })
   },

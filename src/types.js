@@ -37,14 +37,16 @@ const types = {
    * empty or undefined, calls the appropriate `type` and executes validation
    * @memberof types
    * @param {Object} def The property configuration
-   * @param {String} key The key name of the property
+   * @param {string} key The key name of the property
    * @param {*} value The value being validated
-   * @returns {*} The value if empty or undefined, check method if value requires type validation
+   * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
+   * to which any additional error objects will be added
+   * @returns {*|Promise.<*>} The value if empty or undefined, check method if value requires type validation
    */
-  validate: function(def, key, value) {
+  validate: function(def, key, value, errors) {
     const parsedDef = types.checkSubType(def)
     const fail = message => {
-      this.errors.push({ type: def.type, sub: def.sub, key, value, message })
+      errors.push({ type: def.type, sub: def.sub, key, value, message })
     }
     // Handle `empty` prop for string values
     if (def.empty && typeof value === 'string' && def.type !== 'array' && value.length === 0) {
@@ -52,19 +54,18 @@ const types = {
     }
     // Don't run if undefined on required
     if (def.required && value === undefined) {
-      this.errors.push({ type: 'required', sub: 'default', key, value, message: `Property '${key}' is required` })
+      errors.push({ type: 'required', sub: 'default', key, value, message: `Property '${key}' is required` })
       return value
     }
     // Execute check
-    return types.check({ def: parsedDef, key, value, fail, errors: this.errors })
+    return types.check({ def: parsedDef, key, value, fail, errors })
   },
 
   /**
    * Add (or override) a type in the library
    * @memberof types
-   * @param {String} name The name of the type
-   * @param {Object|Function} handler
-   * @param {String} fn The type strategy method
+   * @param {string} name The name of the type
+   * @param {Object|function} handler The type strategy method
    */
   add: (name, handler) => {
     types.strategies[name] = _.isFunction(handler) ? { default: handler } : handler
@@ -74,9 +75,8 @@ const types = {
    * Ensures that the strategy exists, loads if not already in memory, then ensures
    * subtype and returns the applied type strategy
    * @memberof types
-   * @param {String} type The type to check
-   * @param {*} val The value to check
-   * @returns {Object} The type execution function promise resolution
+   * @param {{def: Object, key: string, value: *, fail: function, errors: Array<{Object}>}} context A type context
+   * @returns {Promise.<*>} Resolves with the provided data, possibly modified by the type strategy
    */
   check: context => {
     if (!types.strategies[context.def.type]) {

@@ -23,19 +23,10 @@ data during validation</p>
 </dd>
 </dl>
 
-## Constants
-
-<dl>
-<dt><a href="#addErrors">addErrors</a></dt>
-<dd><p>Adds the error array from a ValidationError&#39;s collection into a parent context&#39;s
-existing collection. This function is curried.</p>
-</dd>
-</dl>
-
 ## Functions
 
 <dl>
-<dt><a href="#getMessages">getMessages(msgObjs)</a> ⇒ <code>Array</code></dt>
+<dt><a href="#getMessages">getMessages(msgObjs)</a> ⇒ <code>Array.&lt;string&gt;</code></dt>
 <dd><p>Compiles array items into string error messages</p>
 </dd>
 <dt><a href="#ValidationError">ValidationError(message)</a></dt>
@@ -81,7 +72,7 @@ throws and error if the creator does not exist
 | Param | Type | Description |
 | --- | --- | --- |
 | def | <code>Object</code> | The property configuration |
-| key | <code>String</code> | The key name of the property |
+| key | <code>string</code> | The key name of the property |
 | value | <code>\*</code> | The value being validated |
 
 <a name="creators.add"></a>
@@ -92,7 +83,7 @@ Adds a creator to the library
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> | The name of the creator |
+| name | <code>string</code> | The name of the creator |
 | fn | <code>function</code> | The creator's method |
 
 <a name="obey"></a>
@@ -104,7 +95,7 @@ well as the API for all other modules
 
 * [obey](#obey) : <code>object</code>
     * [.rule(def)](#obey.rule) ⇒ <code>Object</code>
-    * [.model(obj, (strict))](#obey.model) ⇒ <code>Object</code>
+    * [.model(obj, [strict])](#obey.model) ⇒ <code>Object</code>
     * [.type(name, handler)](#obey.type)
     * [.modifier(name, fn)](#obey.modifier)
     * [.creator(name, fn)](#obey.creator)
@@ -120,15 +111,15 @@ Returns a composed rule from a definition object
 | def | <code>Object</code> | The rule definition |
 
 <a name="obey.model"></a>
-### obey.model(obj, (strict)) ⇒ <code>Object</code>
+### obey.model(obj, [strict]) ⇒ <code>Object</code>
 Returns a composed model from a definition object
 
 **Kind**: static method of <code>[obey](#obey)</code>  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | <code>Object</code> | The definition object |
-| (strict) | <code>Boolean</code> | Whether or not to enforce strict validation |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| obj | <code>Object</code> |  | The definition object |
+| [strict] | <code>boolean</code> | <code>true</code> | Whether or not to enforce strict validation |
 
 <a name="obey.type"></a>
 ### obey.type(name, handler)
@@ -138,7 +129,7 @@ Creates and stores (or replaces) a type
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> | The name of the type |
+| name | <code>string</code> | The name of the type |
 | handler | <code>Object</code> &#124; <code>function</code> | The type method or object of methods |
 
 <a name="obey.modifier"></a>
@@ -149,7 +140,7 @@ Creates and stores a modifier
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> | The modifier's name |
+| name | <code>string</code> | The modifier's name |
 | fn | <code>function</code> | The method for the modifier |
 
 <a name="obey.creator"></a>
@@ -160,7 +151,7 @@ Creates and stores a creator
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> | The creator's name |
+| name | <code>string</code> | The creator's name |
 | fn | <code>function</code> | The method for the creator |
 
 <a name="modifiers"></a>
@@ -195,7 +186,7 @@ throws an error if the modifier does not exist
 | Param | Type | Description |
 | --- | --- | --- |
 | def | <code>Object</code> | The property configuration |
-| key | <code>String</code> | The key name of the property |
+| key | <code>string</code> | The key name of the property |
 | value | <code>\*</code> | The value being validated |
 
 <a name="modifiers.add"></a>
@@ -206,7 +197,7 @@ Adds new modifier to the library
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> | The name of the modifier |
+| name | <code>string</code> | The name of the modifier |
 | fn | <code>function</code> | The modifier's method |
 
 <a name="rules"></a>
@@ -219,7 +210,7 @@ properties during validation
 * [rules](#rules) : <code>object</code>
     * [.props](#rules.props)
     * [.makeValidate(def)](#rules.makeValidate)
-    * [.validate(def, data, (key))](#rules.validate)
+    * [.validate(def, data, [key], [errors], [rejectOnFail])](#rules.validate) ⇒ <code>Promise.&lt;\*&gt;</code>
     * [.build(def)](#rules.build) ⇒ <code>Object</code>
 
 <a name="rules.props"></a>
@@ -242,17 +233,21 @@ Binds rule definition in validate method
 | def | <code>Object</code> | The rule definition object |
 
 <a name="rules.validate"></a>
-### rules.validate(def, data, (key))
+### rules.validate(def, data, [key], [errors], [rejectOnFail]) ⇒ <code>Promise.&lt;\*&gt;</code>
 Iterates over the properties present in the rule definition and sets the
 appropriate bindings to required methods
 
 **Kind**: static method of <code>[rules](#rules)</code>  
+**Returns**: <code>Promise.&lt;\*&gt;</code> - Resolves with the resulting data, with any defaults, creators, and modifiers applied.
+Rejects with a ValidationError if applicable.  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| def | <code>Object</code> | The rule definition object |
-| data | <code>\*</code> | The data (value) to validate |
-| (key) | <code>String</code> | Key for tracking parent in nested iterations |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| def | <code>Object</code> |  | The rule definition object |
+| data | <code>\*</code> |  | The data (value) to validate |
+| [key] | <code>string</code> |  | Key for tracking parent in nested iterations |
+| [errors] | <code>Array.&lt;{type: string, sub: string, key: string, value: \*, message: string}&gt;</code> | <code>[]</code> | An error array to which any additional error objects will be added. If not specified, a new array will be created. |
+| [rejectOnFail] | <code>boolean</code> | <code>true</code> | If true, resulting promise will reject if the errors array is not empty; otherwise ValidationErrors will not cause a rejection |
 
 <a name="rules.build"></a>
 ### rules.build(def) ⇒ <code>Object</code>
@@ -274,9 +269,9 @@ data during validation
 * [types](#types) : <code>object</code>
     * [.strategies](#types.strategies)
     * [.checkSubType(def)](#types.checkSubType) ⇒ <code>Object</code>
-    * [.validate(def, key, value)](#types.validate) ⇒ <code>\*</code>
-    * [.add(name, handler, fn)](#types.add)
-    * [.check(type, val)](#types.check) ⇒ <code>Object</code>
+    * [.validate(def, key, value, errors)](#types.validate) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
+    * [.add(name, handler)](#types.add)
+    * [.check(context)](#types.check) ⇒ <code>Promise.&lt;\*&gt;</code>
 
 <a name="types.strategies"></a>
 ### types.strategies
@@ -298,65 +293,52 @@ Checks for and applies sub-type to definition
 | def | <code>Object</code> | The rule defintion |
 
 <a name="types.validate"></a>
-### types.validate(def, key, value) ⇒ <code>\*</code>
+### types.validate(def, key, value, errors) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
 Sets up the `fail` method and handles `empty` or `undefined` values. If neither
 empty or undefined, calls the appropriate `type` and executes validation
 
 **Kind**: static method of <code>[types](#types)</code>  
-**Returns**: <code>\*</code> - The value if empty or undefined, check method if value requires type validation  
+**Returns**: <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code> - The value if empty or undefined, check method if value requires type validation  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | def | <code>Object</code> | The property configuration |
-| key | <code>String</code> | The key name of the property |
+| key | <code>string</code> | The key name of the property |
 | value | <code>\*</code> | The value being validated |
+| errors | <code>Array.&lt;{type: string, sub: (string\|number), key: string, value: \*, message: string}&gt;</code> | An error array to which any additional error objects will be added |
 
 <a name="types.add"></a>
-### types.add(name, handler, fn)
+### types.add(name, handler)
 Add (or override) a type in the library
 
 **Kind**: static method of <code>[types](#types)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> | The name of the type |
-| handler | <code>Object</code> &#124; <code>function</code> |  |
-| fn | <code>String</code> | The type strategy method |
+| name | <code>string</code> | The name of the type |
+| handler | <code>Object</code> &#124; <code>function</code> | The type strategy method |
 
 <a name="types.check"></a>
-### types.check(type, val) ⇒ <code>Object</code>
+### types.check(context) ⇒ <code>Promise.&lt;\*&gt;</code>
 Ensures that the strategy exists, loads if not already in memory, then ensures
 subtype and returns the applied type strategy
 
 **Kind**: static method of <code>[types](#types)</code>  
-**Returns**: <code>Object</code> - The type execution function promise resolution  
+**Returns**: <code>Promise.&lt;\*&gt;</code> - Resolves with the provided data, possibly modified by the type strategy  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| type | <code>String</code> | The type to check |
-| val | <code>\*</code> | The value to check |
-
-<a name="addErrors"></a>
-## addErrors
-Adds the error array from a ValidationError's collection into a parent context's
-existing collection. This function is curried.
-
-**Kind**: global constant  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| context | <code>Object</code> | An Obey type context |
-| err | <code>[ValidationError](#ValidationError)</code> | An error to merge with the context's error stack |
+| context | <code>Object</code> | A type context |
 
 <a name="getMessages"></a>
-## getMessages(msgObjs) ⇒ <code>Array</code>
+## getMessages(msgObjs) ⇒ <code>Array.&lt;string&gt;</code>
 Compiles array items into string error messages
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| msgObjs | <code>Array</code> | Original array of error message objects |
+| msgObjs | <code>Array.&lt;{type: string, sub: (string\|number), key: string, value: \*, message: string}&gt;</code> | Original array of error message objects |
 
 <a name="ValidationError"></a>
 ## ValidationError(message)
@@ -366,7 +348,7 @@ Creates ValidationError object for throwing
 
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>Array</code> | Raw array of error objects |
+| message | <code>Array.&lt;{type: string, sub: (string\|number), key: string, value: \*, message: string}&gt;</code> | Raw array of error objects |
 
 <a name="validateByKeys"></a>
 ## validateByKeys(context, keyPrefix) ⇒ <code>Promise.&lt;Object&gt;</code>

@@ -6,7 +6,7 @@ const validators = {
   /**
    * Validator default method, used by model
    * @param {Object} def The property configuration
-   * @param {String} key The key name of the property
+   * @param {string} key The key name of the property
    * @param {*} value The value being validated
    */
   default: function(def, key, value) {
@@ -16,48 +16,54 @@ const validators = {
   /**
    * Validator allowed method, used by model
    * @param {Object} def The property configuration
-   * @param {String} key The key name of the property
+   * @param {string} key The key name of the property
    * @param {*} value The value being validated
+   * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
+   * to which any additional error objects will be added
    */
-  allow: function(def, key, value) {
+  allow: function(def, key, value, errors) {
     const type = 'allow'
     const sub = def.allow
     if (Array.isArray(def.allow) && def.allow.indexOf(value) === -1) {
-      this.errors.push({ type, sub, key, value, message: `Value '${value}' is not allowed` })
+      errors.push({ type, sub, key, value, message: `Value '${value}' is not allowed` })
     } else if (!Array.isArray(def.allow) && def.allow !== value) {
-      this.errors.push({ type, sub, key, value, message: `Value '${value}' is not allowed` })
+      errors.push({ type, sub, key, value, message: `Value '${value}' is not allowed` })
     }
   },
 
   /**
    * Validator min method, used by model
    * @param {Object} def The property configuration
-   * @param {String} key The key name of the property
+   * @param {string} key The key name of the property
    * @param {*} value The value being validated
+   * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
+   * to which any additional error objects will be added
    */
-  min: function(def, key, value) {
+  min: function(def, key, value, errors) {
     const type = 'min'
     const sub = def.min
     if (Array.isArray(value) || typeof value === 'string' && value.length < def.min) {
-      this.errors.push({ type, sub, key, value, message: `Length must be greater than ${def.min}` })
+      errors.push({ type, sub, key, value, message: `Length must be greater than ${def.min}` })
     } else if (typeof value === 'number' && value < def.min) {
-      this.errors.push({ type, sub, key, value, message: `Value must be greater than ${def.min}` })
+      errors.push({ type, sub, key, value, message: `Value must be greater than ${def.min}` })
     }
   },
 
   /**
    * Validator max method, used by model
    * @param {Object} def The property configuration
-   * @param {String} key The key name of the property
+   * @param {string} key The key name of the property
    * @param {*} value The value being validated
+   * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
+   * to which any additional error objects will be added
    */
-  max: function(def, key, value) {
+  max: function(def, key, value, errors) {
     const type = 'max'
     const sub = def.max
     if (Array.isArray(value) || typeof value === 'string' && value.length > def.max) {
-      this.errors.push({ type, sub, key, value, message: `Length must be less than ${def.max}` })
+      errors.push({ type, sub, key, value, message: `Length must be less than ${def.max}` })
     } else if (typeof value === 'number' && value > def.max) {
-      this.errors.push({ type, sub, key, value, message: `Value must be less than ${def.max}` })
+      errors.push({ type, sub, key, value, message: `Value must be less than ${def.max}` })
     }
   }
 }

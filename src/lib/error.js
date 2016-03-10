@@ -4,8 +4,9 @@
 
 /**
  * Compiles array items into string error messages
- * @param {Array} msgObjs Original array of error message objects
- * @returns {Array}
+ * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} msgObjs Original array
+ * of error message objects
+ * @returns {Array<string>}
  */
 const getMessages = (msgObjs) => {
   const messages = []
@@ -17,7 +18,8 @@ const getMessages = (msgObjs) => {
 
 /**
  * Creates ValidationError object for throwing
- * @param {Array} message Raw array of error objects
+ * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} message Raw array of
+ * error objects
  */
 function ValidationError(message) {
   Object.defineProperty(this, 'name', { value: 'ValidationError' })
@@ -26,9 +28,7 @@ function ValidationError(message) {
   Error.captureStackTrace(this, this.name)
 }
 
-/**
- * Creates instance of ValidationError as Error object
- */
+// Creates instance of ValidationError as Error object
 ValidationError.prototype = Object.create(Error.prototype)
 ValidationError.prototype.constructor = ValidationError
 

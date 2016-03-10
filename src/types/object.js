@@ -1,19 +1,6 @@
 import _ from 'lodash'
 import rules from '../rules'
 import Promise from 'bluebird'
-import ValidationError from '../lib/error'
-
-/**
- * Adds the error array from a ValidationError's collection into a parent context's
- * existing collection. This function is curried.
- * @param {Object} context An Obey type context
- * @param {ValidationError} err An error to merge with the context's error stack
- */
-const addErrors = _.curry((context, err) => {
-  err.collection.forEach(error => {
-    context.errors.push(error)
-  })
-})
 
 /**
  * Validates an object using the definition's `keys` property
@@ -26,12 +13,11 @@ const validateByKeys = (context, keyPrefix) => {
   const missingKeys = []
   const promises = {}
   _.forOwn(context.def.keys, (keyDef, key) => {
-    promises[key] = rules.validate(keyDef, context.value[key], `${keyPrefix}${key}`)
+    promises[key] = rules.validate(keyDef, context.value[key], `${keyPrefix}${key}`, context.errors, false)
       .then(val => {
         if (!context.value.hasOwnProperty(key) && val === undefined) missingKeys.push(key)
         return val
       })
-      .catch(ValidationError, addErrors(context))
   })
   // Check undefined keys
   const strictMode = !context.def.hasOwnProperty('strict') || context.def.strict
@@ -59,8 +45,7 @@ const validateByKeys = (context, keyPrefix) => {
 const validateByValues = (context, keyPrefix) => {
   const promises = {}
   _.forOwn(context.value, (val, key) => {
-    promises[key] = rules.validate(context.def.values, val, `${keyPrefix}${key}`)
-      .catch(ValidationError, addErrors(context))
+    promises[key] = rules.validate(context.def.values, val, `${keyPrefix}${key}`, context.errors, false)
   })
   return Promise.props(promises)
 }

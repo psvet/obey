@@ -19,9 +19,9 @@ const creators = {
    * throws and error if the creator does not exist
    * @memberof creators
    * @param {Object} def The property configuration
-   * @param {String} key The key name of the property
+   * @param {string} key The key name of the property
    * @param {*} value The value being validated
-   * @returns {Function} The creator function
+   * @returns {function} The creator function
    */
   execute: function(def, key, value) {
     if (value !== undefined) return value
@@ -32,8 +32,8 @@ const creators = {
   /**
    * Adds a creator to the library
    * @memberof creators
-   * @param {String} name The name of the creator
-   * @param {Function} fn The creator's method
+   * @param {string} name The name of the creator
+   * @param {function} fn The creator's method
    */
   add: (name, fn) => {
     if (typeof name !== 'string') throw new Error('creator name should be a string')

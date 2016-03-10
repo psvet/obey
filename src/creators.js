@@ -19,11 +19,10 @@ const creators = {
    * throws and error if the creator does not exist
    * @memberof creators
    * @param {Object} def The property configuration
-   * @param {string} key The key name of the property
    * @param {*} value The value being validated
    * @returns {function} The creator function
    */
-  execute: function(def, key, value) {
+  execute: function(def, value) {
     if (value !== undefined) return value
     if (creators.lib[def.creator]) return creators.lib[def.creator]()
     throw new Error(`creator '${def.creator}' does not exist`)

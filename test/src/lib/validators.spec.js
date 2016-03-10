@@ -11,14 +11,14 @@ describe('validators', () => {
       const def = {
         default: 'foo'
       }
-      const actual = validators.default(def, 'test', undefined)
+      const actual = validators.default(def, undefined)
       expect(actual).to.equal('foo')
     })
     it('uses the value if it is already set', () => {
       const def = {
         default: 'foo'
       }
-      const actual = validators.default(def, 'test', 'bar')
+      const actual = validators.default(def, 'bar')
       expect(actual).to.equal('bar')
     })
   })
@@ -27,21 +27,21 @@ describe('validators', () => {
       const def = {
         allow: [ 'foo', 'bar' ]
       }
-      validators.allow(def, 'test', 'foo', mockErrors)
+      validators.allow(def, 'foo', 'test', mockErrors)
       expect(mockErrors.length).to.equal(0)
     })
     it('passes if value is in allow (single)', () => {
       const def = {
         allow: 'foo'
       }
-      validators.allow(def, 'test', 'foo', mockErrors)
+      validators.allow(def, 'foo', 'test', mockErrors)
       expect(mockErrors.length).to.equal(0)
     })
     it('creates an error object if value is not in allow (array)', () => {
       const def = {
         allow: [ 'foo', 'bar' ]
       }
-      validators.allow(def, 'test', 'fizz', mockErrors)
+      validators.allow(def, 'fizz', 'test', mockErrors)
       expect(mockErrors[0]).to.deep.equal({
         type: 'allow',
         sub: [ 'foo', 'bar' ],
@@ -54,7 +54,7 @@ describe('validators', () => {
       const def = {
         allow: 'foo'
       }
-      validators.allow(def, 'test', 'bar', mockErrors)
+      validators.allow(def, 'bar', 'test', mockErrors)
       expect(mockErrors[0]).to.deep.equal({
         type: 'allow',
         sub: 'foo',
@@ -67,7 +67,7 @@ describe('validators', () => {
   describe('min', () => {
     it('creates an error object if array length is less than def min', () => {
       const def = { min: 3 }
-      validators.min(def, 'test', [ 'foo' ], mockErrors)
+      validators.min(def, [ 'foo' ], 'test', mockErrors)
       expect(mockErrors[0]).to.deep.equal({
         type: 'min',
         sub: 3,
@@ -78,7 +78,7 @@ describe('validators', () => {
     })
     it('creates an error object if string length is less than def min', () => {
       const def = { min: 5 }
-      validators.min(def, 'test', 'foo', mockErrors)
+      validators.min(def, 'foo', 'test', mockErrors)
       expect(mockErrors[0]).to.deep.equal({
         type: 'min',
         sub: 5,
@@ -89,7 +89,7 @@ describe('validators', () => {
     })
     it('creates an error object if number is less than def min', () => {
       const def = { min: 10 }
-      validators.min(def, 'test', 5, mockErrors)
+      validators.min(def, 5, 'test', mockErrors)
       expect(mockErrors[0]).to.deep.equal({
         type: 'min',
         sub: 10,
@@ -102,7 +102,7 @@ describe('validators', () => {
   describe('max', () => {
     it('creates an error object if array length is greater than def max', () => {
       const def = { max: 1 }
-      validators.max(def, 'test', [ 'foo', 'bar' ], mockErrors)
+      validators.max(def, [ 'foo', 'bar' ], 'test', mockErrors)
       expect(mockErrors[0]).to.deep.equal({
         type: 'max',
         sub: 1,
@@ -113,7 +113,7 @@ describe('validators', () => {
     })
     it('creates an error object if string length is greater than def max', () => {
       const def = { max: 2 }
-      validators.max(def, 'test', 'foo', mockErrors)
+      validators.max(def, 'foo', 'test', mockErrors)
       expect(mockErrors[0]).to.deep.equal({
         type: 'max',
         sub: 2,
@@ -124,7 +124,7 @@ describe('validators', () => {
     })
     it('creates an error object if number is greater than def max', () => {
       const def = { max: 5 }
-      validators.max(def, 'test', 10, mockErrors)
+      validators.max(def, 10, 'test', mockErrors)
       expect(mockErrors[0]).to.deep.equal({
         type: 'max',
         sub: 5,

@@ -6,22 +6,21 @@ const validators = {
   /**
    * Validator default method, used by model
    * @param {Object} def The property configuration
-   * @param {string} key The key name of the property
    * @param {*} value The value being validated
    */
-  default: function(def, key, value) {
+  default: function(def, value) {
     return value || def.default
   },
 
   /**
    * Validator allowed method, used by model
    * @param {Object} def The property configuration
-   * @param {string} key The key name of the property
    * @param {*} value The value being validated
+   * @param {string} key The key name of the property
    * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
    * to which any additional error objects will be added
    */
-  allow: function(def, key, value, errors) {
+  allow: function(def, value, key, errors) {
     const type = 'allow'
     const sub = def.allow
     if (Array.isArray(def.allow) && def.allow.indexOf(value) === -1) {
@@ -34,12 +33,12 @@ const validators = {
   /**
    * Validator min method, used by model
    * @param {Object} def The property configuration
-   * @param {string} key The key name of the property
    * @param {*} value The value being validated
+   * @param {string} key The key name of the property
    * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
    * to which any additional error objects will be added
    */
-  min: function(def, key, value, errors) {
+  min: function(def, value, key, errors) {
     const type = 'min'
     const sub = def.min
     if (Array.isArray(value) || typeof value === 'string' && value.length < def.min) {
@@ -52,12 +51,12 @@ const validators = {
   /**
    * Validator max method, used by model
    * @param {Object} def The property configuration
-   * @param {string} key The key name of the property
    * @param {*} value The value being validated
+   * @param {string} key The key name of the property
    * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
    * to which any additional error objects will be added
    */
-  max: function(def, key, value, errors) {
+  max: function(def, value, key, errors) {
     const type = 'max'
     const sub = def.max
     if (Array.isArray(value) || typeof value === 'string' && value.length > def.max) {

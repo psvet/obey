@@ -7,7 +7,7 @@ describe('creators', () => {
   })
   describe('execute', () => {
     it('returns the original value if defined', () => {
-      const actual = creators.execute({}, 'foo', 'bar')
+      const actual = creators.execute({}, 'bar')
       expect(actual).to.equal('bar')
     })
     it('returns the modifier method if exists', () => {

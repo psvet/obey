@@ -19,11 +19,10 @@ const modifiers = {
    * throws an error if the modifier does not exist
    * @memberof modifiers
    * @param {Object} def The property configuration
-   * @param {string} key The key name of the property
    * @param {*} value The value being validated
    * @returns {function} The modifier function
    */
-  execute: function(def, key, value) {
+  execute: function(def, value) {
     if (modifiers.lib[def.modifier]) return modifiers.lib[def.modifier](value)
     throw new Error(`Modifier '${def.modifier}' does not exist`)
   },

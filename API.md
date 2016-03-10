@@ -49,7 +49,7 @@ value is not supplied
 
 * [creators](#creators) : <code>object</code>
     * [.lib](#creators.lib)
-    * [.execute(def, key, value)](#creators.execute) ⇒ <code>function</code>
+    * [.execute(def, value)](#creators.execute) ⇒ <code>function</code>
     * [.add(name, fn)](#creators.add)
 
 <a name="creators.lib"></a>
@@ -62,7 +62,7 @@ value is not supplied
 | Library | <code>Object</code> | of creators |
 
 <a name="creators.execute"></a>
-### creators.execute(def, key, value) ⇒ <code>function</code>
+### creators.execute(def, value) ⇒ <code>function</code>
 Execute method calls the appropriate creator and returns the method or
 throws and error if the creator does not exist
 
@@ -72,7 +72,6 @@ throws and error if the creator does not exist
 | Param | Type | Description |
 | --- | --- | --- |
 | def | <code>Object</code> | The property configuration |
-| key | <code>string</code> | The key name of the property |
 | value | <code>\*</code> | The value being validated |
 
 <a name="creators.add"></a>
@@ -163,7 +162,7 @@ when validation occurs
 
 * [modifiers](#modifiers) : <code>object</code>
     * [.lib](#modifiers.lib)
-    * [.execute(def, key, value)](#modifiers.execute) ⇒ <code>function</code>
+    * [.execute(def, value)](#modifiers.execute) ⇒ <code>function</code>
     * [.add(name, fn)](#modifiers.add)
 
 <a name="modifiers.lib"></a>
@@ -176,7 +175,7 @@ when validation occurs
 | Library | <code>Object</code> | of modifiers |
 
 <a name="modifiers.execute"></a>
-### modifiers.execute(def, key, value) ⇒ <code>function</code>
+### modifiers.execute(def, value) ⇒ <code>function</code>
 Execute method calls the appropriate modifier and passes in the value or
 throws an error if the modifier does not exist
 
@@ -186,7 +185,6 @@ throws an error if the modifier does not exist
 | Param | Type | Description |
 | --- | --- | --- |
 | def | <code>Object</code> | The property configuration |
-| key | <code>string</code> | The key name of the property |
 | value | <code>\*</code> | The value being validated |
 
 <a name="modifiers.add"></a>
@@ -269,7 +267,7 @@ data during validation
 * [types](#types) : <code>object</code>
     * [.strategies](#types.strategies)
     * [.checkSubType(def)](#types.checkSubType) ⇒ <code>Object</code>
-    * [.validate(def, key, value, errors)](#types.validate) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
+    * [.validate(def, value, key, errors)](#types.validate) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
     * [.add(name, handler)](#types.add)
     * [.check(context)](#types.check) ⇒ <code>Promise.&lt;\*&gt;</code>
 
@@ -293,7 +291,7 @@ Checks for and applies sub-type to definition
 | def | <code>Object</code> | The rule defintion |
 
 <a name="types.validate"></a>
-### types.validate(def, key, value, errors) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
+### types.validate(def, value, key, errors) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
 Sets up the `fail` method and handles `empty` or `undefined` values. If neither
 empty or undefined, calls the appropriate `type` and executes validation
 
@@ -303,8 +301,8 @@ empty or undefined, calls the appropriate `type` and executes validation
 | Param | Type | Description |
 | --- | --- | --- |
 | def | <code>Object</code> | The property configuration |
-| key | <code>string</code> | The key name of the property |
 | value | <code>\*</code> | The value being validated |
+| key | <code>string</code> | The key name of the property |
 | errors | <code>Array.&lt;{type: string, sub: (string\|number), key: string, value: \*, message: string}&gt;</code> | An error array to which any additional error objects will be added |
 
 <a name="types.add"></a>

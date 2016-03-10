@@ -19,7 +19,7 @@ describe('types', () => {
       expect(actual).to.be.a.function
     })
     it('allows an empty string to pass (via return) when empty flag is set', () => {
-      const actual = types.validate.call({ errors: [] }, { type: 'string', empty: true }, 'foo', '')
+      const actual = types.validate.call({ errors: [] }, { type: 'string', empty: true }, '', 'foo')
       expect(actual).to.equal('')
     })
   })

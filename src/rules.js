@@ -80,7 +80,7 @@ const rules = {
     props.forEach(prop => {
       if (def.hasOwnProperty(prop.name)) {
         chain = chain
-          .then(val => prop.fn(def, key, val, errors))
+          .then(val => prop.fn(def, val, key, errors))
           .then(res => {
             if (res !== undefined) curData = res
             return curData

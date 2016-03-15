@@ -2,6 +2,7 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 import _ from 'lodash'
+import strategies from './types/index'
 
 /**
  * Types determine and execute the appropriate validation to be performed on the
@@ -13,7 +14,7 @@ const types = {
    * @memberof types
    * @property {Object} Contains type strategies
    */
-  strategies: {},
+  strategies,
 
   /**
    * Checks for and applies sub-type to definition

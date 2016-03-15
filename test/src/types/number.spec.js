@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import number from 'src/types/number'
+import number from 'src/types/strategies/number'
 
 describe('type:number', () => {
   it('calls context.fail if type is not a number', () => {

@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import object from 'src/types/object'
+import object from 'src/types/strategies/object'
 
 describe('type:object', () => {
   it('iterates sub-object if keys prop is present', () => {

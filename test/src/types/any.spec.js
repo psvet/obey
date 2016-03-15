@@ -1,5 +1,5 @@
 /* global describe, it, expect */
-import any from 'src/types/any'
+import any from 'src/types/strategies/any'
 
 describe('type:any', () => {
   it('passes through (via return) the value', () => {

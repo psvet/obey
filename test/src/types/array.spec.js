@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import array from 'src/types/array'
+import array from 'src/types/strategies/array'
 
 describe('type:array', () => {
   it('calls context.fail if type is not an array', () => {

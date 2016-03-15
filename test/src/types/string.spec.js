@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import string from 'src/types/string'
+import string from 'src/types/strategies/string'
 
 describe('type:string', () => {
   it('calls context.fail if type is not a string', () => {

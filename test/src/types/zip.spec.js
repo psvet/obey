@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import zip from 'src/types/zip'
+import zip from 'src/types/strategies/zip'
 
 describe('type:zip', () => {
   it('calls context.fail if value is not a valid zip code', () => {

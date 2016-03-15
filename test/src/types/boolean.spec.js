@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import boolean from 'src/types/boolean'
+import boolean from 'src/types/strategies/boolean'
 
 describe('type:boolean', () => {
   it('calls context.fail if type is not a boolean', () => {

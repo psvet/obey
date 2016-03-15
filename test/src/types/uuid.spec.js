@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import uuid from 'src/types/uuid'
+import uuid from 'src/types/strategies/uuid'
 
 describe('type:uuid', () => {
   it('calls context.fail if type is not a valid UUID', () => {

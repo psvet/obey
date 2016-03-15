@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import rules from '../rules'
+import rules from '../../rules'
 import Promise from 'bluebird'
 
 /**

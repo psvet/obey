@@ -84,16 +84,10 @@ const types = {
       if (context.def.type.match(/[\/\\]/)) {
         throw new Error(`Illegal type name: ${context.def.type}`)
       }
-      try {
-        types.strategies[context.def.type] = require(`./types/${context.def.type}`).default
-      } catch (e) {
-        /* istanbul ignore else */
-        if (e.message.indexOf('Cannot find module') >= 0) {
-          throw new Error(`Type '${context.def.type}' does not exist`)
-        } else {
-          throw e
-        }
-      }
+    }
+    // Ensure type
+    if (!types.strategies[context.def.type]) {
+      throw new Error(`Type '${context.def.type}' does not exist`)
     }
     // Ensure subtype
     if (!types.strategies[context.def.type][context.def.sub]) {

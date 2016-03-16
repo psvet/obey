@@ -145,7 +145,7 @@ When setting definitions for rules or model properties, the following are suppor
 
 ## Types
 
-**Reference: [Type Documentaion](/src/types/strategies)**
+**Reference: [Type Documentaion](/src/typeStrategies)**
 
 > Types are basic checks against native types, built-ins or customs. The library includes native types (`boolean`, `number`, `string`, `array`, and `object`) as well other common types. A [list of built-in types](/src/types) is contained in the source.
 

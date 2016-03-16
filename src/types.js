@@ -2,7 +2,7 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 import _ from 'lodash'
-import strategies from './types/index'
+import strategies from './typeStrategies'
 
 /**
  * Types determine and execute the appropriate validation to be performed on the

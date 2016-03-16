@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import email from 'src/types/strategies/email'
+import email from 'src/typeStrategies/email'
 
 describe('type:email', () => {
   it('calls context.fail if type is not a valid email', () => {

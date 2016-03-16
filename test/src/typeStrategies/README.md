@@ -1,6 +1,6 @@
 # Types
 
-Below is a list of supported, built-in types for the Obey library
+Below is a list of supported, built-in types for the Obey library. Types are loaded into Obey via the [index](./index.js) file in this directory.
 
 ## Any
 

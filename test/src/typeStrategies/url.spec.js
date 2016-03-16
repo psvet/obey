@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import url from 'src/types/url'
+import url from 'src/typeStrategies/url'
 
 describe('type:url', () => {
   it('calls context.fail if type is not a valid URL', () => {

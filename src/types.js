@@ -2,6 +2,7 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 import _ from 'lodash'
+import strategies from './typeStrategies'
 
 /**
  * Types determine and execute the appropriate validation to be performed on the
@@ -13,7 +14,7 @@ const types = {
    * @memberof types
    * @property {Object} Contains type strategies
    */
-  strategies: {},
+  strategies,
 
   /**
    * Checks for and applies sub-type to definition
@@ -83,16 +84,10 @@ const types = {
       if (context.def.type.match(/[\/\\]/)) {
         throw new Error(`Illegal type name: ${context.def.type}`)
       }
-      try {
-        types.strategies[context.def.type] = require(`./types/${context.def.type}`).default
-      } catch (e) {
-        /* istanbul ignore else */
-        if (e.message.indexOf('Cannot find module') >= 0) {
-          throw new Error(`Type '${context.def.type}' does not exist`)
-        } else {
-          throw e
-        }
-      }
+    }
+    // Ensure type
+    if (!types.strategies[context.def.type]) {
+      throw new Error(`Type '${context.def.type}' does not exist`)
     }
     // Ensure subtype
     if (!types.strategies[context.def.type][context.def.sub]) {

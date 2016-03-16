@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import ip from 'src/types/ip'
+import ip from 'src/typeStrategies/ip'
 
 describe('type:ip', () => {
   it('calls context.fail if type is not a valid ipv4', () => {

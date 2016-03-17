@@ -74,7 +74,7 @@ const rules = {
    */
   validate: (def, data, key = null, errors = [], rejectOnFail = true) => {
     let curData = data
-    const props = !def.required && data === undefined || def.allow === null ? rules.props.noVal : rules.props.default
+    const props = !def.required && data === undefined || def.allow === null && data === null ? rules.props.noVal : rules.props.default
     if (!def.type) throw new Error('Model properties must define a \'type\'')
     let chain = Promise.resolve(data)
     props.forEach(prop => {

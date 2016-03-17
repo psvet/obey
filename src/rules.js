@@ -110,6 +110,7 @@ const rules = {
    * Gets props list according to required and allowNull specifications
    * @memberof rules
    * @param {Object} def The rule definition
+   * @param {*} data The value being evaluated
    * @returns {Array}
    */
   getProps: (def, data) => {

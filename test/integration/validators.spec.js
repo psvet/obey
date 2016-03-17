@@ -46,7 +46,7 @@ describe('integration:validators', () => {
           value: 30,
           message: 'Value must be a string'
         },
-        { 
+        {
           type: 'phone',
           sub: 'default',
           key: 'phone',

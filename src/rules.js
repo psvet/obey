@@ -110,7 +110,7 @@ const rules = {
    * Gets props list according to required and allowNull specifications
    * @memberof rules
    * @param {Object} def The rule definition
-   * @returns {Object}
+   * @returns {Array}
    */
   getProps: (def, data) => {
     if (!def.required && data === undefined) {

@@ -5,6 +5,9 @@ export default {
   allow: {
     name: { type: 'string', allow: [ 'foo', 'bar' ] }
   },
+  allowNull: {
+    name: { type: 'string', allow: null }
+  },
   min: {
     name: { type: 'string', min: 10 }
   },

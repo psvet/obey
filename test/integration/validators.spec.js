@@ -26,6 +26,13 @@ describe('integration:validators', () => {
         }])
       })
     })
+    it('builds a model with allowed null value in string field', () => {
+      const testModel = obey.model(modelFixtures.allowNull)
+      const testData = { name: null }
+      return testModel.validate(testData).then(res => {
+        expect(res.name).to.be.null
+      })
+    })
   })
   describe('min', () => {
     it('builds a model and fails validation because value is less than min', () => {

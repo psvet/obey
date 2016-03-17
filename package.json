@@ -52,8 +52,8 @@
     "snyk": "^1.11.1"
   },
   "dependencies": {
-    "bluebird": "^3.3.1",
-    "lodash": "^4.3.0"
+    "bluebird": "^3.3.4",
+    "lodash": "^4.6.1"
   },
   "pre-commit": [
     "test"

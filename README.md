@@ -66,6 +66,7 @@ const userModel = obey.model({
   password: { type: 'string', modifier: 'encryptPassword', required: true },
   fname: { type: 'string', description: 'First Name' },
   lname: { type: 'string', description: 'Last Name', empty: true },
+  suffix: { type: 'string', allowNull: true },
   phone: { type: 'phone:numeric', min: 7, max: 10 },
   // Array
   labels: { type: 'array', values: {
@@ -140,6 +141,7 @@ When setting definitions for rules or model properties, the following are suppor
 * `max`: The maximum character length for a string, highest number, or maximum items in array
 * `required`: Enforces the value cannot be `undefined` during validation (default `false`)
 * `allow`: Array of allowed values or single allowed value
+* `allowNull`: Accepts a null value or processes specified type
 * `strict`: Enable or disable strict checking of an object, see [Strict Mode](#strict-mode)
 * `description`: A description of the property
 

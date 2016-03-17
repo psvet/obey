@@ -74,7 +74,7 @@ const rules = {
    */
   validate: (def, data, key = null, errors = [], rejectOnFail = true) => {
     let curData = data
-    const props = !def.required && data === undefined ? rules.props.noVal : rules.props.default
+    const props = rules.getProps(def, data)
     if (!def.type) throw new Error('Model properties must define a \'type\'')
     let chain = Promise.resolve(data)
     props.forEach(prop => {
@@ -104,6 +104,23 @@ const rules = {
       def,
       validate: rules.makeValidate(def)
     }
+  },
+
+  /**
+   * Gets props list according to required and allowNull specifications
+   * @memberof rules
+   * @param {Object} def The rule definition
+   * @param {*} data The value being evaluated
+   * @returns {Array}
+   */
+  getProps: (def, data) => {
+    if (!def.required && data === undefined) {
+      return rules.props.noVal
+    }
+    if (def.allowNull && data === null) {
+      return rules.props.noVal
+    }
+    return rules.props.default
   }
 }
 

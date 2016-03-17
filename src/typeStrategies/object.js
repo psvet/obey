@@ -52,7 +52,7 @@ const validateByValues = (context, keyPrefix) => {
 
 const object = {
   default: context => {
-    if (!_.isObject(context.value)) {
+    if (!_.isObject(context.value) || context.value === null) {
       return context.fail('Value must be an object')
     }
     const prefix = context.key ? `${context.key}.` : ''

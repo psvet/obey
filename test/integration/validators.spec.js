@@ -26,6 +26,35 @@ describe('integration:validators', () => {
         }])
       })
     })
+    it('builds a model with allowed null value in string field', () => {
+      const testModel = obey.model(modelFixtures.allowNull)
+      const testData = { name: null, email: 'notNull@test.com', phone: '555-555-5555' }
+      return testModel.validate(testData).then(res => {
+        expect(res.name).to.be.null
+        expect(res.email).to.equal(testData.email)
+        expect(res.phone).to.equal(testData.phone)
+      })
+    })
+    it('builds a model and fails validation due to value of wrong type (allowNull)', () => {
+      const testModel = obey.model(modelFixtures.allowNull)
+      const testData = { name: 30, email: null, phone: null }
+      return testModel.validate(testData).catch(err => {
+        expect(err.collection).to.deep.equal([{
+          type: 'string',
+          sub: 'default',
+          key: 'name',
+          value: 30,
+          message: 'Value must be a string'
+        },
+        {
+          type: 'phone',
+          sub: 'default',
+          key: 'phone',
+          value: null,
+          message: 'Value must be a valid phone number'
+        }])
+      })
+    })
   })
   describe('min', () => {
     it('builds a model and fails validation because value is less than min', () => {

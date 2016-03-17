@@ -6,7 +6,9 @@ export default {
     name: { type: 'string', allow: [ 'foo', 'bar' ] }
   },
   allowNull: {
-    name: { type: 'string', allow: null }
+    name: { type: 'string', allowNull: true },
+    email: { type: 'email', allowNull: true },
+    phone: { type: 'phone' }
   },
   min: {
     name: { type: 'string', min: 10 }

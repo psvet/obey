@@ -4,7 +4,7 @@ import Promise from 'bluebird'
 const array = {
   default: context => {
     // Ensure array
-    if (!Array.isArray(context.value)) {
+    if (context.value === null || !Array.isArray(context.value)) {
       return context.fail('Value must be an array')
     }
     // If empty (and empty allowed), move forward

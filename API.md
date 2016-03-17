@@ -225,6 +225,7 @@ properties during validation
     * [.makeValidate(def)](#rules.makeValidate)
     * [.validate(def, data, [key], [errors], [rejectOnFail])](#rules.validate) ⇒ <code>Promise.&lt;\*&gt;</code>
     * [.build(def)](#rules.build) ⇒ <code>Object</code>
+    * [.getProps()](#rules.getProps)
 
 <a name="rules.props"></a>
 
@@ -276,6 +277,10 @@ Adds new rule to the lib
 | --- | --- | --- |
 | def | <code>Object</code> | The rule definition |
 
+<a name="rules.getProps"></a>
+
+### rules.getProps()
+**Kind**: static method of <code>[rules](#rules)</code>  
 <a name="types"></a>
 
 ## types : <code>object</code>

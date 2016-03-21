@@ -137,4 +137,14 @@ describe('integration:core', () => {
         expect(err.message).to.equal('names (): Value must not be empty array')
       })
   })
+  it('builds a model and passes validation when partial option is set to true', () => {
+    const testModel = obey.model(modelFixtures.basicExtended)
+    const testData = {
+      lname: 'Smith'
+    }
+    return testModel.validate(testData, { partial: true })
+      .then(data => {
+        expect(data).to.deep.equal(testData)
+      })
+  })
 })

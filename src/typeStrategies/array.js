@@ -18,7 +18,7 @@ const array = {
     // Specific array sub-validation
     if (!context.def.values) return true
     const promises = context.value.map((elem, idx) => {
-      return rules.validate(context.def.values, elem, `${context.key}[${idx}]`, context.errors, false)
+      return rules.validate(context.def.values, elem, context.def.opts, `${context.key}[${idx}]`, context.errors, false)
     })
     return Promise.all(promises)
   }

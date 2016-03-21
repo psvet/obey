@@ -41,7 +41,6 @@ data during validation</p>
 </dl>
 
 <a name="creators"></a>
-
 ## creators : <code>object</code>
 Creators allow for methods which create values during validation when a
 value is not supplied
@@ -54,7 +53,6 @@ value is not supplied
     * [.add(name, fn)](#creators.add)
 
 <a name="creators.lib"></a>
-
 ### creators.lib
 **Kind**: static property of <code>[creators](#creators)</code>  
 **Properties**
@@ -64,7 +62,6 @@ value is not supplied
 | Library | <code>Object</code> | of creators |
 
 <a name="creators.execute"></a>
-
 ### creators.execute(def, value) ⇒ <code>function</code>
 Execute method calls the appropriate creator and returns the method or
 throws and error if the creator does not exist
@@ -78,7 +75,6 @@ throws and error if the creator does not exist
 | value | <code>\*</code> | The value being validated |
 
 <a name="creators.add"></a>
-
 ### creators.add(name, fn)
 Adds a creator to the library
 
@@ -90,7 +86,6 @@ Adds a creator to the library
 | fn | <code>function</code> | The creator's method |
 
 <a name="obey"></a>
-
 ## obey : <code>object</code>
 The main object for Obey; exposes the core API methods for standard use as
 well as the API for all other modules
@@ -105,7 +100,6 @@ well as the API for all other modules
     * [.creator(name, fn)](#obey.creator)
 
 <a name="obey.rule"></a>
-
 ### obey.rule(def) ⇒ <code>Object</code>
 Returns a composed rule from a definition object
 
@@ -116,7 +110,6 @@ Returns a composed rule from a definition object
 | def | <code>Object</code> | The rule definition |
 
 <a name="obey.model"></a>
-
 ### obey.model(obj, [strict]) ⇒ <code>Object</code>
 Returns a composed model from a definition object
 
@@ -128,7 +121,6 @@ Returns a composed model from a definition object
 | [strict] | <code>boolean</code> | <code>true</code> | Whether or not to enforce strict validation |
 
 <a name="obey.type"></a>
-
 ### obey.type(name, handler)
 Creates and stores (or replaces) a type
 
@@ -140,7 +132,6 @@ Creates and stores (or replaces) a type
 | handler | <code>Object</code> &#124; <code>function</code> | The type method or object of methods |
 
 <a name="obey.modifier"></a>
-
 ### obey.modifier(name, fn)
 Creates and stores a modifier
 
@@ -152,7 +143,6 @@ Creates and stores a modifier
 | fn | <code>function</code> | The method for the modifier |
 
 <a name="obey.creator"></a>
-
 ### obey.creator(name, fn)
 Creates and stores a creator
 
@@ -164,7 +154,6 @@ Creates and stores a creator
 | fn | <code>function</code> | The method for the creator |
 
 <a name="modifiers"></a>
-
 ## modifiers : <code>object</code>
 Modifiers allow for coercion/modification of a value present in the object
 when validation occurs
@@ -177,7 +166,6 @@ when validation occurs
     * [.add(name, fn)](#modifiers.add)
 
 <a name="modifiers.lib"></a>
-
 ### modifiers.lib
 **Kind**: static property of <code>[modifiers](#modifiers)</code>  
 **Properties**
@@ -187,7 +175,6 @@ when validation occurs
 | Library | <code>Object</code> | of modifiers |
 
 <a name="modifiers.execute"></a>
-
 ### modifiers.execute(def, value) ⇒ <code>function</code>
 Execute method calls the appropriate modifier and passes in the value or
 throws an error if the modifier does not exist
@@ -201,7 +188,6 @@ throws an error if the modifier does not exist
 | value | <code>\*</code> | The value being validated |
 
 <a name="modifiers.add"></a>
-
 ### modifiers.add(name, fn)
 Adds new modifier to the library
 
@@ -213,7 +199,6 @@ Adds new modifier to the library
 | fn | <code>function</code> | The modifier's method |
 
 <a name="rules"></a>
-
 ## rules : <code>object</code>
 Rules is responsible for determining the execution of schema definition
 properties during validation
@@ -223,12 +208,11 @@ properties during validation
 * [rules](#rules) : <code>object</code>
     * [.props](#rules.props)
     * [.makeValidate(def)](#rules.makeValidate)
-    * [.validate(def, data, [key], [errors], [rejectOnFail])](#rules.validate) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * [.validate(def, data, [opts], [key], [errors], [rejectOnFail])](#rules.validate) ⇒ <code>Promise.&lt;\*&gt;</code>
     * [.build(def)](#rules.build) ⇒ <code>Object</code>
-    * [.getProps(def)](#rules.getProps) ⇒ <code>Array</code>
+    * [.getProps(def, data)](#rules.getProps) ⇒ <code>Array</code>
 
 <a name="rules.props"></a>
-
 ### rules.props
 **Kind**: static property of <code>[rules](#rules)</code>  
 **Properties**
@@ -238,7 +222,6 @@ properties during validation
 | Validation | <code>Object</code> | property setup and order of operations |
 
 <a name="rules.makeValidate"></a>
-
 ### rules.makeValidate(def)
 Binds rule definition in validate method
 
@@ -249,8 +232,7 @@ Binds rule definition in validate method
 | def | <code>Object</code> | The rule definition object |
 
 <a name="rules.validate"></a>
-
-### rules.validate(def, data, [key], [errors], [rejectOnFail]) ⇒ <code>Promise.&lt;\*&gt;</code>
+### rules.validate(def, data, [opts], [key], [errors], [rejectOnFail]) ⇒ <code>Promise.&lt;\*&gt;</code>
 Iterates over the properties present in the rule definition and sets the
 appropriate bindings to required methods
 
@@ -262,12 +244,12 @@ Rejects with a ValidationError if applicable.
 | --- | --- | --- | --- |
 | def | <code>Object</code> |  | The rule definition object |
 | data | <code>\*</code> |  | The data (value) to validate |
+| [opts] | <code>Object</code> | <code>{partial: false}</code> | Specific options for validation process |
 | [key] | <code>string</code> &#124; <code>null</code> | <code>null</code> | Key for tracking parent in nested iterations |
 | [errors] | <code>Array.&lt;{type: string, sub: string, key: string, value: \*, message: string}&gt;</code> | <code>[]</code> | An error array to which any additional error objects will be added. If not specified, a new array will be created. |
 | [rejectOnFail] | <code>boolean</code> | <code>true</code> | If true, resulting promise will reject if the errors array is not empty; otherwise ValidationErrors will not cause a rejection |
 
 <a name="rules.build"></a>
-
 ### rules.build(def) ⇒ <code>Object</code>
 Adds new rule to the lib
 
@@ -278,8 +260,7 @@ Adds new rule to the lib
 | def | <code>Object</code> | The rule definition |
 
 <a name="rules.getProps"></a>
-
-### rules.getProps(def) ⇒ <code>Array</code>
+### rules.getProps(def, data) ⇒ <code>Array</code>
 Gets props list according to required and allowNull specifications
 
 **Kind**: static method of <code>[rules](#rules)</code>  
@@ -287,9 +268,9 @@ Gets props list according to required and allowNull specifications
 | Param | Type | Description |
 | --- | --- | --- |
 | def | <code>Object</code> | The rule definition |
+| data | <code>\*</code> | The value being evaluated |
 
 <a name="types"></a>
-
 ## types : <code>object</code>
 Types determine and execute the appropriate validation to be performed on the
 data during validation
@@ -304,7 +285,6 @@ data during validation
     * [.check(context)](#types.check) ⇒ <code>Promise.&lt;\*&gt;</code>
 
 <a name="types.strategies"></a>
-
 ### types.strategies
 **Kind**: static property of <code>[types](#types)</code>  
 **Properties**
@@ -314,7 +294,6 @@ data during validation
 | Contains | <code>Object</code> | type strategies |
 
 <a name="types.checkSubType"></a>
-
 ### types.checkSubType(def) ⇒ <code>Object</code>
 Checks for and applies sub-type to definition
 
@@ -325,7 +304,6 @@ Checks for and applies sub-type to definition
 | def | <code>Object</code> | The rule defintion |
 
 <a name="types.validate"></a>
-
 ### types.validate(def, value, key, errors) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
 Sets up the `fail` method and handles `empty` or `undefined` values. If neither
 empty or undefined, calls the appropriate `type` and executes validation
@@ -341,7 +319,6 @@ empty or undefined, calls the appropriate `type` and executes validation
 | errors | <code>Array.&lt;{type: string, sub: (string\|number), key: string, value: \*, message: string}&gt;</code> | An error array to which any additional error objects will be added |
 
 <a name="types.add"></a>
-
 ### types.add(name, handler)
 Add (or override) a type in the library
 
@@ -353,7 +330,6 @@ Add (or override) a type in the library
 | handler | <code>Object</code> &#124; <code>function</code> | The type strategy method |
 
 <a name="types.check"></a>
-
 ### types.check(context) ⇒ <code>Promise.&lt;\*&gt;</code>
 Ensures that the strategy exists, loads if not already in memory, then ensures
 subtype and returns the applied type strategy
@@ -366,7 +342,6 @@ subtype and returns the applied type strategy
 | context | <code>Object</code> | A type context |
 
 <a name="getMessages"></a>
-
 ## getMessages(msgObjs) ⇒ <code>Array.&lt;string&gt;</code>
 Compiles array items into string error messages
 
@@ -377,7 +352,6 @@ Compiles array items into string error messages
 | msgObjs | <code>Array.&lt;{type: string, sub: (string\|number), key: string, value: \*, message: string}&gt;</code> | Original array of error message objects |
 
 <a name="ValidationError"></a>
-
 ## ValidationError(message)
 Creates ValidationError object for throwing
 
@@ -388,7 +362,6 @@ Creates ValidationError object for throwing
 | message | <code>Array.&lt;{type: string, sub: (string\|number), key: string, value: \*, message: string}&gt;</code> | Raw array of error objects |
 
 <a name="validateByKeys"></a>
-
 ## validateByKeys(context, keyPrefix) ⇒ <code>Promise.&lt;Object&gt;</code>
 Validates an object using the definition's `keys` property
 
@@ -401,7 +374,6 @@ Validates an object using the definition's `keys` property
 | keyPrefix | <code>string</code> | A prefix to include before the key in an error message |
 
 <a name="validateByValues"></a>
-
 ## validateByValues(context, keyPrefix) ⇒ <code>Promise.&lt;Object&gt;</code>
 Validates an object using the definition's `values` property
 

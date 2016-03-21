@@ -54,8 +54,12 @@ const types = {
       return value
     }
     // Don't run if undefined on required
-    if (def.required && value === undefined) {
+    if (def.required && value === undefined && !def.opts.partial) {
       errors.push({ type: 'required', sub: 'default', key, value, message: `Property '${key}' is required` })
+      return value
+    }
+    // Don't run if undefined and partial
+    if (value === undefined && def.opts.partial) {
       return value
     }
     // Execute check

@@ -115,10 +115,10 @@ The `validate` method has the ability to validate partial data objects:
 
 ```javascript
 // Allow partial validation by supplying second argument `true`
-userModel.validate({ /* some data */ }, true)
+userModel.validate({ /* some (partial) data */ }, true)
 ```
 
-The default for the partial argument is `false`, but passing `true` will allow for validation of an object containing a subset (i.e. will not throw errors for unsupplied `required` properties).
+The default for the partial argument is `false`, but passing `true` will allow for validation of an object containing a subset (i.e. will not throw errors for `required` properties).
 
 The common use-case for validating partials is `PATCH` updates.
 

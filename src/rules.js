@@ -64,7 +64,7 @@ const rules = {
    * @memberof rules
    * @param {Object} def The rule definition object
    * @param {*} data The data (value) to validate
-   * @param {Object} opts Specific options for validation process
+   * @param {Object} [opts={partial: false}] Specific options for validation process
    * @param {string|null} [key=null] Key for tracking parent in nested iterations
    * @param {Array<{type: string, sub: string, key: string, value: *, message: string}>} [errors=[]] An error array
    * to which any additional error objects will be added. If not specified, a new array will be created.

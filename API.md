@@ -208,7 +208,7 @@ properties during validation
 * [rules](#rules) : <code>object</code>
     * [.props](#rules.props)
     * [.makeValidate(def)](#rules.makeValidate)
-    * [.validate(def, data, opts, [key], [errors], [rejectOnFail])](#rules.validate) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * [.validate(def, data, [opts], [key], [errors], [rejectOnFail])](#rules.validate) ⇒ <code>Promise.&lt;\*&gt;</code>
     * [.build(def)](#rules.build) ⇒ <code>Object</code>
     * [.getProps(def, data)](#rules.getProps) ⇒ <code>Array</code>
 
@@ -232,7 +232,7 @@ Binds rule definition in validate method
 | def | <code>Object</code> | The rule definition object |
 
 <a name="rules.validate"></a>
-### rules.validate(def, data, opts, [key], [errors], [rejectOnFail]) ⇒ <code>Promise.&lt;\*&gt;</code>
+### rules.validate(def, data, [opts], [key], [errors], [rejectOnFail]) ⇒ <code>Promise.&lt;\*&gt;</code>
 Iterates over the properties present in the rule definition and sets the
 appropriate bindings to required methods
 
@@ -244,7 +244,7 @@ Rejects with a ValidationError if applicable.
 | --- | --- | --- | --- |
 | def | <code>Object</code> |  | The rule definition object |
 | data | <code>\*</code> |  | The data (value) to validate |
-| opts | <code>Object</code> |  | Specific options for validation process |
+| [opts] | <code>Object</code> | <code>{partial: false}</code> | Specific options for validation process |
 | [key] | <code>string</code> &#124; <code>null</code> | <code>null</code> | Key for tracking parent in nested iterations |
 | [errors] | <code>Array.&lt;{type: string, sub: string, key: string, value: \*, message: string}&gt;</code> | <code>[]</code> | An error array to which any additional error objects will be added. If not specified, a new array will be created. |
 | [rejectOnFail] | <code>boolean</code> | <code>true</code> | If true, resulting promise will reject if the errors array is not empty; otherwise ValidationErrors will not cause a rejection |

@@ -16,6 +16,7 @@ Asynchronous Data Modelling and Validation.
 - [Rules](#rules)
 - [Models](#models)
 - [Validation](#validation)
+  - [Validating Partials](#validating-partials)
   - [Validation Error Handling](#validation-error-handling)
 - [Definition Properties](#definition-properties)
 - [Types](#types)
@@ -107,6 +108,19 @@ userModel.validate({ /* some data */ })
 ```
 
 The validate method returns a promise (for more information see [Asynchronous Validation](#Asynchronous Validation)). A passing run will resolve with the data, any failures will reject and the `ValidationError` instance will be returned.
+
+### Validating Partials
+
+The `validate` method has the ability to validate partial data objects:
+
+```javascript
+// Allow partial validation by supplying second argument `true`
+userModel.validate({ /* some data */ }, true)
+```
+
+The default for the partial argument is `false`, but passing `true` will allow for validation of an object containing a subset (i.e. will not throw errors for unsupplied `required` properties).
+
+The common use-case for validating partials is `PATCH` updates.
 
 ### Validation Error Handling
 

@@ -13,7 +13,7 @@ const validateByKeys = (context, keyPrefix) => {
   const missingKeys = []
   const promises = {}
   _.forOwn(context.def.keys, (keyDef, key) => {
-    promises[key] = rules.validate(keyDef, context.value[key], `${keyPrefix}${key}`, context.errors, false)
+    promises[key] = rules.validate(keyDef, context.value[key], context.def.opts, `${keyPrefix}${key}`, context.errors, false)
       .then(val => {
         if (!context.value.hasOwnProperty(key) && val === undefined) missingKeys.push(key)
         return val
@@ -45,7 +45,7 @@ const validateByKeys = (context, keyPrefix) => {
 const validateByValues = (context, keyPrefix) => {
   const promises = {}
   _.forOwn(context.value, (val, key) => {
-    promises[key] = rules.validate(context.def.values, val, `${keyPrefix}${key}`, context.errors, false)
+    promises[key] = rules.validate(context.def.values, val, context.def.opts, `${keyPrefix}${key}`, context.errors, false)
   })
   return Promise.props(promises)
 }

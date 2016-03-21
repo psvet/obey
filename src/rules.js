@@ -64,6 +64,7 @@ const rules = {
    * @memberof rules
    * @param {Object} def The rule definition object
    * @param {*} data The data (value) to validate
+   * @param {Object} opts Specific options for validation process
    * @param {string|null} [key=null] Key for tracking parent in nested iterations
    * @param {Array<{type: string, sub: string, key: string, value: *, message: string}>} [errors=[]] An error array
    * to which any additional error objects will be added. If not specified, a new array will be created.
@@ -72,8 +73,9 @@ const rules = {
    * @returns {Promise.<*>} Resolves with the resulting data, with any defaults, creators, and modifiers applied.
    * Rejects with a ValidationError if applicable.
    */
-  validate: (def, data, key = null, errors = [], rejectOnFail = true) => {
+  validate: (def, data, opts = { partial: false }, key = null, errors = [], rejectOnFail = true) => {
     let curData = data
+    def.opts = opts
     const props = rules.getProps(def, data)
     if (!def.type) throw new Error('Model properties must define a \'type\'')
     let chain = Promise.resolve(data)

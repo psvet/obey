@@ -147,4 +147,15 @@ describe('integration:core', () => {
         expect(data).to.deep.equal(testData)
       })
   })
+  it('builds a model and passes validation when partial option is set to true, does not run creators', () => {
+    obey.creator('testCreator', () => 'fizz')
+    const testModel = obey.model(modelFixtures.basicCreator)
+    const testData = {
+      bar: 'buzz'
+    }
+    return testModel.validate(testData, { partial: true })
+      .then(data => {
+        expect(data).to.deep.equal(testData)
+      })
+  })
 })

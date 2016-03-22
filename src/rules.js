@@ -43,12 +43,14 @@ const rules = {
       allProps.max,
       allProps.type
     ],
-    // When no value/undefined
+    // No value/undefined
     noVal: [
       allProps.creator,
       allProps.default,
       allProps.modifier
-    ]
+    ],
+    // No value, partial
+    noValPartial: []
   },
 
   /**
@@ -109,19 +111,20 @@ const rules = {
   },
 
   /**
-   * Gets props list according to required and allowNull specifications
+   * Gets props list according to partial, required, and allowNull specifications
    * @memberof rules
    * @param {Object} def The rule definition
    * @param {*} data The value being evaluated
    * @returns {Array}
    */
   getProps: (def, data) => {
-    if (!def.required && data === undefined) {
-      return rules.props.noVal
-    }
-    if (def.allowNull && data === null) {
-      return rules.props.noVal
-    }
+    // Partial and undefined
+    if (def.opts.partial && data === undefined) return rules.props.noValPartial
+    // Not required, undefined
+    if (!def.required && data === undefined) return rules.props.noVal
+    // AllowNull and null
+    if (def.allowNull && data === null) return rules.props.noVal
+    // Use default
     return rules.props.default
   }
 }

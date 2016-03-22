@@ -14,6 +14,10 @@ export default {
     lname: { type: 'string', min: 2, max: 20 },
     type: { type: 'string', allowed: [ 'foo', 'bar' ] }
   },
+  basicCreator: {
+    foo: { type: 'string', creator: 'testCreator' },
+    bar: { type: 'string' }
+  },
   basicNested: {
     name: { type: 'string' },
     someobj: { type: 'object', keys: {

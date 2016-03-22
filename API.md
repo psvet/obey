@@ -261,7 +261,7 @@ Adds new rule to the lib
 
 <a name="rules.getProps"></a>
 ### rules.getProps(def, data) ⇒ <code>Array</code>
-Gets props list according to required and allowNull specifications
+Gets props list according to partial, required, and allowNull specifications
 
 **Kind**: static method of <code>[rules](#rules)</code>  
 

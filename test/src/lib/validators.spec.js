@@ -23,6 +23,13 @@ describe('validators', () => {
     })
   })
   describe('allow', () => {
+    it('passes if value is in allow (object)', () => {
+      const def = {
+        allow: { 'foo': 'fooey', 'bar': 'barey' }
+      }
+      validators.allow(def, 'foo', 'test', mockErrors)
+      expect(mockErrors.length).to.equal(0)
+    })
     it('passes if value is in allow (array)', () => {
       const def = {
         allow: [ 'foo', 'bar' ]

@@ -23,6 +23,7 @@ Asynchronous Data Modelling and Validation.
   - [Adding New Types](#adding-new-types)
     - [Adding Single-Method Type](#adding-single-method-type)
     - [Adding Type with Subs](#adding-type-with-subs)
+- [Allow](#allow)
 - [Modifiers](#modifiers)
   - [Creating Modifiers](#creating-modifiers)
 - [Creators](#creators)
@@ -156,7 +157,7 @@ When setting definitions for rules or model properties, the following are suppor
 * `min`: The minimum character length for a string, lowest number, or minimum items in array
 * `max`: The maximum character length for a string, highest number, or maximum items in array
 * `required`: Enforces the value cannot be `undefined` during validation (default `false`)
-* `allow`: Array of allowed values or single allowed value
+* `allow`: Object, array or single value representing allowed value(s), see [Allow](#allow)
 * `allowNull`: Accepts a null value or processes specified type
 * `strict`: Enable or disable strict checking of an object, see [Strict Mode](#strict-mode)
 * `description`: A description of the property
@@ -242,6 +243,34 @@ obey.type('uniqueEmail', context => {
 Types _can_ return/resolve a value, though it is not required and is recommended any coercion be handled with a modifier.
 
 Regardless of if a value is returned/resolved, asynchronous types must resolve. Errors should be handled with the `context.fail()` method.
+
+## Allow
+
+The `allow` property in definition objects accepts three formats; `string`, `array` or `object`
+
+The `string` and `array` methods are straight-forward:
+
+```javascript
+// Only allow 'bar'
+foo: { type: 'string', allow: 'bar' }
+// Allow 'buzz', 'bazz', 'bizz'
+fizz: { type: 'string', allow: [ 'buzz', 'bazz', 'bizz' ] }
+```
+
+The `object` representation of the `allow` property gives the ability to store enums alongside the model structure making sharing/reuse of the objects simplified:
+
+```javascript
+const allowedStatuses: {
+  'prog': 'in progress',
+  'comp': 'completed',
+  'arch': 'archived'
+}
+
+// Allow statuses
+status: { type: 'string', allow: allowedStatuses }
+```
+
+In the above example, the model would only accept the keys (`prog`, `comp`, `arch`) during validation.
 
 ## Modifiers
 

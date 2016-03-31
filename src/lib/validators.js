@@ -23,9 +23,10 @@ const validators = {
   allow: function(def, value, key, errors) {
     const type = 'allow'
     const sub = typeof def.allow === 'object' && !Array.isArray(def.allow) ? Object.keys(def.allow) : def.allow
-    if (Array.isArray(sub) && sub.indexOf(value) === -1) {
+    const subIsArray = Array.isArray(sub)
+    if (subIsArray && sub.indexOf(value) === -1) {
       errors.push({ type, sub, key, value, message: `Value '${value}' is not allowed` })
-    } else if (!Array.isArray(sub) && sub !== value) {
+    } else if (!subIsArray && sub !== value) {
       errors.push({ type, sub, key, value, message: `Value '${value}' is not allowed` })
     }
   },

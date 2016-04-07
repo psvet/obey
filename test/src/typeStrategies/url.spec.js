@@ -1,7 +1,7 @@
 /* global describe, it, expect, sinon */
 import url from 'src/typeStrategies/url'
 
-describe.only('type:url', () => {
+describe('type:url', () => {
   it('calls context.fail if type is not a valid URL (default)', () => {
     const context = {
       value: 'foo',

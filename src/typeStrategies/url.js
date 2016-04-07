@@ -1,6 +1,6 @@
 const url = {
   _regex: {
-    default: /^((http|https|ftp):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+    default: /^(?:https?:\/\/)?[^\s\/\.]+(?:\.[a-z]{2,})+(?:\/\S*)?$/i
   },
   default: context => {
     if (context.value === null || context.value && !context.value.toString().match(url._regex.default)) {

@@ -52,6 +52,9 @@ Checks for valid string types:
 
 Checks for valid URL
 
+* `default`: Check for valid URI with protocol
+* `noproto`: Check for valid URL, no protocol
+
 ## UUID
 
 Checks for valid v4 UUID

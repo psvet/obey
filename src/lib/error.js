@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
+import util from 'util'
 
 /**
  * Compiles array items into string error messages
@@ -25,11 +26,10 @@ function ValidationError(message) {
   Object.defineProperty(this, 'name', { value: 'ValidationError' })
   Object.defineProperty(this, 'message', { value: getMessages(message).join('\n') })
   Object.defineProperty(this, 'collection', { value: message })
-  Error.captureStackTrace(this, this.name)
+  Error.captureStackTrace(this, ValidationError)
 }
 
 // Creates instance of ValidationError as Error object
-ValidationError.prototype = Object.create(Error.prototype)
-ValidationError.prototype.constructor = ValidationError
+util.inherits(ValidationError, Error)
 
 export default ValidationError

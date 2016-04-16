@@ -2,7 +2,7 @@
 
 Asynchronous Data Modelling and Validation.
 
-[![CircleCI](https://img.shields.io/circleci/project/TechnologyAdvice/obey.svg)](https://circleci.com/gh/TechnologyAdvice/obey)
+[![CircleCI](https://img.shields.io/circleci/project/TechnologyAdvice/obey/master.svg)](https://circleci.com/gh/TechnologyAdvice/obey)
 [![Code Climate](https://img.shields.io/codeclimate/github/TechnologyAdvice/obey.svg)](https://codeclimate.com/github/TechnologyAdvice/obey)
 [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/TechnologyAdvice/obey.svg)](https://codeclimate.com/github/TechnologyAdvice/obey/coverage)
 ![Dependencies](https://img.shields.io/david/technologyadvice/obey.svg)

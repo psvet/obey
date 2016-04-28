@@ -1,6 +1,6 @@
 const email = {
   _regex: {
-    default: /.+@.+\..+/
+    default: /.+@.+\.\S+/
   },
   default: context => {
     if (context.value === null || context.value && !context.value.toString().match(email._regex.default)) {

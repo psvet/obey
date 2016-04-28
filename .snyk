@@ -1,3 +1,7 @@
-ignore: {}
+ignore:
+  'npm:marked:20150520':
+    - 'jsdoc > marked':
+        reason: Dev Dependecy
+        expires: '2016-05-28T00:25:33.252Z'
 patch: {}
 version: v1

@@ -6,6 +6,7 @@ dependencies:
     - npm install -g codeclimate-test-reporter
     - npm install -g snyk
     - npm install -g jsdoc-to-markdown
+    - npm install
 general:
   artifacts:
     - coverage

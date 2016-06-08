@@ -18,4 +18,12 @@ describe('type:url', () => {
     url.default(context)
     expect(context.fail).to.not.be.called
   })
+  it('passes urls with number and hypens', () => {
+    const context = {
+      value: 'this-is.1weird.domain.com',
+      fail: sinon.spy()
+    }
+    url.default(context)
+    expect(context.fail).to.not.be.called
+  })
 })

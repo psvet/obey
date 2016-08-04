@@ -260,14 +260,14 @@ fizz: { type: 'string', allow: [ 'buzz', 'bazz', 'bizz' ] }
 The `object` representation of the `allow` property gives the ability to store enums alongside the model structure making sharing/reuse of the objects simplified:
 
 ```javascript
-const allowedStatuses: {
+const allowedStatuses = {
   'prog': 'in progress',
   'comp': 'completed',
   'arch': 'archived'
 }
 
 // Allow statuses
-status: { type: 'string', allow: allowedStatuses }
+{ status: { type: 'string', allow: allowedStatuses } }
 ```
 
 In the above example, the model would only accept the keys (`prog`, `comp`, `arch`) during validation.

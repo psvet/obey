@@ -9,7 +9,7 @@ dependencies:
     - npm install
 general:
   artifacts:
-    - coverage
+    - "coverage/lcov.info"
 test:
   post:
     - codeclimate-test-reporter < coverage/lcov.info

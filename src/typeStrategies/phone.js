@@ -1,6 +1,6 @@
 const phone = {
   _regex: {
-    default: /^\(?\d{3}\)?([-. ]?)\d{3}\1\d{4}$/,
+    default: /^[\(\)\s\-\+\d]{10,17}$/,
     numeric: /\d{7,10}/
   },
   default: context => {

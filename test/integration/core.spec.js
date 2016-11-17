@@ -20,7 +20,10 @@ describe('integration:core', () => {
     const testData = {
       fname: 5,
       lname: 'Smith',
-      type: 'foo'
+      type: 'foo',
+      nested: {
+        foo: 'bar'
+      }
     }
     return testModel.validate(testData).catch(e => {
       expect(e).to.be.instanceOf(ValidationError)

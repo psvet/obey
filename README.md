@@ -157,6 +157,8 @@ When setting definitions for rules or model properties, the following are suppor
 * `min`: The minimum character length for a string, lowest number, or minimum items in array
 * `max`: The maximum character length for a string, highest number, or maximum items in array
 * `required`: Enforces the value cannot be `undefined` during validation (default `false`)
+* `requireIf`: Enforces the value cannot be `undefined` if a value exists for the corresponding field
+* `requireIfNot`: Enforces the value cannot be `undefined` if a value _does not_ exist for the corresponding field
 * `allow`: Object, array or single value representing allowed value(s), see [Allow](#allow)
 * `allowNull`: Accepts a null value or processes specified type
 * `strict`: Enable or disable strict checking of an object, see [Strict Mode](#strict-mode)

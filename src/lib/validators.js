@@ -83,6 +83,23 @@ const validators = {
     if (dot.pick(sub, data) !== undefined && value === undefined) {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' exists`})
     }
+  },
+
+  /**
+   * Validator requireIfNot method, used by model
+   * @param {Object} def The property configuration
+   * @param {*} value The value being validated
+   * @param {string} key The key name of the property
+   * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
+   * to which any additional error objects will be added
+   * @param {Object} data The full initial data object
+   */
+  requireIfNot: function(def, value, key, errors, data) {
+    const type = 'requireIfNot'
+    const sub = def.requireIfNot
+    if (dot.pick(sub, data) === undefined && value === undefined) {
+      errors.push({ type, sub, key, value, message: `Value required because '${sub}' is undefined`})
+    }
   }
 }
 

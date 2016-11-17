@@ -20,7 +20,8 @@ const allProps = {
   min: { name: 'min', fn: validators.min },
   max: { name: 'max', fn: validators.max },
   type: { name: 'type', fn: types.validate },
-  requireIf: { name: 'requireIf', fn: validators.requireIf }
+  requireIf: { name: 'requireIf', fn: validators.requireIf },
+  requireIfNot: { name: 'requireIfNot', fn: validators.requireIfNot }
 }
 
 /**
@@ -43,14 +44,16 @@ const rules = {
       allProps.min,
       allProps.max,
       allProps.type,
-      allProps.requireIf
+      allProps.requireIf,
+      allProps.requireIfNot
     ],
     // No value/undefined
     noVal: [
       allProps.creator,
       allProps.default,
       allProps.modifier,
-      allProps.requireIf
+      allProps.requireIf,
+      allProps.requireIfNot
     ],
     // No value, partial
     noValPartial: []

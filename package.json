@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "bluebird": "^3.3.4",
+    "dot-object": "^1.5.4",
     "lodash": "^4.6.1"
   },
   "pre-commit": [

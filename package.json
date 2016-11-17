@@ -15,7 +15,8 @@
     "mocha": "babel-node node_modules/.bin/_mocha",
     "cover": "babel-node node_modules/.bin/babel-istanbul cover node_modules/mocha/bin/_mocha",
     "lint": "eslint ./src ./test --fix",
-    "prepublish": "rm -rf ./build && npm test && npm run build"
+    "prepublish": "rm -rf ./build && npm test && npm run build",
+    "ci": "npm run lint && npm run cover"
   },
   "keywords": [
     "obey",

@@ -155,4 +155,18 @@ describe('validators', () => {
       })
     })
   })
+  describe('requireIfNot', () => {
+    it('creates an error object if conditionally required value is undefined', () => {
+      const data = { address: { street: '123 test ave' } }
+      const def = { requireIfNot: 'address.state' }
+      validators.requireIfNot(def, undefined, 'address.country', mockErrors, data)
+      expect(mockErrors[0]).to.deep.equal({
+        type: 'requireIfNot',
+        sub: 'address.state',
+        key: 'address.country',
+        value: undefined,
+        message: 'Value required because \'address.state\' is undefined'
+      })
+    })
+  })
 })

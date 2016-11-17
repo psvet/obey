@@ -19,7 +19,9 @@ const allProps = {
   allow: { name: 'allow', fn: validators.allow },
   min: { name: 'min', fn: validators.min },
   max: { name: 'max', fn: validators.max },
-  type: { name: 'type', fn: types.validate }
+  type: { name: 'type', fn: types.validate },
+  requireIf: { name: 'requireIf', fn: validators.requireIf },
+  requireIfNot: { name: 'requireIfNot', fn: validators.requireIfNot }
 }
 
 /**
@@ -41,13 +43,17 @@ const rules = {
       allProps.allow,
       allProps.min,
       allProps.max,
-      allProps.type
+      allProps.type,
+      allProps.requireIf,
+      allProps.requireIfNot
     ],
     // No value/undefined
     noVal: [
       allProps.creator,
       allProps.default,
-      allProps.modifier
+      allProps.modifier,
+      allProps.requireIf,
+      allProps.requireIfNot
     ],
     // No value, partial
     noValPartial: []
@@ -76,6 +82,7 @@ const rules = {
    * Rejects with a ValidationError if applicable.
    */
   validate: (def, data, opts = { partial: false }, key = null, errors = [], rejectOnFail = true) => {
+    if (!rules.initData) rules.initData = data
     let curData = data
     def.opts = opts
     const props = rules.getProps(def, data)
@@ -84,7 +91,7 @@ const rules = {
     props.forEach(prop => {
       if (def.hasOwnProperty(prop.name)) {
         chain = chain
-          .then(val => prop.fn(def, val, key, errors))
+          .then(val => prop.fn(def, val, key, errors, rules.initData))
           .then(res => {
             if (res !== undefined) curData = res
             return curData

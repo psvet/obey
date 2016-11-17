@@ -18,5 +18,20 @@ export default {
   },
   required: {
     name: { type: 'string', required: true }
+  },
+  requireIf: {
+    phone: { type: 'phone' },
+    phoneType: { type: 'string', requireIf: 'phone' },
+    address: { type: 'object', keys: {
+      street: { type: 'string' },
+      city: { type: 'string', requireIf: 'address.street' }
+    }}
+  },
+  requireIfNot: {
+    address: { type: 'object', keys: {
+      street: { type: 'string' },
+      state: { type: 'string' },
+      country: { type: 'string', requireIfNot: 'address.state' }
+    }}
   }
 }

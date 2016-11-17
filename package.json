@@ -9,13 +9,14 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
-    "doc": "node_modules/.bin/jsdoc2md \"src/**/*.js\" > API.md",
+    "doc": "jsdoc2md \"src/**/*.js\" > API.md",
     "build": "babel ./src --out-dir ./build",
     "test": "snyk test && npm run lint && npm run cover && npm run doc",
     "mocha": "babel-node node_modules/.bin/_mocha",
     "cover": "babel-node node_modules/.bin/babel-istanbul cover node_modules/mocha/bin/_mocha",
     "lint": "eslint ./src ./test --fix",
-    "prepublish": "rm -rf ./build && npm test && npm run build"
+    "prepublish": "rm -rf ./build && npm run cover && npm run build",
+    "ci": "npm run lint && npm run cover"
   },
   "keywords": [
     "obey",
@@ -54,6 +55,7 @@
   },
   "dependencies": {
     "bluebird": "^3.3.4",
+    "dot-object": "^1.5.4",
     "lodash": "^4.6.1"
   },
   "pre-commit": [

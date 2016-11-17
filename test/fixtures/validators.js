@@ -26,5 +26,12 @@ export default {
       street: { type: 'string' },
       city: { type: 'string', requireIf: 'address.street' }
     }}
+  },
+  requireIfNot: {
+    address: { type: 'object', keys: {
+      street: { type: 'string' },
+      state: { type: 'string' },
+      country: { type: 'string', requireIfNot: 'address.state' }
+    }}
   }
 }

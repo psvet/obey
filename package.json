@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
-    "doc": "node_modules/.bin/jsdoc2md \"src/**/*.js\" > API.md",
+    "doc": "jsdoc2md \"src/**/*.js\" > API.md",
     "build": "babel ./src --out-dir ./build",
     "test": "snyk test && npm run lint && npm run cover && npm run doc",
     "mocha": "babel-node node_modules/.bin/_mocha",

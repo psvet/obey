@@ -70,6 +70,7 @@ const userModel = obey.model({
   lname: { type: 'string', description: 'Last Name', empty: true },
   suffix: { type: 'string', allowNull: true },
   phone: { type: 'phone:numeric', min: 7, max: 10 },
+  phoneType: { type: 'string', requireIf: 'phone' },
   // Array
   labels: { type: 'array', values: {
     type: 'object', keys: {

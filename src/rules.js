@@ -21,7 +21,8 @@ const allProps = {
   max: { name: 'max', fn: validators.max },
   type: { name: 'type', fn: types.validate },
   requireIf: { name: 'requireIf', fn: validators.requireIf },
-  requireIfNot: { name: 'requireIfNot', fn: validators.requireIfNot }
+  requireIfNot: { name: 'requireIfNot', fn: validators.requireIfNot },
+  equalTo: { name: 'equalTo', fn: validators.equalTo }
 }
 
 /**
@@ -45,7 +46,8 @@ const rules = {
       allProps.max,
       allProps.type,
       allProps.requireIf,
-      allProps.requireIfNot
+      allProps.requireIfNot,
+      allProps.equalTo
     ],
     // No value/undefined
     noVal: [
@@ -53,7 +55,8 @@ const rules = {
       allProps.default,
       allProps.modifier,
       allProps.requireIf,
-      allProps.requireIfNot
+      allProps.requireIfNot,
+      allProps.equalTo
     ],
     // No value, partial
     noValPartial: []

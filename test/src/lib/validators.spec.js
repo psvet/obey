@@ -169,4 +169,24 @@ describe('validators', () => {
       })
     })
   })
+  describe('equalTo', () => {
+    it('creates an error object when fields are not equal', () => {
+      const data = { password: 'Password' }
+      const def = { equalTo: 'password' }
+      validators.equalTo(def, 'Passwrod', 'passwordConfirm', mockErrors, data)
+      expect(mockErrors[0]).to.deep.equal({
+        type: 'equalTo',
+        sub: 'password',
+        key: 'passwordConfirm',
+        value: 'Passwrod',
+        message: 'Value must match password value'
+      })
+    })
+    it('doesn\'t create an error object when fields are equal', () => {
+      const data = { password: 'Password' }
+      const def = { equalTo: 'password' }
+      validators.equalTo(def, 'Password', 'passwordConfirm', mockErrors, data)
+      expect(mockErrors).to.be.empty
+    })
+  })
 })

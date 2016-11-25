@@ -26,7 +26,13 @@ function ValidationError(message) {
   Object.defineProperty(this, 'name', { value: 'ValidationError' })
   Object.defineProperty(this, 'message', { value: getMessages(message).join('\n') })
   Object.defineProperty(this, 'collection', { value: message })
-  Error.captureStackTrace(this, ValidationError)
+
+  // Fixes captureStackTrace missing on Safari
+  if (typeof Error.captureStackTrace === 'function') {
+    Error.captureStackTrace(this, ValidationError)
+  } else {
+    this.stack = new Error().stack
+  }
 }
 
 // Creates instance of ValidationError as Error object

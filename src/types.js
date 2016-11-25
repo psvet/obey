@@ -42,9 +42,10 @@ const types = {
    * @param {string} key The key name of the property
    * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
    * to which any additional error objects will be added
+   * @param {Object} initData Initial data object
    * @returns {*|Promise.<*>} The value if empty or undefined, check method if value requires type validation
    */
-  validate: function(def, value, key, errors) {
+  validate: function(def, value, key, errors, initData) {
     const parsedDef = types.checkSubType(def)
     const fail = message => {
       errors.push({ type: def.type, sub: def.sub, key, value, message })
@@ -59,7 +60,7 @@ const types = {
       return value
     }
     // Execute check
-    return types.check({ def: parsedDef, key, value, fail, errors })
+    return types.check({ def: parsedDef, key, value, fail, errors, initData })
   },
 
   /**

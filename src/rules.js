@@ -78,11 +78,12 @@ const rules = {
    * to which any additional error objects will be added. If not specified, a new array will be created.
    * @param {boolean} [rejectOnFail=true] If true, resulting promise will reject if the errors array is not empty;
    * otherwise ValidationErrors will not cause a rejection
+   * @param {Object|null} [initData=null] Initial data object
    * @returns {Promise.<*>} Resolves with the resulting data, with any defaults, creators, and modifiers applied.
    * Rejects with a ValidationError if applicable.
    */
-  validate: (def, data, opts = { partial: false }, key = null, errors = [], rejectOnFail = true) => {
-    if (!rules.initData) rules.initData = data
+  validate: (def, data, opts = { partial: false }, key = null, errors = [], rejectOnFail = true, initData = null) => {
+    let passthruData = initData === null ? data : initData
     let curData = data
     def.opts = opts
     const props = rules.getProps(def, data)
@@ -91,7 +92,7 @@ const rules = {
     props.forEach(prop => {
       if (def.hasOwnProperty(prop.name)) {
         chain = chain
-          .then(val => prop.fn(def, val, key, errors, rules.initData))
+          .then(val => prop.fn(def, val, key, errors, passthruData))
           .then(res => {
             if (res !== undefined) curData = res
             return curData

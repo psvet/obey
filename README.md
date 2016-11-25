@@ -66,6 +66,7 @@ const userModel = obey.model({
   id: { type: 'uuid', creator: 'uuid', required: true },
   email: { type: 'email', required: true },
   password: { type: 'string', modifier: 'encryptPassword', required: true },
+  passwordConfirm: { type: 'string', equalTo: 'password' },
   fname: { type: 'string', description: 'First Name' },
   lname: { type: 'string', description: 'Last Name', empty: true },
   suffix: { type: 'string', allowNull: true },
@@ -160,6 +161,7 @@ When setting definitions for rules or model properties, the following are suppor
 * `required`: Enforces the value cannot be `undefined` during validation (default `false`)
 * `requireIf`: Enforces the value cannot be `undefined` if a value exists for the corresponding field
 * `requireIfNot`: Enforces the value cannot be `undefined` if a value _does not_ exist for the corresponding field
+* `equalTo`: Enforces the value to be the same as the corresponding field
 * `allow`: Object, array or single value representing allowed value(s), see [Allow](#allow)
 * `allowNull`: Accepts a null value or processes specified type
 * `strict`: Enable or disable strict checking of an object, see [Strict Mode](#strict-mode)

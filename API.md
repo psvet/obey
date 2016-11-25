@@ -223,7 +223,7 @@ properties during validation
 * [rules](#rules) : <code>object</code>
     * [.props](#rules.props)
     * [.makeValidate(def)](#rules.makeValidate)
-    * [.validate(def, data, [opts], [key], [errors], [rejectOnFail])](#rules.validate) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * [.validate(def, data, [opts], [key], [errors], [rejectOnFail], [initData])](#rules.validate) ⇒ <code>Promise.&lt;\*&gt;</code>
     * [.build(def)](#rules.build) ⇒ <code>Object</code>
     * [.getProps(def, data)](#rules.getProps) ⇒ <code>Array</code>
 
@@ -250,7 +250,7 @@ Binds rule definition in validate method
 
 <a name="rules.validate"></a>
 
-### rules.validate(def, data, [opts], [key], [errors], [rejectOnFail]) ⇒ <code>Promise.&lt;\*&gt;</code>
+### rules.validate(def, data, [opts], [key], [errors], [rejectOnFail], [initData]) ⇒ <code>Promise.&lt;\*&gt;</code>
 Iterates over the properties present in the rule definition and sets the
 appropriate bindings to required methods
 
@@ -266,6 +266,7 @@ Rejects with a ValidationError if applicable.
 | [key] | <code>string</code> &#124; <code>null</code> | <code>null</code> | Key for tracking parent in nested iterations |
 | [errors] | <code>Array.&lt;{type: string, sub: string, key: string, value: \*, message: string}&gt;</code> | <code>[]</code> | An error array to which any additional error objects will be added. If not specified, a new array will be created. |
 | [rejectOnFail] | <code>boolean</code> | <code>true</code> | If true, resulting promise will reject if the errors array is not empty; otherwise ValidationErrors will not cause a rejection |
+| [initData] | <code>Object</code> &#124; <code>null</code> | <code></code> | Initial data object |
 
 <a name="rules.build"></a>
 
@@ -301,7 +302,7 @@ data during validation
 * [types](#types) : <code>object</code>
     * [.strategies](#types.strategies)
     * [.checkSubType(def)](#types.checkSubType) ⇒ <code>Object</code>
-    * [.validate(def, value, key, errors)](#types.validate) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
+    * [.validate(def, value, key, errors, initData)](#types.validate) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
     * [.add(name, handler)](#types.add)
     * [.check(context)](#types.check) ⇒ <code>Promise.&lt;\*&gt;</code>
 
@@ -328,7 +329,7 @@ Checks for and applies sub-type to definition
 
 <a name="types.validate"></a>
 
-### types.validate(def, value, key, errors) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
+### types.validate(def, value, key, errors, initData) ⇒ <code>\*</code> &#124; <code>Promise.&lt;\*&gt;</code>
 Sets up the `fail` method and handles `empty` or `undefined` values. If neither
 empty or undefined, calls the appropriate `type` and executes validation
 
@@ -341,6 +342,7 @@ empty or undefined, calls the appropriate `type` and executes validation
 | value | <code>\*</code> | The value being validated |
 | key | <code>string</code> | The key name of the property |
 | errors | <code>Array.&lt;{type: string, sub: (string\|number), key: string, value: \*, message: string}&gt;</code> | An error array to which any additional error objects will be added |
+| initData | <code>Object</code> | Initial data object |
 
 <a name="types.add"></a>
 

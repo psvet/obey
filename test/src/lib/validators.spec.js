@@ -154,6 +154,18 @@ describe('validators', () => {
         message: 'Value required because \'address.street\' exists'
       })
     })
+    it('creates an error object if conditionally required value is undefined when corresponding field HAS the given value', () => {
+      const data = { address: { street: '123 test ave', country: 'US' } }
+      const def = { requireIf: { 'address.country': 'US' } }
+      validators.requireIf(def, undefined, 'address.zip', mockErrors, data)
+      expect(mockErrors[0]).to.deep.equal({
+        type: 'requireIf',
+        sub: { 'address.country': 'US' },
+        key: 'address.zip',
+        value: undefined,
+        message: 'Value required by existing \'address.country\' value'
+      })
+    })
   })
   describe('requireIfNot', () => {
     it('creates an error object if conditionally required value is undefined', () => {
@@ -166,6 +178,18 @@ describe('validators', () => {
         key: 'address.country',
         value: undefined,
         message: 'Value required because \'address.state\' is undefined'
+      })
+    })
+    it('creates an error object if conditionally required value is undefined when corresponding field does NOT have the given value', () => {
+      const data = { testField: 'not what we want' }
+      const def = { requireIfNot: { testField: 'what we want' } }
+      validators.requireIfNot(def, undefined, 'conditionalField', mockErrors, data)
+      expect(mockErrors[0]).to.deep.equal({
+        type: 'requireIfNot',
+        sub: { testField: 'what we want' },
+        key: 'conditionalField',
+        value: undefined,
+        message: 'Value required because \'testField\' value is not one specified'
       })
     })
   })

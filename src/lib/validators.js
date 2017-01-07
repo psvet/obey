@@ -80,8 +80,13 @@ const validators = {
   requireIf: function(def, value, key, errors, data) {
     const type = 'requireIf'
     const sub = def.requireIf
-    if (dot.pick(sub, data) !== undefined && value === undefined) {
-      errors.push({ type, sub, key, value, message: `Value required because '${sub}' exists`})
+    if (typeof sub === 'object') {
+      const field = Object.keys(sub)[0]
+      if (dot.pick(field, data) === sub[field] && value === undefined) {
+        errors.push({ type, sub, key, value, message: `Value required by existing '${field}' value` })
+      }
+    } else if (dot.pick(sub, data) !== undefined && value === undefined) {
+      errors.push({ type, sub, key, value, message: `Value required because '${sub}' exists` })
     }
   },
 
@@ -97,7 +102,12 @@ const validators = {
   requireIfNot: function(def, value, key, errors, data) {
     const type = 'requireIfNot'
     const sub = def.requireIfNot
-    if (dot.pick(sub, data) === undefined && value === undefined) {
+    if (typeof sub === 'object') {
+      const field = Object.keys(sub)[0]
+      if (dot.pick(field, data) !== sub[field] && value === undefined) {
+        errors.push({ type, sub, key, value, message: `Value required because '${field}' value is NOT x` }) // TODO: make this message make sense
+      }
+    } else if (dot.pick(sub, data) === undefined && value === undefined) {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' is undefined`})
     }
   },

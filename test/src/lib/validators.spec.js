@@ -189,7 +189,7 @@ describe('validators', () => {
         sub: { testField: 'what we want' },
         key: 'conditionalField',
         value: undefined,
-        message: 'Value required because \'testField\' value is NOT x'
+        message: 'Value required because \'testField\' value is NOT one specified'
       })
     })
   })

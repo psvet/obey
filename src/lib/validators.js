@@ -105,7 +105,7 @@ const validators = {
     if (typeof sub === 'object') {
       const field = Object.keys(sub)[0]
       if (dot.pick(field, data) !== sub[field] && value === undefined) {
-        errors.push({ type, sub, key, value, message: `Value required because '${field}' value is NOT x` }) // TODO: make this message make sense
+        errors.push({ type, sub, key, value, message: `Value required because '${field}' value is NOT one specified` })
       }
     } else if (dot.pick(sub, data) === undefined && value === undefined) {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' is undefined`})

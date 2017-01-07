@@ -72,6 +72,7 @@ const userModel = obey.model({
   suffix: { type: 'string', allowNull: true },
   phone: { type: 'phone:numeric', min: 7, max: 10 },
   phoneType: { type: 'string', requireIf: 'phone' },
+  carrier: { type: 'string', requireIf: { phoneType: 'mobile' }},
   // Array
   labels: { type: 'array', values: {
     type: 'object', keys: {
@@ -159,8 +160,8 @@ When setting definitions for rules or model properties, the following are suppor
 * `min`: The minimum character length for a string, lowest number, or minimum items in array
 * `max`: The maximum character length for a string, highest number, or maximum items in array
 * `required`: Enforces the value cannot be `undefined` during validation (default `false`)
-* `requireIf`: Enforces the value cannot be `undefined` if a value exists for the corresponding field
-* `requireIfNot`: Enforces the value cannot be `undefined` if a value _does not_ exist for the corresponding field
+* `requireIf`: Enforces the value cannot be `undefined` if a value exists or matches a given value for the corresponding field
+* `requireIfNot`: Enforces the value cannot be `undefined` if a value _does not_ exist or match a given value for the corresponding field
 * `equalTo`: Enforces the value to be the same as the corresponding field
 * `allow`: Object, array or single value representing allowed value(s), see [Allow](#allow)
 * `allowNull`: Accepts a null value or processes specified type

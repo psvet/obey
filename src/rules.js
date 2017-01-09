@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
-/* esling no-console: 0 */
+/* eslint no-console: 0 */
 import types from './types'
 import modifiers from './modifiers'
 import creators from './creators'
@@ -136,7 +136,7 @@ const rules = {
    * @returns {Array}
    */
   getProps: (def, data) => {
-    // 
+    //
     if (def.require) {
       def.required = def.require
       delete def.require

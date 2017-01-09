@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
+/* eslint no-console: 0 */
 import dot from 'dot-object'
 
 const validators = {
@@ -69,7 +70,7 @@ const validators = {
   },
 
   /**
-   * Validator requireIf method, used by model
+   * Validator requiredIf method, used by model
    * @param {Object} def The property configuration
    * @param {*} value The value being validated
    * @param {string} key The key name of the property
@@ -77,9 +78,9 @@ const validators = {
    * to which any additional error objects will be added
    * @param {Object} data The full initial data object
    */
-  requireIf: function(def, value, key, errors, data) {
-    const type = 'requireIf'
-    const sub = def.requireIf
+  requiredIf: function(def, value, key, errors, data) {
+    const type = 'requiredIf'
+    const sub = def.requiredIf
     if (typeof sub === 'object') {
       const field = Object.keys(sub)[0]
       if (dot.pick(field, data) === sub[field] && value === undefined) {
@@ -89,9 +90,18 @@ const validators = {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' exists` })
     }
   },
+  /**
+   * Alias for requiredIf
+   */
+  requireIf: function(def, value, key, errors, data) {
+    console.log('-----\nObey Warning: `requireIf` should be `requiredIf`\n-----')
+    def.requiredIf = def.requireIf
+    delete def.requireIf
+    validators.requiredIf(def, value, key, errors, data)
+  },
 
   /**
-   * Validator requireIfNot method, used by model
+   * Validator requiredIfNot method, used by model
    * @param {Object} def The property configuration
    * @param {*} value The value being validated
    * @param {string} key The key name of the property
@@ -99,9 +109,9 @@ const validators = {
    * to which any additional error objects will be added
    * @param {Object} data The full initial data object
    */
-  requireIfNot: function(def, value, key, errors, data) {
-    const type = 'requireIfNot'
-    const sub = def.requireIfNot
+  requiredIfNot: function(def, value, key, errors, data) {
+    const type = 'requiredIfNot'
+    const sub = def.requiredIfNot
     if (typeof sub === 'object') {
       const field = Object.keys(sub)[0]
       if (dot.pick(field, data) !== sub[field] && value === undefined) {
@@ -110,6 +120,15 @@ const validators = {
     } else if (dot.pick(sub, data) === undefined && value === undefined) {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' is undefined`})
     }
+  },
+  /**
+   * Alias for requiredIfNot
+   */
+  requireIfNot: function(def, value, key, errors, data) {
+    console.log('-----\nObey Warning: `requireIfNot` should be `requiredIfNot`\n-----')
+    def.requiredIfNot = def.requireIfNot
+    delete def.requireIfNot
+    validators.requiredIfNot(def, value, key, errors, data)
   },
 
   /**

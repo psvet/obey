@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
+/* eslint no-console: 0 */
 import types from './types'
 import modifiers from './modifiers'
 import creators from './creators'
@@ -20,6 +21,8 @@ const allProps = {
   min: { name: 'min', fn: validators.min },
   max: { name: 'max', fn: validators.max },
   type: { name: 'type', fn: types.validate },
+  requiredIf: { name: 'requiredIf', fn: validators.requiredIf },
+  requiredIfNot: { name: 'requiredIfNot', fn: validators.requiredIfNot },
   requireIf: { name: 'requireIf', fn: validators.requireIf },
   requireIfNot: { name: 'requireIfNot', fn: validators.requireIfNot },
   equalTo: { name: 'equalTo', fn: validators.equalTo }
@@ -45,6 +48,8 @@ const rules = {
       allProps.min,
       allProps.max,
       allProps.type,
+      allProps.requiredIf,
+      allProps.requiredIfNot,
       allProps.requireIf,
       allProps.requireIfNot,
       allProps.equalTo
@@ -54,6 +59,8 @@ const rules = {
       allProps.creator,
       allProps.default,
       allProps.modifier,
+      allProps.requiredIf,
+      allProps.requiredIfNot,
       allProps.requireIf,
       allProps.requireIfNot,
       allProps.equalTo
@@ -129,6 +136,12 @@ const rules = {
    * @returns {Array}
    */
   getProps: (def, data) => {
+    //
+    if (def.require) {
+      def.required = def.require
+      delete def.require
+      console.log('-----\nObey Warning: `require` should be `required`\n-----')
+    }
     // Partial and undefined
     if (def.opts.partial && data === undefined) return rules.props.noValPartial
     // Not required, undefined

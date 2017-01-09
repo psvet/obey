@@ -19,19 +19,19 @@ export default {
   required: {
     name: { type: 'string', required: true }
   },
-  requireIf: {
+  requiredIf: {
     phone: { type: 'phone' },
-    phoneType: { type: 'string', requireIf: 'phone' },
+    phoneType: { type: 'string', requiredIf: 'phone' },
     address: { type: 'object', keys: {
       street: { type: 'string' },
-      city: { type: 'string', requireIf: 'address.street' }
+      city: { type: 'string', requiredIf: 'address.street' }
     }}
   },
-  requireIfNot: {
+  requiredIfNot: {
     address: { type: 'object', keys: {
       street: { type: 'string' },
       state: { type: 'string' },
-      country: { type: 'string', requireIfNot: 'address.state' }
+      country: { type: 'string', requiredIfNot: 'address.state' }
     }}
   }
 }

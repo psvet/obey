@@ -30,7 +30,7 @@ describe('rules', () => {
         type: 'object',
         keys: {
           phone: { type: 'string' },
-          phoneType: { type: 'string', requireIf: 'phone' }
+          phoneType: { type: 'string', requiredIf: 'phone' }
         }
       }
       return rules.validate(def, { phone: '123' })
@@ -48,7 +48,7 @@ describe('rules', () => {
           }
         },
           contacts: { type: 'object', keys: {
-            phone: { type: 'string', requireIf: 'person.name' }
+            phone: { type: 'string', requiredIf: 'person.name' }
           }}
         }
       }
@@ -68,7 +68,7 @@ describe('rules', () => {
           labels: { type: 'array', values: {
             type: 'object', keys: {
               label: { type: 'string' },
-              condRequired: { type: 'string', requireIf: 'person.name' }
+              condRequired: { type: 'string', requiredIf: 'person.name' }
             }
           }}
         }

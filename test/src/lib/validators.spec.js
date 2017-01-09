@@ -141,13 +141,13 @@ describe('validators', () => {
       })
     })
   })
-  describe('requireIf', () => {
+  describe('requiredIf', () => {
     it('creates an error object if conditionally required value is undefined', () => {
       const data = { address: { street: '123 test ave' } }
-      const def = { requireIf: 'address.street' }
-      validators.requireIf(def, undefined, 'address.city', mockErrors, data)
+      const def = { requiredIf: 'address.street' }
+      validators.requiredIf(def, undefined, 'address.city', mockErrors, data)
       expect(mockErrors[0]).to.deep.equal({
-        type: 'requireIf',
+        type: 'requiredIf',
         sub: 'address.street',
         key: 'address.city',
         value: undefined,
@@ -156,10 +156,10 @@ describe('validators', () => {
     })
     it('creates an error object if conditionally required value is undefined when corresponding field HAS the given value', () => {
       const data = { address: { street: '123 test ave', country: 'US' } }
-      const def = { requireIf: { 'address.country': 'US' } }
-      validators.requireIf(def, undefined, 'address.zip', mockErrors, data)
+      const def = { requiredIf: { 'address.country': 'US' } }
+      validators.requiredIf(def, undefined, 'address.zip', mockErrors, data)
       expect(mockErrors[0]).to.deep.equal({
-        type: 'requireIf',
+        type: 'requiredIf',
         sub: { 'address.country': 'US' },
         key: 'address.zip',
         value: undefined,
@@ -167,13 +167,33 @@ describe('validators', () => {
       })
     })
   })
-  describe('requireIfNot', () => {
+  describe('requireIf', () => {
+    let stub
+    after(() => {
+      stub.restore()
+    })
+    it('logs a warning and calls requiredIf method', () => {
+      stub = sinon.stub(console, 'log')
+      const data = { address: { street: '123 test ave' } }
+      const def = { requireIf: 'address.street' }
+      validators.requireIf(def, undefined, 'address.city', mockErrors, data)
+      expect(mockErrors[0]).to.deep.equal({
+        type: 'requiredIf',
+        sub: 'address.street',
+        key: 'address.city',
+        value: undefined,
+        message: 'Value required because \'address.street\' exists'
+      })
+      expect(stub).calledWith('-----\nObey Warning: `requireIf` should be `requiredIf`\n-----')
+    })
+  })
+  describe('requiredIfNot', () => {
     it('creates an error object if conditionally required value is undefined', () => {
       const data = { address: { street: '123 test ave' } }
-      const def = { requireIfNot: 'address.state' }
-      validators.requireIfNot(def, undefined, 'address.country', mockErrors, data)
+      const def = { requiredIfNot: 'address.state' }
+      validators.requiredIfNot(def, undefined, 'address.country', mockErrors, data)
       expect(mockErrors[0]).to.deep.equal({
-        type: 'requireIfNot',
+        type: 'requiredIfNot',
         sub: 'address.state',
         key: 'address.country',
         value: undefined,
@@ -182,15 +202,35 @@ describe('validators', () => {
     })
     it('creates an error object if conditionally required value is undefined when corresponding field does NOT have the given value', () => {
       const data = { testField: 'not what we want' }
-      const def = { requireIfNot: { testField: 'what we want' } }
-      validators.requireIfNot(def, undefined, 'conditionalField', mockErrors, data)
+      const def = { requiredIfNot: { testField: 'what we want' } }
+      validators.requiredIfNot(def, undefined, 'conditionalField', mockErrors, data)
       expect(mockErrors[0]).to.deep.equal({
-        type: 'requireIfNot',
+        type: 'requiredIfNot',
         sub: { testField: 'what we want' },
         key: 'conditionalField',
         value: undefined,
         message: 'Value required because \'testField\' value is not one specified'
       })
+    })
+  })
+  describe('requireIfNot', () => {
+    let stub
+    after(() => {
+      stub.restore()
+    })
+    it('logs a warning and calls requiredIfNot method', () => {
+      stub = sinon.stub(console, 'log')
+      const data = { address: { street: '123 test ave' } }
+      const def = { requireIfNot: 'address.state' }
+      validators.requireIfNot(def, undefined, 'address.country', mockErrors, data)
+      expect(mockErrors[0]).to.deep.equal({
+        type: 'requiredIfNot',
+        sub: 'address.state',
+        key: 'address.country',
+        value: undefined,
+        message: 'Value required because \'address.state\' is undefined'
+      })
+      expect(stub).calledWith('-----\nObey Warning: `requireIfNot` should be `requiredIfNot`\n-----')
     })
   })
   describe('equalTo', () => {

@@ -86,20 +86,20 @@ describe('integration:validators', () => {
       })
     })
   })
-  describe('requireIf', () => {
+  describe('requiredIf', () => {
     it('builds a model and fails validation because conditionally required value is undefined', () => {
-      const testModel = obey.model(modelFixtures.requireIf)
+      const testModel = obey.model(modelFixtures.requiredIf)
       const testData = { phone: 5551234567, address: { street: '123 test ave' } }
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
-          type: 'requireIf',
+          type: 'requiredIf',
           sub: 'phone',
           key: 'phoneType',
           value: undefined,
           message: 'Value required because \'phone\' exists'
         },
         {
-          type: 'requireIf',
+          type: 'requiredIf',
           sub: 'address.street',
           key: 'address.city',
           value: undefined,
@@ -108,13 +108,13 @@ describe('integration:validators', () => {
       })
     })
   })
-  describe('requireIfNot', () => {
+  describe('requiredIfNot', () => {
     it('builds a model and fails validation because conditionally required value is undefined', () => {
-      const testModel = obey.model(modelFixtures.requireIfNot)
+      const testModel = obey.model(modelFixtures.requiredIfNot)
       const testData = { address: { street: '123 test ave' } }
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
-          type: 'requireIfNot',
+          type: 'requiredIfNot',
           sub: 'address.state',
           key: 'address.country',
           value: undefined,

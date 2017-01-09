@@ -184,7 +184,7 @@ describe('validators', () => {
         value: undefined,
         message: 'Value required because \'address.street\' exists'
       })
-      expect(stub).calledWith('-----\nrequireIf should be requiredIf\n-----')
+      expect(stub).calledWith('-----\n`requireIf` should be `requiredIf`\n-----')
     })
   })
   describe('requiredIfNot', () => {
@@ -230,7 +230,7 @@ describe('validators', () => {
         value: undefined,
         message: 'Value required because \'address.state\' is undefined'
       })
-      expect(stub).calledWith('-----\nrequireIfNot should be requiredIfNot\n-----')
+      expect(stub).calledWith('-----\n`requireIfNot` should be `requiredIfNot`\n-----')
     })
   })
   describe('equalTo', () => {

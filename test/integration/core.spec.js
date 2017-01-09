@@ -4,6 +4,10 @@ import modelFixtures from 'test/fixtures/core'
 import ValidationError from 'src/lib/error'
 
 describe('integration:core', () => {
+  let stub
+  afterEach(() => {
+    if (stub) stub.restore()
+  })
   it('builds a model and successfully validates passing object', () => {
     const testModel = obey.model(modelFixtures.basicExtended)
     const testData = {
@@ -55,6 +59,7 @@ describe('integration:core', () => {
       })
   })
   it('builds a model and fails when required field is undefined', () => {
+    stub = sinon.stub(console, 'log')
     const testModel = obey.model(modelFixtures.basicRequired)
     const testData = {
       fname: 'John'
@@ -63,6 +68,7 @@ describe('integration:core', () => {
       .then(() => { throw new Error('Should fail') })
       .catch((err) => {
         expect(err.message).to.equal('lname (undefined): Property \'lname\' is required')
+        expect(stub).calledWith('-----\n`require` should be `required`\n-----')
       })
   })
   it('builds a model and successfully validates when nested object present', () => {

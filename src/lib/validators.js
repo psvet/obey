@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
+/* eslint no-console: 0 */
 import dot from 'dot-object'
 
 const validators = {
@@ -77,7 +78,7 @@ const validators = {
    * to which any additional error objects will be added
    * @param {Object} data The full initial data object
    */
-  requireIf: function(def, value, key, errors, data) {
+  requiredIf: function(def, value, key, errors, data) {
     const type = 'requireIf'
     const sub = def.requireIf
     if (typeof sub === 'object') {
@@ -89,6 +90,13 @@ const validators = {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' exists` })
     }
   },
+  /**
+   * Alias for requiredIf
+   */
+  requireIf: function(def, value, key, errors, data) {
+    console.log('\n-----\nrequireIf should be requiredIf\n-----\n')
+    validators.requiredIf(def, value, key, errors, data)
+  },
 
   /**
    * Validator requireIfNot method, used by model
@@ -99,7 +107,7 @@ const validators = {
    * to which any additional error objects will be added
    * @param {Object} data The full initial data object
    */
-  requireIfNot: function(def, value, key, errors, data) {
+  requiredIfNot: function(def, value, key, errors, data) {
     const type = 'requireIfNot'
     const sub = def.requireIfNot
     if (typeof sub === 'object') {
@@ -110,6 +118,13 @@ const validators = {
     } else if (dot.pick(sub, data) === undefined && value === undefined) {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' is undefined`})
     }
+  },
+  /**
+   * Alias for requiredIfNot
+   */
+  requireIfNot: function(def, value, key, errors, data) {
+    console.log('\n-----\nrequireIfNot should be requiredIfNot\n-----\n')
+    validators.requiredIfNot(def, value, key, errors, data)
   },
 
   /**

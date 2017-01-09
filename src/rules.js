@@ -140,7 +140,7 @@ const rules = {
     if (def.require) {
       def.required = def.require
       delete def.require
-      console.log('-----\n`require` should be `required`\n-----')
+      console.log('-----\nObey Warning: `require` should be `required`\n-----')
     }
     // Partial and undefined
     if (def.opts.partial && data === undefined) return rules.props.noValPartial

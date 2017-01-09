@@ -68,7 +68,7 @@ describe('integration:core', () => {
       .then(() => { throw new Error('Should fail') })
       .catch((err) => {
         expect(err.message).to.equal('lname (undefined): Property \'lname\' is required')
-        expect(stub).calledWith('-----\n`require` should be `required`\n-----')
+        expect(stub).calledWith('-----\nObey Warning: `require` should be `required`\n-----')
       })
   })
   it('builds a model and successfully validates when nested object present', () => {

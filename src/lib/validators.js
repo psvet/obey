@@ -94,7 +94,7 @@ const validators = {
    * Alias for requiredIf
    */
   requireIf: function(def, value, key, errors, data) {
-    console.log('-----\n`requireIf` should be `requiredIf`\n-----')
+    console.log('-----\nObey Warning: `requireIf` should be `requiredIf`\n-----')
     def.requiredIf = def.requireIf
     delete def.requireIf
     validators.requiredIf(def, value, key, errors, data)
@@ -125,7 +125,7 @@ const validators = {
    * Alias for requiredIfNot
    */
   requireIfNot: function(def, value, key, errors, data) {
-    console.log('-----\n`requireIfNot` should be `requiredIfNot`\n-----')
+    console.log('-----\nObey Warning: `requireIfNot` should be `requiredIfNot`\n-----')
     def.requiredIfNot = def.requireIfNot
     delete def.requireIfNot
     validators.requiredIfNot(def, value, key, errors, data)

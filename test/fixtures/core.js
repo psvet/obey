@@ -12,7 +12,7 @@ export default {
   basicExtended: {
     fname: { type: 'string', required: true, min: 2, max: 20 },
     lname: { type: 'string', min: 2, max: 20 },
-    type: { type: 'string', requireIf: 'nested.foo', allowed: [ 'foo', 'bar' ] },
+    type: { type: 'string', requiredIf: 'nested.foo', allowed: [ 'foo', 'bar' ] },
     nested: { type: 'object', values: { type: 'string' } }
   },
   basicCreator: {

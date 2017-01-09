@@ -20,6 +20,8 @@ const allProps = {
   min: { name: 'min', fn: validators.min },
   max: { name: 'max', fn: validators.max },
   type: { name: 'type', fn: types.validate },
+  requiredIf: { name: 'requiredIf', fn: validators.requiredIf },
+  requiredIfNot: { name: 'requiredIfNot', fn: validators.requiredIfNot },
   requireIf: { name: 'requireIf', fn: validators.requireIf },
   requireIfNot: { name: 'requireIfNot', fn: validators.requireIfNot },
   equalTo: { name: 'equalTo', fn: validators.equalTo }
@@ -45,6 +47,8 @@ const rules = {
       allProps.min,
       allProps.max,
       allProps.type,
+      allProps.requiredIf,
+      allProps.requiredIfNot,
       allProps.requireIf,
       allProps.requireIfNot,
       allProps.equalTo
@@ -54,6 +58,8 @@ const rules = {
       allProps.creator,
       allProps.default,
       allProps.modifier,
+      allProps.requiredIf,
+      allProps.requiredIfNot,
       allProps.requireIf,
       allProps.requireIfNot,
       allProps.equalTo

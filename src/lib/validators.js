@@ -70,7 +70,7 @@ const validators = {
   },
 
   /**
-   * Validator requireIf method, used by model
+   * Validator requiredIf method, used by model
    * @param {Object} def The property configuration
    * @param {*} value The value being validated
    * @param {string} key The key name of the property
@@ -79,8 +79,8 @@ const validators = {
    * @param {Object} data The full initial data object
    */
   requiredIf: function(def, value, key, errors, data) {
-    const type = 'requireIf'
-    const sub = def.requireIf
+    const type = 'requiredIf'
+    const sub = def.requiredIf
     if (typeof sub === 'object') {
       const field = Object.keys(sub)[0]
       if (dot.pick(field, data) === sub[field] && value === undefined) {
@@ -94,12 +94,14 @@ const validators = {
    * Alias for requiredIf
    */
   requireIf: function(def, value, key, errors, data) {
-    console.log('\n-----\nrequireIf should be requiredIf\n-----\n')
+    console.log('-----\nrequireIf should be requiredIf\n-----')
+    def.requiredIf = def.requireIf
+    delete def.requireIf
     validators.requiredIf(def, value, key, errors, data)
   },
 
   /**
-   * Validator requireIfNot method, used by model
+   * Validator requiredIfNot method, used by model
    * @param {Object} def The property configuration
    * @param {*} value The value being validated
    * @param {string} key The key name of the property
@@ -108,8 +110,8 @@ const validators = {
    * @param {Object} data The full initial data object
    */
   requiredIfNot: function(def, value, key, errors, data) {
-    const type = 'requireIfNot'
-    const sub = def.requireIfNot
+    const type = 'requiredIfNot'
+    const sub = def.requiredIfNot
     if (typeof sub === 'object') {
       const field = Object.keys(sub)[0]
       if (dot.pick(field, data) !== sub[field] && value === undefined) {
@@ -123,7 +125,9 @@ const validators = {
    * Alias for requiredIfNot
    */
   requireIfNot: function(def, value, key, errors, data) {
-    console.log('\n-----\nrequireIfNot should be requiredIfNot\n-----\n')
+    console.log('-----\nrequireIfNot should be requiredIfNot\n-----')
+    def.requiredIfNot = def.requireIfNot
+    delete def.requireIfNot
     validators.requiredIfNot(def, value, key, errors, data)
   },
 

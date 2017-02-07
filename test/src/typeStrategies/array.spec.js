@@ -1,7 +1,7 @@
 /* global describe, it, expect, sinon */
 import array from 'src/typeStrategies/array'
 
-describe.only('type:array', () => {
+describe('type:array', () => {
   it('calls context.fail if type is not an array', () => {
     const context = {
       value: 'foo',

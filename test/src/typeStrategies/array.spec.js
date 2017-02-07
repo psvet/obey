@@ -16,8 +16,9 @@ describe('type:array', () => {
       fail: sinon.spy(),
       def: {}
     }
-    array.default(context)
+    const actual = array.default(context)
     expect(context.fail).to.not.be.called
+    expect(actual).to.deep.equal(context.value)
   })
   it('allows an empty array to pass if empty flag is set to true', () => {
     const context = {

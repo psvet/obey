@@ -12,7 +12,7 @@ Asynchronous Data Modelling and Validation.
 
 - [Introduction](#introduction)
 - [Installation](#installation)
-- [API Documentaion](#api-documentation)
+- [API Documentation](#api-documentation)
 - [Rules](#rules)
 - [Models](#models)
 - [Validation](#validation)

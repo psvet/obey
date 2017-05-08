@@ -11,6 +11,9 @@ const validators = {
    * @param {*} value The value being validated
    */
   default: function(def, value) {
+    if (/^(number|boolean)$/.test(def.type)) {
+      if (value === 0 || value === false) return value
+    }
     return value || def.default
   },
 

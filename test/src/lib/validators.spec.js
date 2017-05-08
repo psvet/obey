@@ -21,6 +21,22 @@ describe('validators', () => {
       const actual = validators.default(def, 'bar')
       expect(actual).to.equal('bar')
     })
+    it('uses falsey value for boolean type if value is already set', () => {
+      const def = {
+        type: 'boolean',
+        default: true
+      }
+      const actual = validators.default(def, false)
+      expect(actual).to.equal(false)
+    })
+    it('uses falsey value for number type if value is already set', () => {
+      const def = {
+        type: 'number',
+        default: 3
+      }
+      const actual = validators.default(def, 0)
+      expect(actual).to.equal(0)
+    })
   })
   describe('allow', () => {
     it('passes if value is in allow (object)', () => {

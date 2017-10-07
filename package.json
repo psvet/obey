@@ -51,13 +51,13 @@
     "pre-commit": "~1.1.1",
     "sinon": "~1.15.4",
     "sinon-chai": "~2.8.0",
-    "snyk": "^1.11.1"
+    "snyk": "^1.42.2"
   },
   "dependencies": {
-    "bluebird": "^3.3.4",
-    "dot-object": "^1.5.4",
+    "bluebird": "^3.5.1",
+    "dot-object": "^1.7.0",
     "lodash": "^4.6.1",
-    "snyk": "^1.23.3"
+    "snyk": "^1.42.4"
   },
   "pre-commit": [
     "test"

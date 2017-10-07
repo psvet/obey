@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
-/* eslint no-console: 0 */
+/* eslint no-console: 0, consistent-return: 0 */
 import dot from 'dot-object'
 
 const validators = {
@@ -86,9 +86,14 @@ const validators = {
     const sub = def.requiredIf
     if (typeof sub === 'object') {
       const field = Object.keys(sub)[0]
-      if (dot.pick(field, data) === sub[field] && value === undefined) {
-        errors.push({ type, sub, key, value, message: `Value required by existing '${field}' value` })
-      }
+      const fieldArr = Array.isArray(sub[field]) ? sub[field] : [ sub[field] ]
+      fieldArr.some(val => {
+        /* istanbul ignore else */
+        if (dot.pick(field, data) === val && value === undefined) {
+          errors.push({ type, sub, key, value, message: `Value required by existing '${field}' value` })
+          return true
+        }
+      })
     } else if (dot.pick(sub, data) !== undefined && value === undefined) {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' exists` })
     }
@@ -117,9 +122,14 @@ const validators = {
     const sub = def.requiredIfNot
     if (typeof sub === 'object') {
       const field = Object.keys(sub)[0]
-      if (dot.pick(field, data) !== sub[field] && value === undefined) {
-        errors.push({ type, sub, key, value, message: `Value required because '${field}' value is not one specified` })
-      }
+      const fieldArr = Array.isArray(sub[field]) ? sub[field] : [ sub[field] ]
+      fieldArr.some(val => {
+        /* istanbul ignore else */
+        if (dot.pick(field, data) !== val && value === undefined) {
+          errors.push({ type, sub, key, value, message: `Value required because '${field}' value is not one specified` })
+          return true
+        }
+      })
     } else if (dot.pick(sub, data) === undefined && value === undefined) {
       errors.push({ type, sub, key, value, message: `Value required because '${sub}' is undefined`})
     }

@@ -182,6 +182,18 @@ describe('validators', () => {
         message: 'Value required by existing \'address.country\' value'
       })
     })
+    it('creates an error object if conditionally required value is undefined when corresponding field has any of the given values', () => {
+      const data = { address: { street: '123 test ave', country: 'US' } }
+      const def = { requiredIf: { 'address.country': [ 'US', 'Canada' ] } }
+      validators.requiredIf(def, undefined, 'address.zip', mockErrors, data)
+      expect(mockErrors[0]).to.deep.equal({
+        type: 'requiredIf',
+        sub: { 'address.country': [ 'US', 'Canada' ] },
+        key: 'address.zip',
+        value: undefined,
+        message: 'Value required by existing \'address.country\' value'
+      })
+    })
   })
   describe('requireIf', () => {
     let stub
@@ -223,6 +235,18 @@ describe('validators', () => {
       expect(mockErrors[0]).to.deep.equal({
         type: 'requiredIfNot',
         sub: { testField: 'what we want' },
+        key: 'conditionalField',
+        value: undefined,
+        message: 'Value required because \'testField\' value is not one specified'
+      })
+    })
+    it('creates an error object if conditionally required value is undefined when corresponding field does NOT have any of the given value', () => {
+      const data = { testField: 'not what we want' }
+      const def = { requiredIfNot: { testField: [ 'what we want', 'something else we want' ] } }
+      validators.requiredIfNot(def, undefined, 'conditionalField', mockErrors, data)
+      expect(mockErrors[0]).to.deep.equal({
+        type: 'requiredIfNot',
+        sub: { testField: [ 'what we want', 'something else we want' ] },
         key: 'conditionalField',
         value: undefined,
         message: 'Value required because \'testField\' value is not one specified'

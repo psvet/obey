@@ -1,7 +1,9 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:marked:20150520':
-    - 'jsdoc > marked':
+    - jsdoc > marked:
         reason: Dev Dependecy
         expires: '2016-05-28T00:25:33.252Z'
 patch: {}
-version: v1
+version: v1.7.1

@@ -43,7 +43,7 @@ Obey can be installed via [NPM](https://www.npmjs.com/package/obey): `npm instal
 
 ## API Documentation
 
-Detailed [API Documentation](API.md) is available for assistance in using, modifying, or [contibuting](#contributing) to the Obey library.
+Detailed [API Documentation](API.md) is available for assistance in using, modifying, or [contributing](#contributing) to the Obey library.
 
 ## Rules
 

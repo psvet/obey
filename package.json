@@ -28,14 +28,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/TechnologyAdvice/obey.git"
+    "url": "git+ssh://git@github.com/psvet/obey.git"
   },
-  "author": "TechnologyAdvice",
+  "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TechnologyAdvice/obey/issues"
+    "url": "https://github.com/psvet/obey/issues"
   },
-  "homepage": "https://github.com/TechnologyAdvice/obey#readme",
+  "homepage": "https://github.com/psvet/obey#readme",
   "devDependencies": {
     "babel-cli": "~6.1.4",
     "babel-core": "~6.1.4",

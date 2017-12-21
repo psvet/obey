@@ -3,7 +3,7 @@
 Asynchronous Data Modelling and Validation.
 
 [![Travis branch](https://img.shields.io/travis/psvet/obey/master.svg)](https://travis-ci.org/psvet/obey)
-![Dependencies](https://img.shields.io/david/technologyadvice/obey.svg)
+![Dependencies](https://img.shields.io/david/psvet/obey.svg)
 [![Known Vulnerabilities](https://snyk.io/test/npm/obey/badge.svg)](https://snyk.io/test/npm/obey)
 
 ## Contents

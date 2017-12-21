@@ -361,4 +361,4 @@ Contibutions to Obey are welcomed and encouraged. If you would like to make a co
 
 ## License
 
-Obey is developed and maintained by [TechnologyAdvice](http://www.technologyadvice.com) and released under the [MIT](LICENSE.txt) license.
+Obey was originally created at [TechnologyAdvice](http://www.technologyadvice.com) in Nashville, TN and released under the [MIT](LICENSE.txt) license.

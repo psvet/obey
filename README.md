@@ -2,10 +2,8 @@
 
 Asynchronous Data Modelling and Validation.
 
-[![Travis branch](https://img.shields.io/travis/TechnologyAdvice/obey/master.svg)](https://travis-ci.org/TechnologyAdvice/obey)
-[![Code Climate](https://img.shields.io/codeclimate/github/TechnologyAdvice/obey.svg)](https://codeclimate.com/github/TechnologyAdvice/obey)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/TechnologyAdvice/obey.svg)](https://codeclimate.com/github/TechnologyAdvice/obey/coverage)
-![Dependencies](https://img.shields.io/david/technologyadvice/obey.svg)
+[![Travis branch](https://img.shields.io/travis/psvet/obey/master.svg)](https://travis-ci.org/psvet/obey)
+![Dependencies](https://img.shields.io/david/psvet/obey.svg)
 [![Known Vulnerabilities](https://snyk.io/test/npm/obey/badge.svg)](https://snyk.io/test/npm/obey)
 
 ## Contents
@@ -43,7 +41,7 @@ Obey can be installed via [NPM](https://www.npmjs.com/package/obey): `npm instal
 
 ## API Documentation
 
-Detailed [API Documentation](API.md) is available for assistance in using, modifying, or [contibuting](#contributing) to the Obey library.
+Detailed [API Documentation](API.md) is available for assistance in using, modifying, or [contributing](#contributing) to the Obey library.
 
 ## Rules
 
@@ -361,4 +359,4 @@ Contibutions to Obey are welcomed and encouraged. If you would like to make a co
 
 ## License
 
-Obey is developed and maintained by [TechnologyAdvice](http://www.technologyadvice.com) and released under the [MIT](LICENSE.txt) license.
+Obey was originally created at [TechnologyAdvice](http://www.technologyadvice.com) in Nashville, TN and released under the [MIT](LICENSE.txt) license.

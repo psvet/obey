@@ -1,6 +1,6 @@
 {
   "name": "obey",
-  "version": "1.8.0",
+  "version": "2.0.0",
   "description": "Data modelling and validation library",
   "main": "index.js",
   "files": [
@@ -28,14 +28,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/TechnologyAdvice/obey.git"
+    "url": "git+ssh://git@github.com/psvet/obey.git"
   },
-  "author": "TechnologyAdvice",
+  "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TechnologyAdvice/obey/issues"
+    "url": "https://github.com/psvet/obey/issues"
   },
-  "homepage": "https://github.com/TechnologyAdvice/obey#readme",
+  "homepage": "https://github.com/psvet/obey#readme",
   "devDependencies": {
     "babel-cli": "~6.1.4",
     "babel-core": "~6.1.4",
@@ -56,8 +56,8 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "dot-object": "^1.7.0",
-    "lodash": "^4.6.1",
-    "snyk": "^1.42.4"
+    "lodash": "^4.17.5",
+    "snyk": "^1.70.3"
   },
   "pre-commit": [
     "test"

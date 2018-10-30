@@ -29,7 +29,6 @@
     "type": "git",
     "url": "git+ssh://git@github.com/psvet/obey.git"
   },
-  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/psvet/obey/issues"

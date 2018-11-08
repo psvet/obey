@@ -1,5 +1,5 @@
 /* global describe, it, expect */
-import any from 'src/typeStrategies/any'
+const any = require('src/typeStrategies/any')
 
 describe('type:any', () => {
   it('passes through (via return) the value', () => {

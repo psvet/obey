@@ -1,7 +1,7 @@
 /* global describe, it, expect */
-import obey from 'src/index'
-import modelFixtures from 'test/fixtures/core'
-import ValidationError from 'src/lib/error'
+const obey = require('src/index')
+const modelFixtures = require('test/fixtures/core')
+const ValidationError = require('src/lib/error')
 
 describe('integration:core', () => {
   let stub

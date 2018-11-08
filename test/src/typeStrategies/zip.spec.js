@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import zip from 'src/typeStrategies/zip'
+const zip = require('src/typeStrategies/zip')
 
 describe('type:zip', () => {
   it('calls context.fail if value is not a valid US zip code', () => {

@@ -1,5 +1,5 @@
 /* global describe, it, expect, afterEach */
-import modifiers from 'src/modifiers'
+const modifiers = require('src/modifiers')
 
 describe('modifiers', () => {
   afterEach(() => {

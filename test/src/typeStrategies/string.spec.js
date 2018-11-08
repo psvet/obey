@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import string from 'src/typeStrategies/string'
+const string = require('src/typeStrategies/string')
 
 describe('type:string', () => {
   it('calls context.fail if type is not a string', () => {

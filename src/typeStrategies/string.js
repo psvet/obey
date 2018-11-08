@@ -14,4 +14,4 @@ const string = {
   }
 }
 
-export default string
+module.exports = string

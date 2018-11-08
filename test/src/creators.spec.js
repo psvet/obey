@@ -1,5 +1,5 @@
 /* global describe, it, expect, afterEach */
-import creators from 'src/creators'
+const creators = require('src/creators')
 
 describe('creators', () => {
   afterEach(() => {

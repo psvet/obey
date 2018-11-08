@@ -4,17 +4,14 @@
   "description": "Data modelling and validation library",
   "main": "index.js",
   "files": [
-    "build",
     "index.js"
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
-    "build": "babel ./src --out-dir ./build",
     "test": "snyk test && npm run lint && npm run cover",
     "mocha": "babel-node node_modules/.bin/_mocha",
     "cover": "babel-node node_modules/.bin/babel-istanbul cover node_modules/mocha/bin/_mocha",
     "lint": "eslint ./src ./test --fix",
-    "prepublish": "rm -rf ./build && npm run cover && npm run build",
     "ci": "npm run lint && npm run cover"
   },
   "keywords": [
@@ -35,17 +32,11 @@
   },
   "homepage": "https://github.com/psvet/obey#readme",
   "devDependencies": {
-    "babel-cli": "~6.1.4",
-    "babel-core": "~6.1.4",
-    "babel-eslint": "~4.1.7",
-    "babel-istanbul": "^0.11.0",
-    "babel-preset-es2015": "^6.5.0",
     "chai": "~3.0.0",
     "chai-as-promised": "^5.2.0",
     "eslint": "~2.1.0",
     "istanbul": "^0.4.5",
     "mocha": "~2.2.5",
-    "pre-commit": "~1.1.1",
     "sinon": "~1.15.4",
     "sinon-chai": "~2.8.0",
     "snyk": "^1.42.2"
@@ -54,13 +45,5 @@
     "bluebird": "^3.5.1",
     "dot-object": "^1.7.0",
     "lodash": "^4.17.5"
-  },
-  "pre-commit": [
-    "test"
-  ],
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
   }
 }

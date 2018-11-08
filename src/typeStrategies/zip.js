@@ -15,4 +15,4 @@ const zip = {
   }
 }
 
-export default zip
+module.exports = zip

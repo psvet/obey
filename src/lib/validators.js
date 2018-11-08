@@ -2,7 +2,7 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 /* eslint no-console: 0, consistent-return: 0 */
-import dot from 'dot-object'
+const dot = require('dot-object')
 
 const validators = {
   /**
@@ -162,4 +162,4 @@ const validators = {
   }
 }
 
-export default validators
+module.exports = validators

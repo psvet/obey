@@ -1,6 +1,6 @@
-import _ from 'lodash'
-import rules from '../rules'
-import Promise from 'bluebird'
+const _ = require('lodash')
+const rules = require('../rules')
+const Promise = require('bluebird')
 
 /**
  * Validates an object using the definition's `keys` property
@@ -62,4 +62,4 @@ const object = {
   }
 }
 
-export default object
+module.exports = object

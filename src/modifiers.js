@@ -40,4 +40,4 @@ const modifiers = {
   }
 }
 
-export default modifiers
+module.exports = modifiers

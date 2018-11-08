@@ -1,5 +1,5 @@
 /* global describe, it, expect */
-import rules from 'src/rules'
+const rules = require('src/rules')
 
 describe('rules', () => {
   describe('makeValidate', () => {

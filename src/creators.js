@@ -41,4 +41,4 @@ const creators = {
   }
 }
 
-export default creators
+module.exports = creators

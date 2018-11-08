@@ -1,5 +1,5 @@
-import rules from '../rules'
-import Promise from 'bluebird'
+const rules = require('../rules')
+const Promise = require('bluebird')
 
 const array = {
   default: context => {
@@ -24,4 +24,4 @@ const array = {
   }
 }
 
-export default array
+module.exports = array

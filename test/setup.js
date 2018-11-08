@@ -1,10 +1,10 @@
 /* global expect sinon */
-import path from 'path'
-import chai from 'chai'
-import chaiaspromised from 'chai-as-promised'
-import sinon from 'sinon'
-import schai from 'sinon-chai'
-import module from 'module'
+const path = require('path')
+const chai = require('chai')
+const chaiaspromised = require('chai-as-promised')
+const sinon = require('sinon')
+const schai = require('sinon-chai')
+const module = require('module')
 global.sinon = sinon
 global.expect = chai.expect
 chai.use(schai)

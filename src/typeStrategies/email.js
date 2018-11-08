@@ -9,4 +9,4 @@ const email = {
   }
 }
 
-export default email
+module.exports = email

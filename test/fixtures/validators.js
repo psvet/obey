@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   default: {
     name: { type: 'string', default: 'foo' }
   },

@@ -1,10 +1,10 @@
 /* global expect, sinon, describe, it, before, after */
-import _ from 'lodash'
-import obey from 'src/index'
-import rules from 'src/rules'
-import types from 'src/types'
-import modifiers from 'src/modifiers'
-import creators from 'src/creators'
+const _ = require('lodash')
+const obey = require('src/index')
+const rules = require('src/rules')
+const types = require('src/types')
+const modifiers = require('src/modifiers')
+const creators = require('src/creators')
 
 describe('obey', () => {
   describe('rule', () => {

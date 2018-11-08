@@ -1,1 +1,1 @@
-module.exports = require('./build/index').default
+module.exports = require('./src/index')

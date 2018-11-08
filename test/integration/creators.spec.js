@@ -1,7 +1,7 @@
 /* global describe, it, expect, afterEach */
-import obey from 'src/index'
-import creators from 'src/creators'
-import modelFixtures from 'test/fixtures/creators'
+const obey = require('src/index')
+const creators = require('src/creators')
+const modelFixtures = require('test/fixtures/creators')
 
 describe('integration:creators', () => {
   afterEach(() => {

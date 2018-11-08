@@ -2,19 +2,19 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 
-import rules from './rules'
-import types from './types'
-import modifiers from './modifiers'
-import creators from './creators'
-import validators from './lib/validators'
-import ValidationError from './lib/error'
+const rules = require('./rules')
+const types = require('./types')
+const modifiers = require('./modifiers')
+const creators = require('./creators')
+const validators = require('./lib/validators')
+const ValidationError = require('./lib/error')
 
 /**
  * The main object for Obey; exposes the core API methods for standard use as
  * well as the API for all other modules
  * @namespace obey
  */
-export default {
+module.exports = {
   /**
    * API, exposes modules to make lib API accessible
    */

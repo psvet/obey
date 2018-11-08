@@ -1,6 +1,6 @@
 /* global describe, it, expect, beforeEach */
 /* eslint no-unused-vars: 0 */
-import types from 'src/types.js'
+const types = require('src/types.js')
 
 describe('types', () => {
   describe('checkSubType', () => {

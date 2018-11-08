@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import object from 'src/typeStrategies/object'
+const object = require('src/typeStrategies/object')
 
 describe('type:object', () => {
   it('iterates sub-object if keys prop is present', () => {

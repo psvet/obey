@@ -15,4 +15,4 @@ const phone = {
   }
 }
 
-export default phone
+module.exports = phone

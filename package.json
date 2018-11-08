@@ -9,9 +9,9 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "test": "snyk test && npm run lint && npm run cover",
-    "mocha": "babel-node node_modules/.bin/_mocha",
-    "cover": "babel-node node_modules/.bin/babel-istanbul cover node_modules/mocha/bin/_mocha",
-    "lint": "eslint ./src ./test --fix",
+    "mocha": "node_modules/.bin/_mocha",
+    "cover": "node_modules/.bin/babel-istanbul cover node_modules/mocha/bin/_mocha",
+    "lint": "standard ./src ./test --fix",
     "ci": "npm run lint && npm run cover"
   },
   "keywords": [
@@ -32,18 +32,18 @@
   },
   "homepage": "https://github.com/psvet/obey#readme",
   "devDependencies": {
-    "chai": "~3.0.0",
-    "chai-as-promised": "^5.2.0",
-    "eslint": "~2.1.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "istanbul": "^0.4.5",
-    "mocha": "~2.2.5",
-    "sinon": "~1.15.4",
-    "sinon-chai": "~2.8.0",
-    "snyk": "^1.42.2"
+    "mocha": "^5.2.0",
+    "sinon": "^6.3.5",
+    "sinon-chai": "^3.2.0",
+    "snyk": "^1.108.0",
+    "standard": "^12.0.1"
   },
   "dependencies": {
-    "bluebird": "^3.5.1",
-    "dot-object": "^1.7.0",
-    "lodash": "^4.17.5"
+    "bluebird": "^3.5.3",
+    "dot-object": "^1.7.1",
+    "lodash": "^4.17.11"
   }
 }

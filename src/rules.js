@@ -132,10 +132,10 @@ const rules = {
    * Gets props list according to partial, required, and allowNull specifications
    * @memberof rules
    * @param {Object} def The rule definition
-   * @param {*} data The value being evaluated
+   * @param {*} val The value being evaluated
    * @returns {Array}
    */
-  getProps: (def, data) => {
+  getProps: (def, val) => {
     //
     if (def.require) {
       def.required = def.require
@@ -143,11 +143,21 @@ const rules = {
       console.log('-----\nObey Warning: `require` should be `required`\n-----')
     }
     // Partial and undefined
-    if (def.opts.partial && data === undefined) return rules.props.noValPartial
+    if (def.opts.partial && val === undefined) return rules.props.noValPartial
     // Not required, undefined
-    if (!def.required && data === undefined) return rules.props.noVal
-    // AllowNull and null
-    if (def.allowNull && data === null) return rules.props.noVal
+    if (!def.required && val === undefined) return rules.props.noVal
+    // AllowNull
+    console.log({def, val})
+    if (def.allowNull) {
+      // val is null, look no further
+      if (val === null) {
+        return rules.props.noVal
+      }
+      // val is otherwise falsey, but not undefined, AND default is null
+      if (!val && val !== undefined && def.default === null) {
+        return rules.props.noVal
+      }
+    }
     // Use default
     return rules.props.default
   }

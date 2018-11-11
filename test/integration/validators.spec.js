@@ -35,6 +35,15 @@ describe('integration:validators', () => {
         expect(res.phone).to.equal(testData.phone)
       })
     })
+    it('builds a model with allowed null value in empty (falsey) field', () => {
+      const testModel = obey.model(modelFixtures.allowNullDefault)
+      const testData = { name: '', email: 'notNull@test.com', phone: '555-555-5555' }
+      return testModel.validate(testData).then(res => {
+        expect(res.name).to.be.null
+        expect(res.email).to.equal(testData.email)
+        expect(res.phone).to.equal(testData.phone)
+      })
+    })
     it('builds a model and fails validation due to value of wrong type (allowNull)', () => {
       const testModel = obey.model(modelFixtures.allowNull)
       const testData = { name: 30, email: null, phone: null }

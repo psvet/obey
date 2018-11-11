@@ -10,6 +10,11 @@ export default {
     email: { type: 'email', allowNull: true },
     phone: { type: 'phone' }
   },
+  allowNullDefault: {
+    name: { type: 'string', allowNull: true, default: null },
+    email: { type: 'email', allowNull: true },
+    phone: { type: 'phone' }
+  },
   min: {
     name: { type: 'string', min: 10 }
   },

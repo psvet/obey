@@ -147,7 +147,6 @@ const rules = {
     // Not required, undefined
     if (!def.required && val === undefined) return rules.props.noVal
     // AllowNull
-    console.log({def, val})
     if (def.allowNull) {
       // val is null, look no further
       if (val === null) {

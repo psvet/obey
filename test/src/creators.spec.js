@@ -10,10 +10,10 @@ describe('creators', () => {
       const actual = creators.execute({}, 'bar')
       expect(actual).to.equal('bar')
     })
-    it('returns the modifier method if exists', () => {
+    it('runs creator and returns created value if exists', () => {
       creators.add('test', () => 'foo')
-      const actual = creators.execute({ creator: 'test' }, 'foo')
-      expect(actual).to.be.a.function
+      const actual = creators.execute({ creator: 'test' })
+      expect(actual).to.equal('foo')
     })
     it('throws an error if the creator does not exist', () => {
       expect(creators.execute.bind(null, { creator: 'nope'})).to.throw('creator \'nope\' does not exist')
@@ -23,7 +23,7 @@ describe('creators', () => {
     it('adds a new creator to the lib', () => {
       creators.add('test', () => 'foo')
       expect(creators.lib).to.have.property('test')
-      expect(creators.lib.test).to.be.a.function
+      expect(creators.lib.test).to.be.a('function')
     })
     it('throws an error if the creator name is not a string', () => {
       expect(creators.add.bind(null, true, () => 'foo')).to.throw('creator name should be a string')

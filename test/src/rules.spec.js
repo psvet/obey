@@ -5,7 +5,7 @@ describe('rules', () => {
   describe('makeValidate', () => {
     it('returns the bound validation method', () => {
       const actual = rules.makeValidate({ type: 'string' })
-      expect(actual).to.be.a.function
+      expect(actual).to.be.a('function')
     })
   })
   describe('validate', () => {
@@ -83,9 +83,9 @@ describe('rules', () => {
   describe('build', () => {
     it('returns an object with the original definition and validate method', () => {
       const actual = rules.build({ type: 'string' })
-      expect(actual).to.be.an.object
+      expect(actual).to.be.an('object')
       expect(actual.def).to.deep.equal({ type: 'string' })
-      expect(actual.validate).to.be.a.function
+      expect(actual.validate).to.be.a('function')
     })
   })
 })

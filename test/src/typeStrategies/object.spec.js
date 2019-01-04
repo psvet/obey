@@ -2,16 +2,6 @@
 const object = require('src/typeStrategies/object')
 
 describe('type:object', () => {
-  it('iterates sub-object if keys prop is present', () => {
-    const context = {
-      def: {
-        keys: {}
-      },
-      fail: sinon.spy()
-    }
-    const actual = object.default(context)
-    expect(actual).to.be.a.function
-  })
   it('calls context.fail if type is not an object', () => {
     const context = {
       value: 'foo',

@@ -20,7 +20,7 @@ const modifiers = {
    * @memberof modifiers
    * @param {Object} def The property configuration
    * @param {*} value The value being validated
-   * @returns {function} The modifier function
+   * @returns {function} The return value of the modifier function
    */
   execute: function(def, value) {
     if (modifiers.lib[def.modifier]) return modifiers.lib[def.modifier](value)

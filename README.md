@@ -48,7 +48,7 @@ Detailed [API Documentation](API.md) is available for assistance in using, modif
 > Rules are core definitions of how a value should be validated:
 
 ```javascript
-import obey from 'obey'
+const obey = require('obey')
 
 const firstName = obey.rule({ type: 'string', min: 2, max: 45, required: true })
 ```
@@ -58,7 +58,7 @@ const firstName = obey.rule({ type: 'string', min: 2, max: 45, required: true })
 > Models allow for creating validation rules for entire object schemas. The following demonstrates a model being created with Obey:
 
 ```javascript
-import obey from 'obey'
+const obey = require('obey')
 
 const userModel = obey.model({
   id: { type: 'uuid', creator: 'uuid', required: true },

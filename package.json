@@ -2,7 +2,7 @@
   "name": "obey",
   "version": "2.0.2",
   "description": "Data modelling and validation library",
-  "main": "index.js",
+  "main": "src/index.js",
   "files": [
     "index.js"
   ],
@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules",
     "test": "snyk test && npm run lint && npm run cover",
     "mocha": "node_modules/.bin/_mocha",
-    "cover": "node_modules/.bin/babel-istanbul cover node_modules/mocha/bin/_mocha",
+    "cover": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha",
     "lint": "standard ./src ./test --fix",
     "ci": "npm run lint && npm run cover"
   },

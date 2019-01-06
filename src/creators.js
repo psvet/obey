@@ -20,7 +20,7 @@ const creators = {
    * @memberof creators
    * @param {Object} def The property configuration
    * @param {*} value The value being validated
-   * @returns {function} The creator function
+   * @returns {function} The return value of the creator function
    */
   execute: function(def, value) {
     if (value !== undefined) return value
@@ -41,4 +41,4 @@ const creators = {
   }
 }
 
-export default creators
+module.exports = creators

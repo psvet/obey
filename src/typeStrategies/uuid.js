@@ -9,4 +9,4 @@ const uuid = {
   }
 }
 
-export default uuid
+module.exports = uuid

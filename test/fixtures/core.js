@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   basic: {
     name: { type: 'string', required: true }
   },

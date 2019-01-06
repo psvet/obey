@@ -1,15 +1,15 @@
 /* global describe, it, expect, afterEach */
-import modifiers from 'src/modifiers'
+const modifiers = require('src/modifiers')
 
 describe('modifiers', () => {
   afterEach(() => {
     modifiers.lib = {}
   })
   describe('execute', () => {
-    it('returns the modifier method if exists', () => {
-      modifiers.add('test', () => 'foo')
-      const actual = modifiers.execute({ modifier: 'test' }, 'foo', 'bar')
-      expect(actual).to.be.a.function
+    it('runs modifier function and returns modified value if exists', () => {
+      modifiers.add('test', (val) => val.toUpperCase())
+      const actual = modifiers.execute({ modifier: 'test' }, 'foo')
+      expect(actual).to.equal('FOO')
     })
     it('throws an error if the modifier does not exist', () => {
       expect(modifiers.execute.bind(null, { modifier: 'nope' })).to.throw('Modifier \'nope\' does not exist')
@@ -19,7 +19,7 @@ describe('modifiers', () => {
     it('adds a new modifier to the lib', () => {
       modifiers.add('test', () => 'foo')
       expect(modifiers.lib).to.have.property('test')
-      expect(modifiers.lib.test).to.be.a.function
+      expect(modifiers.lib.test).to.be.a('function')
     })
     it('throws an error if the modifier name is not a string', () => {
       expect(modifiers.add.bind(null, true, () => 'foo')).to.throw('Modifier name should be a string')

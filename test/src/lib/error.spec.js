@@ -1,5 +1,5 @@
 /* global describe, it, expect */
-import ValidationError from 'src/lib/error'
+const ValidationError = require('src/lib/error')
 
 describe('ValidationError', () => {
   it('inherits from Error', () => {

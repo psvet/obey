@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
-import _ from 'lodash'
-import strategies from './typeStrategies'
+const _ = require('lodash')
+const strategies = require('./typeStrategies')
 
 /**
  * Types determine and execute the appropriate validation to be performed on the
@@ -99,4 +99,4 @@ const types = {
   }
 }
 
-export default types
+module.exports = types

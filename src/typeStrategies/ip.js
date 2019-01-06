@@ -16,4 +16,4 @@ const ip = {
   default: context => ip.v4(context)
 }
 
-export default ip
+module.exports = ip

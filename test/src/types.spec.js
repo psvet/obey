@@ -1,6 +1,6 @@
 /* global describe, it, expect, beforeEach */
 /* eslint no-unused-vars: 0 */
-import types from 'src/types.js'
+const types = require('src/types.js')
 
 describe('types', () => {
   describe('checkSubType', () => {
@@ -16,7 +16,7 @@ describe('types', () => {
   describe('validate', () => {
     it('builds a fail method and returns types.check', () => {
       const actual = types.validate.call({ errors: [] }, { type: 'string' }, 'foo', 'bar')
-      expect(actual).to.be.a.function
+      expect(actual).to.be.a('promise')
     })
     it('allows an empty string to pass (via return) when empty flag is set', () => {
       const actual = types.validate.call({ errors: [] }, { type: 'string', empty: true }, '', 'foo')
@@ -26,11 +26,11 @@ describe('types', () => {
   describe('add', () => {
     it('adds a new type as a function to the strategies', () => {
       types.add('testFn', context => null)
-      expect(types.strategies.testFn.default).to.be.a.function
+      expect(types.strategies.testFn.default).to.be.a('function')
     })
     it('adds a new type as an object to the strageties', () => {
       types.add('testObj', { foo: () => null })
-      expect(types.strategies.testObj.foo).to.be.a.function
+      expect(types.strategies.testObj.foo).to.be.a('function')
     })
   })
   describe('check', () => {
@@ -46,7 +46,7 @@ describe('types', () => {
     })
     it('loads a type strategy and returns a promise which calls the strategy', () => {
       const actual = types.check(context)
-      expect(actual).to.be.a.function
+      expect(actual).to.be.a('promise')
     })
     it('throws an error if the specified type does not exist', () => {
       context.def.type = 'nope'

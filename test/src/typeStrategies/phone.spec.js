@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import phone from 'src/typeStrategies/phone'
+const phone = require('src/typeStrategies/phone')
 
 describe('type:phone', () => {
   it('calls context.fail if value is not a valid phone number', () => {

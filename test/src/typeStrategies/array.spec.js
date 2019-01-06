@@ -1,5 +1,5 @@
 /* global describe, it, expect, sinon */
-import array from 'src/typeStrategies/array'
+const array = require('src/typeStrategies/array')
 
 describe('type:array', () => {
   it('calls context.fail if type is not an array', () => {

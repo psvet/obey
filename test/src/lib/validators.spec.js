@@ -1,5 +1,5 @@
 /* global describe, it, expect, afterEach */
-import validators from 'src/lib/validators'
+const validators = require('src/lib/validators')
 
 describe('validators', () => {
   let mockErrors

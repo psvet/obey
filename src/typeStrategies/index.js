@@ -1,19 +1,19 @@
 // Import all strategies
-import any from './any'
-import array from './array'
-import boolean from './boolean'
-import email from './email'
-import ip from './ip'
-import number from './number'
-import object from './object'
-import phone from './phone'
-import string from './string'
-import url from './url'
-import uuid from './uuid'
-import zip from './zip'
+const any = require('./any')
+const array = require('./array')
+const boolean = require('./boolean')
+const email = require('./email')
+const ip = require('./ip')
+const number = require('./number')
+const object = require('./object')
+const phone = require('./phone')
+const string = require('./string')
+const url = require('./url')
+const uuid = require('./uuid')
+const zip = require('./zip')
 
 // Export object with all built-in strategies
-export default {
+module.exports = {
   any,
   array,
   boolean,

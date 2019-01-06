@@ -1,5 +1,9 @@
-import rules from '../rules'
-import Promise from 'bluebird'
+const Promise = require('bluebird')
+let rules
+
+const loadRules = () => {
+  if (!rules) rules = require('../rules')
+}
 
 const array = {
   default: context => {
@@ -17,6 +21,8 @@ const array = {
     }
     // Specific array sub-validation
     if (!context.def.values) return context.value
+
+    loadRules()
     const promises = context.value.map((elem, idx) => {
       return rules.validate(context.def.values, elem, context.def.opts, `${context.key}[${idx}]`, context.errors, false, context.initData)
     })
@@ -24,4 +30,4 @@ const array = {
   }
 }
 
-export default array
+module.exports = array

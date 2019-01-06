@@ -6,4 +6,4 @@ const boolean = {
   }
 }
 
-export default boolean
+module.exports = boolean

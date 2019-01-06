@@ -1,6 +1,10 @@
-import _ from 'lodash'
-import rules from '../rules'
-import Promise from 'bluebird'
+const _ = require('lodash')
+const Promise = require('bluebird')
+let rules
+
+const loadRules = () => {
+  if (!rules) rules = require('../rules')
+}
 
 /**
  * Validates an object using the definition's `keys` property
@@ -55,6 +59,7 @@ const object = {
     if (!_.isObject(context.value) || context.value === null) {
       return context.fail('Value must be an object')
     }
+    loadRules()
     const prefix = context.key ? `${context.key}.` : ''
     if (context.def.keys) return validateByKeys(context, prefix)
     if (context.def.values) return validateByValues(context, prefix)
@@ -62,4 +67,4 @@ const object = {
   }
 }
 
-export default object
+module.exports = object

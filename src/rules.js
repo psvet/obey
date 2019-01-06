@@ -2,12 +2,12 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 /* eslint no-console: 0 */
-import types from './types'
-import modifiers from './modifiers'
-import creators from './creators'
-import Promise from 'bluebird'
-import validators from './lib/validators'
-import ValidationError from './lib/error'
+const types = require('./types')
+const modifiers = require('./modifiers')
+const creators = require('./creators')
+const Promise = require('bluebird')
+const validators = require('./lib/validators')
+const ValidationError = require('./lib/error')
 
 /**
  * @memberof rules
@@ -162,4 +162,4 @@ const rules = {
   }
 }
 
-export default rules
+module.exports = rules

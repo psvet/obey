@@ -1,6 +1,6 @@
 /* global describe, it, expect */
-import obey from 'src/index'
-import modelFixtures from 'test/fixtures/validators'
+const obey = require('src/index')
+const modelFixtures = require('test/fixtures/validators')
 
 describe('integration:validators', () => {
   describe('default', () => {

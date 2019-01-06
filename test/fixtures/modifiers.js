@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   synchronous: {
     name: { type: 'string', modifier: 'syncModifier' }
   },

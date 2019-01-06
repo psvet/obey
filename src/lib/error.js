@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 TechnologyAdvice
  */
-import util from 'util'
+const util = require('util')
 
 /**
  * Compiles array items into string error messages
@@ -38,4 +38,4 @@ function ValidationError(message) {
 // Creates instance of ValidationError as Error object
 util.inherits(ValidationError, Error)
 
-export default ValidationError
+module.exports = ValidationError

@@ -9,4 +9,4 @@ const url = {
   }
 }
 
-export default url
+module.exports = url

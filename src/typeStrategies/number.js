@@ -6,4 +6,4 @@ const number = {
   }
 }
 
-export default number
+module.exports = number

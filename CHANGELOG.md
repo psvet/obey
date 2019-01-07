@@ -1,4 +1,4 @@
-### v3.0.0 (2018-03-28):
+### v3.0.0 (2019-01-05):
 
 * *BREAKING*: Removed Babel dependency. This effectively drops support for Node versions <6.
 

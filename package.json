@@ -3,9 +3,6 @@
   "version": "3.0.2",
   "description": "Data modelling and validation library",
   "main": "src/index.js",
-  "files": [
-    "index.js"
-  ],
   "scripts": {
     "clean": "rm -rf node_modules",
     "test": "snyk test && npm run lint && npm run cover",

@@ -36,5 +36,13 @@ module.exports = {
   },
   basicNoEmptyArray: {
     names: { type: 'array' }
+  },
+  conditionalWithDefault: {
+    fname: { type: 'string' },
+    lname: { type: 'string', requiredIfNot: { fname: 'Foo' }, default: 'Bar' }
+  },
+  conditionalWithCreator: {
+    fname: { type: 'string', requiredIf: { lname: 'Bar' }, creator: 'foo-namer' },
+    lname: { type: 'string' }
   }
 }

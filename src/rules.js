@@ -136,12 +136,34 @@ const rules = {
    * @returns {Array}
    */
   getProps: (def, val) => {
-    //
+    // Require(d) alias
     if (def.require) {
       def.required = def.require
       delete def.require
       console.log('-----\nObey Warning: `require` should be `required`\n-----')
     }
+
+
+    // If default or creator defined, no need for conditional requires.
+    if (def.default || def.creator) {
+      const conditionalRequires = ['requireIf', 'requireIfNot', 'requiredIf', 'requiredIfNot']
+      const rules = []
+      conditionalRequires.forEach((key) => {
+        if (def[key]) {
+          rules.push(key)
+          delete def[key]
+        }
+      })
+      if (rules.length) {
+        const message = [
+          '-----\nObey Warning: removing conditional require',
+          `rule(s) (${rules.join(', ')}) due to 'default' or`,
+          '\'creator\' being defined\n-----'
+        ].join(' ')
+        console.log(message)
+      }
+    }
+
     // Partial and undefined
     if (def.opts.partial && val === undefined) return rules.props.noValPartial
     // Not required, undefined

@@ -167,4 +167,41 @@ describe('integration:core', () => {
         expect(data).to.deep.equal(testData)
       })
   })
+  it('builds a model and disregards conditional require because of default rule', () => {
+    stub = sinon.stub(console, 'log')
+    const testModel = obey.model(modelFixtures.conditionalWithDefault)
+    const testData = {
+      fname: 'Test'
+    }
+    return testModel.validate(testData)
+      .then(data => {
+        expect(data).to.deep.equal({
+          fname: 'Test',
+          lname: 'Bar'
+        })
+        expect(stub)
+          .calledWith(
+            "-----\nObey Warning: removing conditional require rule (requiredIfNot) due to 'default' or 'creator' being defined\n-----"
+          )
+      })
+  })
+  it('builds a model and disregards conditional require because of creator', () => {
+    stub = sinon.stub(console, 'log')
+    obey.creator('foo-namer', () => 'FOO')
+    const testModel = obey.model(modelFixtures.conditionalWithCreator)
+    const testData = {
+      lname: 'Bar'
+    }
+    return testModel.validate(testData)
+      .then(data => {
+        expect(data).to.deep.equal({
+          fname: 'FOO',
+          lname: 'Bar'
+        })
+        expect(stub)
+          .calledWith(
+            "-----\nObey Warning: removing conditional require rule (requiredIf) due to 'default' or 'creator' being defined\n-----"
+          )
+      })
+  })
 })

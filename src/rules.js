@@ -147,16 +147,21 @@ const rules = {
     // If default or creator defined, no need for conditional requires.
     if (def.default || def.creator) {
       const conditionalRequires = ['requireIf', 'requireIfNot', 'requiredIf', 'requiredIfNot']
-      let message = null
+      const rules = []
       conditionalRequires.forEach((key) => {
         if (def[key]) {
-          if (!message) {
-            message = `-----\nObey Warning: removing conditional require rule (${key}) due to 'default' or 'creator' being defined\n-----`
-          }
+          rules.push(key)
           delete def[key]
         }
       })
-      if (message) console.log(message)
+      if (rules.length) {
+        const message = [
+          '-----\nObey Warning: removing conditional require',
+          `rule(s) (${rules.join(', ')}) due to 'default' or`,
+          '\'creator\' being defined\n-----'
+        ].join(' ')
+        console.log(message)
+      }
     }
 
     // Partial and undefined

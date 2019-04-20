@@ -181,7 +181,7 @@ describe('integration:core', () => {
         })
         expect(stub)
           .calledWith(
-            "-----\nObey Warning: removing conditional require rule (requiredIfNot) due to 'default' or 'creator' being defined\n-----"
+            "-----\nObey Warning: removing conditional require rule(s) (requiredIfNot) due to 'default' or 'creator' being defined\n-----"
           )
       })
   })
@@ -200,7 +200,7 @@ describe('integration:core', () => {
         })
         expect(stub)
           .calledWith(
-            "-----\nObey Warning: removing conditional require rule (requiredIf) due to 'default' or 'creator' being defined\n-----"
+            "-----\nObey Warning: removing conditional require rule(s) (requiredIf) due to 'default' or 'creator' being defined\n-----"
           )
       })
   })

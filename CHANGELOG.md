@@ -1,3 +1,7 @@
+### v3.0.5 (2019-04-19):
+
+* Conditional require rules (`requiredIf`, `requiredIfNot`) are now removed if a `creator` or `default` rule is defined.
+
 ### v3.0.0 (2019-01-05):
 
 * *BREAKING*: Removed Babel dependency. This effectively drops support for Node versions <6.

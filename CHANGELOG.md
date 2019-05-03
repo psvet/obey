@@ -1,3 +1,7 @@
+### v4.0.0 (2019-05-03):
+
+* *BREAKING*: Fixed bug allowing empty string values for predefined types, even when required ([#76](https://github.com/psvet/obey/issues/76)).
+
 ### v3.0.5 (2019-04-19):
 
 * Conditional require rules (`requiredIf`, `requiredIfNot`) are now removed if a `creator` or `default` rule is defined.

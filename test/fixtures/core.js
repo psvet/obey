@@ -47,5 +47,8 @@ module.exports = {
   },
   requiredPredefined: {
     zip: { type: 'zip', required: true }
+  },
+  notRequiredPredefined: {
+    phone: { type: 'phone' }
   }
 }

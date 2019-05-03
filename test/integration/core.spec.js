@@ -204,12 +204,20 @@ describe('integration:core', () => {
           )
       })
   })
-  it('does not allow empty predefined type value without `empty` rule', () => {
+  it('does not allow empty predefined type value without `empty` rule when required', () => {
     const testModel = obey.model(modelFixtures.requiredPredefined)
     const testData = { zip: '' }
     return testModel.validate(testData)
       .catch(err => {
-        expect(err.message).to.equal('zip (): Value must be a valid US zip code')
+        expect(err.message).to.equal('zip (): Property \'zip\' is required')
+      })
+  })
+  it('does not allow empty predefined type value without `empty` rule when not required', () => {
+    const testModel = obey.model(modelFixtures.notRequiredPredefined)
+    const testData = { phone: '' }
+    return testModel.validate(testData)
+      .catch(err => {
+        expect(err.message).to.equal('phone (): Value must be a valid phone number')
       })
   })
 })

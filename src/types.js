@@ -54,8 +54,10 @@ const types = {
     if (def.empty && typeof value === 'string' && def.type !== 'array' && value.length === 0) {
       return value
     }
+    // Account for stray empties
+    const isEmptyOrUndefined = value === undefined || value === ''
     // Don't run if undefined on required
-    if (def.required && value === undefined && !def.opts.partial) {
+    if (def.required && isEmptyOrUndefined && !def.opts.partial) {
       errors.push({ type: 'required', sub: 'default', key, value, message: `Property '${key}' is required` })
       return value
     }

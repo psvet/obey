@@ -3,7 +3,7 @@ const url = {
     default: /^(?:https?:\/\/)?[^\s\/\.]+(?:\.[a-z0-9-]{2,})+(?:\/\S*)?$/i
   },
   default: context => {
-    if (context.value === null || context.value && !context.value.toString().match(url._regex.default)) {
+    if (context.value == null || !context.value.length || !context.value.toString().match(url._regex.default)) {
       context.fail('Value must be a valid URL')
     }
   }

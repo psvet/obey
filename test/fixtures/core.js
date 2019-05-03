@@ -44,5 +44,11 @@ module.exports = {
   conditionalWithCreator: {
     fname: { type: 'string', requiredIf: { lname: 'Bar' }, creator: 'foo-namer' },
     lname: { type: 'string' }
+  },
+  requiredPredefined: {
+    zip: { type: 'zip', required: true }
+  },
+  notRequiredPredefined: {
+    phone: { type: 'phone' }
   }
 }

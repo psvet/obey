@@ -10,6 +10,14 @@ describe('type:url', () => {
     url.default(context)
     expect(context.fail).to.be.calledWith('Value must be a valid URL')
   })
+  it('calls context.fail if type is empty', () => {
+    const context = {
+      value: '',
+      fail: sinon.spy()
+    }
+    url.default(context)
+    expect(context.fail).to.be.calledWith('Value must be a valid URL')
+  })
   it('does not call context.fail if type is a valid URL', () => {
     const context = {
       value: 'https://www.google.com/test',

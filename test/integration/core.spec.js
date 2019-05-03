@@ -204,4 +204,12 @@ describe('integration:core', () => {
           )
       })
   })
+  it('does not allow empty predefined type value without `empty` rule', () => {
+    const testModel = obey.model(modelFixtures.requiredPredefined)
+    const testData = { zip: '' }
+    return testModel.validate(testData)
+      .catch(err => {
+        expect(err.message).to.equal('zip (): Value must be a valid US zip code')
+      })
+  })
 })

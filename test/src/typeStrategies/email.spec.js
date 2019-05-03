@@ -10,6 +10,14 @@ describe('type:email', () => {
     email.default(context)
     expect(context.fail).to.be.calledWith('Value must be a valid email')
   })
+  it('calls context.fail if value is empty', () => {
+    const context = {
+      value: '',
+      fail: sinon.spy()
+    }
+    email.default(context)
+    expect(context.fail).to.be.calledWith('Value must be a valid email')
+  })
   it('does not call context.fail if type is a valid email (standard)', () => {
     const context = {
       value: 'jsmith@gmail.com',

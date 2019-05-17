@@ -5,13 +5,13 @@ const phone = {
   },
   default: context => {
     const stringified = context.value != null && context.value.toString()
-    if (!stringified || !stringified.length || !stringified.toString().match(phone._regex.default)) {
+    if (!stringified || !stringified.length || !stringified.match(phone._regex.default)) {
       context.fail('Value must be a valid phone number')
     }
   },
   numeric: context => {
     const stringified = context.value != null && context.value.toString()
-    if (!stringified || !stringified.length || !stringified.toString().match(phone._regex.numeric)) {
+    if (!stringified || !stringified.length || !stringified.match(phone._regex.numeric)) {
       context.fail('Value must be a numeric phone number')
     }
   }

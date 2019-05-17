@@ -1,3 +1,9 @@
+### v4.0.1 (2019-05-16):
+
+* Added Node 12 to Travis config.
+
+* Updated vulnerable dependencies.
+
 ### v4.0.0 (2019-05-03):
 
 * *BREAKING*: Fixed bug allowing empty string values for predefined types, even when required ([#76](https://github.com/psvet/obey/issues/76)).

@@ -1,3 +1,7 @@
+### v4.0.2 (2019-06-01):
+
+* Fixed bug in `zip` type that disallowed numeric values. Now values are coerced to strings before validation checks.
+
 ### v4.0.1 (2019-05-16):
 
 * Added Node 12 to Travis config.

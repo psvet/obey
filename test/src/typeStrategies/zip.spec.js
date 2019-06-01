@@ -18,7 +18,15 @@ describe('type:zip', () => {
     zip.default(context)
     expect(context.fail).to.be.calledWith('Value must be a valid US zip code')
   })
-  it('does not call context fail if value is a valid zip code', () => {
+  it('does not call context fail if value is a valid zip code (numeric)', () => {
+    const context = {
+      value: 61029,
+      fail: sinon.spy()
+    }
+    zip.default(context)
+    expect(context.fail).to.not.be.called
+  })
+  it('does not call context fail if value is a valid zip code (string)', () => {
     const context = {
       value: '61029',
       fail: sinon.spy()

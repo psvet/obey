@@ -132,7 +132,7 @@ describe('integration:validators', () => {
       })
     })
   })
-  describe('jexlValidations', () => {
+  describe('jexl', () => {
     it('builds a models and validates based on jexl expression', () => {
       const testModel = obey.model(modelFixtures.jexl)
       const testData = {
@@ -167,7 +167,7 @@ describe('integration:validators', () => {
       }
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
-          type: 'jexlValidations',
+          type: 'jexl',
           sub: [{
             expr: "value == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure"
           }],

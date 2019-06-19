@@ -132,4 +132,71 @@ describe('integration:validators', () => {
       })
     })
   })
+  describe('jexlValidations', () => {
+    it('builds a models and validates based on jexl expression', () => {
+      const testModel = obey.model(modelFixtures.jexl)
+      const testData = {
+        exprVal: 'Dapper Dan',
+        testVal: {
+          nestedObjArray: [
+            { name: 'wrong' },
+            {
+              name: 'theOne',
+              payload: { treasure: 'Dapper Dan' }
+            }
+          ]
+        }
+      }
+      return testModel.validate(testData).then(res => {
+        expect(res).to.deep.equal(testData)
+      })
+    })
+    it('builds a models and fails validation based on jexl expression', () => {
+      const testModel = obey.model(modelFixtures.jexl)
+      const testData = {
+        exprVal: 'Dapper Dan',
+        testVal: {
+          nestedObjArray: [
+            { name: 'wrong' },
+            {
+              name: 'theOne',
+              payload: { treasure: 'Fop' }
+            }
+          ]
+        }
+      }
+      return testModel.validate(testData).catch(err => {
+        expect(err.collection).to.deep.equal([{
+          type: 'jexlValidations',
+          sub: [{
+            expr: "value == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure"
+          }],
+          key: 'exprVal',
+          value: 'Dapper Dan',
+          message: 'Value failed Jexl evaluation'
+        }])
+      })
+    })
+    it('builds a models and validates using jexl plugin instance', () => {
+      const jexl = require('jexl')
+      jexl.addTransform('upper', (val) => val.toUpperCase())
+      obey.use('jexl', jexl)
+      const testModel = obey.model(modelFixtures.jexlTransform)
+      const testData = {
+        exprVal: 'Dapper Dan',
+        testVal: {
+          nestedObjArray: [
+            { name: 'wrong' },
+            {
+              name: 'theOne',
+              payload: { treasure: 'Dapper Dan' }
+            }
+          ]
+        }
+      }
+      return testModel.validate(testData).then(res => {
+        expect(res).to.deep.equal(testData)
+      })
+    })
+  })
 })

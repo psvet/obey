@@ -25,7 +25,8 @@ const allProps = {
   requiredIfNot: { name: 'requiredIfNot', fn: validators.requiredIfNot },
   requireIf: { name: 'requireIf', fn: validators.requireIf },
   requireIfNot: { name: 'requireIfNot', fn: validators.requireIfNot },
-  equalTo: { name: 'equalTo', fn: validators.equalTo }
+  equalTo: { name: 'equalTo', fn: validators.equalTo },
+  jexl: { name: 'jexl', fn: validators.jexl }
 }
 
 /**
@@ -52,7 +53,8 @@ const rules = {
       allProps.requiredIfNot,
       allProps.requireIf,
       allProps.requireIfNot,
-      allProps.equalTo
+      allProps.equalTo,
+      allProps.jexl
     ],
     // No value/undefined
     noVal: [
@@ -63,7 +65,8 @@ const rules = {
       allProps.requiredIfNot,
       allProps.requireIf,
       allProps.requireIfNot,
-      allProps.equalTo
+      allProps.equalTo,
+      allProps.jexl
     ],
     // No value, partial
     noValPartial: []

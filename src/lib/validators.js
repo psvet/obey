@@ -3,6 +3,8 @@
  */
 /* eslint no-console: 0, consistent-return: 0 */
 const dot = require('dot-object')
+const jexl = require('jexl')
+const plugins = require('./plugins')
 
 const validators = {
   /**
@@ -159,6 +161,39 @@ const validators = {
     if (dot.pick(sub, data) !== value) {
       errors.push({ type, sub, key, value, message: `Value must match ${sub} value`})
     }
+  },
+
+  /**
+   * Validator jexl method, used by model
+   * @param {Object} def The property configuration
+   * @param {*} value The value being validated
+   * @param {string} key The key name of the property
+   * @param {Array<{type: string, sub: string|number, key: string, value: *, message: string}>} errors An error array
+   * to which any additional error objects will be added
+   * @param {Object} data The full initial data object
+   */
+  jexl: (def, value, key, errors, data) => {
+    const type = 'jexl'
+    const sub = Array.isArray(def.jexl) ? def.jexl : [ def.jexl ]
+    const promises = sub.map(({expr, message = null}) => {
+      message = message || 'Value failed Jexl evaluation'
+
+      let instance = jexl
+      if (!plugins.lib.jexl) {
+        console.log('-----\nObey Warning: No Jexl plugin instance found\n-----')
+      } else {
+        instance = plugins.lib.jexl
+      }
+
+      return instance.eval(expr, { root: data, value })
+        .then(val => {
+          if (!val) errors.push({ type, sub, key, value, message })
+        })
+        .catch(() => {
+          errors.push({ type, sub, key, value, message })
+        })
+    })
+    Promise.all(promises)
   }
 }
 

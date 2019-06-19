@@ -64,6 +64,32 @@ module.exports = {
       }
     }
   },
+  jexlMessage: {
+    exprVal: { type: 'string', jexl: [{
+      expr: "value == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure",
+      message: "Do not seek the treasure"
+    }] },
+    testVal: {
+      type: 'object',
+      keys: {
+        nestedObjArray: {
+          type: 'array',
+          values: {
+            type: 'object',
+            keys: {
+              name: { type: 'string' },
+              payload: {
+                type: 'object',
+                keys: {
+                  treasure: { type: 'string' }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   jexlTransform: {
     exprVal: { type: 'string', jexl: [{
       expr: "value|upper == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure|upper"

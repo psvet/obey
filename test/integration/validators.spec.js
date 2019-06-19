@@ -177,6 +177,33 @@ describe('integration:validators', () => {
         }])
       })
     })
+    it('builds a models and fails with custom message', () => {
+      const testModel = obey.model(modelFixtures.jexlMessage)
+      const testData = {
+        exprVal: 'Dapper Dan',
+        testVal: {
+          nestedObjArray: [
+            { name: 'wrong' },
+            {
+              name: 'theOne',
+              payload: { treasure: 'Fop' }
+            }
+          ]
+        }
+      }
+      return testModel.validate(testData).catch(err => {
+        expect(err.collection).to.deep.equal([{
+          type: 'jexl',
+          sub: [{
+            expr: "value == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure",
+            message: 'Do not seek the treasure'
+          }],
+          key: 'exprVal',
+          value: 'Dapper Dan',
+          message: 'Do not seek the treasure'
+        }])
+      })
+    })
     it('builds a models and validates using jexl plugin instance', () => {
       const jexl = require('jexl')
       jexl.addTransform('upper', (val) => val.toUpperCase())

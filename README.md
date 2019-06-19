@@ -165,6 +165,7 @@ When setting definitions for rules or model properties, the following are suppor
 * `allowNull`: Accepts a null value or processes specified type
 * `strict`: Enable or disable strict checking of an object, see [Strict Mode](#strict-mode)
 * `description`: A description of the property
+* `jexl`: One or more objects containing an `expr` string for validating data against Jexl expressions. See [Jexl Validation](#jexl-validation).
 
 ## Types
 
@@ -328,6 +329,49 @@ To disable strict mode on a model pass the (optional) strict argument as `false`
 
 ```javascript
 const model = obey.model({ /* definition */ }, false)
+```
+
+## Jexl Validation
+
+Obey allows for validating data against [Jexl](https://github.com/TomFrost/Jexl) expressions via the `jexl` rule:
+
+```javascript
+obey.model({
+  exprVal: {
+    type: 'string',
+    jexl: [{
+      expr: "value == root.testVal.nestedObjArray[.name == 'some specific name'].payload",
+      message: "Do not seek the treasure" // Optional expression-specific error message
+    }]
+  },
+  testVal: {
+    type: 'object',
+    keys: {
+      nestedObjArray: {
+        type: 'array',
+        values: {
+          type: 'object',
+          keys: {
+            name: { type: 'string' },
+            payload: { type: 'string' }
+          }
+        }
+      }
+    }
+  }
+})
+```
+
+**Note**: the `jexl` validator uses `value` and `root` as its context keys for the specific value being validated and the corresponding data, respectively, so expression strings should be constructed accordingly.
+
+If necessary, a preconfigured Jexl instance can be passed in before the model is constructed, in order to utitlize user-defined transforms in validation:
+
+```javascript
+const obey = require('obey')
+const jexl = require('jexl')
+jexl.addTransform('upper', val => val.toUpperCase(val))
+obey.use('jexl', jexl)
+obey.model({/* ...definition... */})
 ```
 
 ## Asynchronous Validation

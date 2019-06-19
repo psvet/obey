@@ -41,6 +41,7 @@
   "dependencies": {
     "bluebird": "^3.5.3",
     "dot-object": "^1.7.1",
+    "jexl": "^2.1.1",
     "lodash": "^4.17.11"
   }
 }

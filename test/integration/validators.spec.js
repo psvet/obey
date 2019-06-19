@@ -168,9 +168,9 @@ describe('integration:validators', () => {
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
           type: 'jexl',
-          sub: [{
+          sub: {
             expr: "value == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure"
-          }],
+          },
           key: 'exprVal',
           value: 'Dapper Dan',
           message: 'Value failed Jexl evaluation'
@@ -194,10 +194,10 @@ describe('integration:validators', () => {
       return testModel.validate(testData).catch(err => {
         expect(err.collection).to.deep.equal([{
           type: 'jexl',
-          sub: [{
+          sub: {
             expr: "value == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure",
             message: 'Do not seek the treasure'
-          }],
+          },
           key: 'exprVal',
           value: 'Dapper Dan',
           message: 'Do not seek the treasure'

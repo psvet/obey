@@ -175,15 +175,18 @@ const validators = {
   jexl: (def, value, key, errors, data) => {
     const type = 'jexl'
     const sub = Array.isArray(def.jexl) ? def.jexl : [ def.jexl ]
-    const promises = sub.map(({expr, message = null}) => {
+    const promises = sub.map((obj) => {
+      const {
+        expr,
+        message = 'Value failed Jexl evaluation'
+      } = obj
       const instance = plugins.lib.jexl || jexl
-      message = message || 'Value failed Jexl evaluation'
       return instance.eval(expr, { root: data, value })
         .then(val => {
-          if (!val) errors.push({ type, sub, key, value, message })
+          if (!val) errors.push({ type, sub: obj, key, value, message })
         })
         .catch(() => {
-          errors.push({ type, sub, key, value, message })
+          errors.push({ type, sub: obj, key, value, message })
         })
     })
     Promise.all(promises)

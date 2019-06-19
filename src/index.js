@@ -8,6 +8,7 @@ const modifiers = require('./modifiers')
 const creators = require('./creators')
 const validators = require('./lib/validators')
 const ValidationError = require('./lib/error')
+const plugins = require('./lib/plugins')
 
 /**
  * The main object for Obey; exposes the core API methods for standard use as
@@ -59,5 +60,14 @@ module.exports = {
    * @param {string} name The creator's name
    * @param {function} fn The method for the creator
    */
-  creator: (name, fn) => creators.add(name, fn)
+  creator: (name, fn) => creators.add(name, fn),
+
+  /**
+   * Adds given package to plugins lib.
+   *
+   * @param {string} name The package name
+   * @param {function|Object} pkg The package reference
+   */
+  // TODO: make this actually useful
+  use: (name, pkg) => plugins.add(name, pkg)
 }

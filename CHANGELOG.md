@@ -1,3 +1,9 @@
+### v4.1.0 (2019-06-19):
+
+* Added `jexl` validator method for evaluating data against [Jexl](https://github.com/TomFrost/Jexl) expressions.
+
+* Added root `use` method for adding plugin references to external packages. (Currently only used by `jexl` validator.)
+
 ### v4.0.2 (2019-06-01):
 
 * Fixed bug in `zip` type that disallowed numeric values. Now values are coerced to strings before validation checks.

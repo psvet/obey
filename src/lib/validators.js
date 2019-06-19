@@ -176,15 +176,8 @@ const validators = {
     const type = 'jexl'
     const sub = Array.isArray(def.jexl) ? def.jexl : [ def.jexl ]
     const promises = sub.map(({expr, message = null}) => {
+      const instance = plugins.lib.jexl || jexl
       message = message || 'Value failed Jexl evaluation'
-
-      let instance = jexl
-      if (!plugins.lib.jexl) {
-        console.log('-----\nObey Warning: No Jexl plugin instance found\n-----')
-      } else {
-        instance = plugins.lib.jexl
-      }
-
       return instance.eval(expr, { root: data, value })
         .then(val => {
           if (!val) errors.push({ type, sub, key, value, message })

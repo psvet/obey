@@ -1,3 +1,7 @@
+### v4.1.1 (2019-07-04):
+
+* Fixed bug around `allow` stomping on `empty` when validating strings. Originally using `allow` would require specifying `''` as an allowed value, even if `empty` was also enabled.
+
 ### v4.1.0 (2019-06-19):
 
 * Added `jexl` validator method for evaluating data against [Jexl](https://github.com/TomFrost/Jexl) expressions.

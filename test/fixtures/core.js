@@ -50,5 +50,11 @@ module.exports = {
   },
   notRequiredPredefined: {
     phone: { type: 'phone' }
+  },
+  allowEmptyString: {
+    foo: { type: 'string', allow: [ 'bar' ], empty: true }
+  },
+  allowEmptyStringObject: {
+    foo: { type: 'string', allow: { foo: 'FOO' }, empty: true }
   }
 }

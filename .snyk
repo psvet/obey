@@ -5,5 +5,9 @@ ignore:
     - jsdoc > marked:
         reason: Dev Dependecy
         expires: '2016-05-28T00:25:33.252Z'
+  SNYK-JS-LODASH-450202:
+    - lodash:
+        reason: None given
+        expires: '2019-08-03T20:58:36.052Z'
 patch: {}
-version: v1.7.1
+version: v1.13.5

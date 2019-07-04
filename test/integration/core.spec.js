@@ -220,4 +220,20 @@ describe('integration:core', () => {
         expect(err.message).to.equal('phone (): Value must be a valid phone number')
       })
   })
+  it('builds a model correctly with `allow` (object) and `empty` rules', () => {
+    const testModel = obey.model(modelFixtures.allowEmptyStringObject)
+    const testData = { foo: '' }
+    return testModel.validate(testData)
+      .then(res => {
+        expect(res).to.deep.equal(testData)
+      })
+  })
+  it('builds a model correctly with `allow` and `empty` rules', () => {
+    const testModel = obey.model(modelFixtures.allowEmptyString)
+    const testData = { foo: '' }
+    return testModel.validate(testData)
+      .then(res => {
+        expect(res).to.deep.equal(testData)
+      })
+  })
 })

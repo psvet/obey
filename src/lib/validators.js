@@ -5,6 +5,7 @@
 const dot = require('dot-object')
 const jexl = require('jexl')
 const plugins = require('./plugins')
+const cloneDeep = require('lodash/cloneDeep')
 
 const validators = {
   /**
@@ -16,7 +17,7 @@ const validators = {
     if (/^(number|boolean)$/.test(def.type)) {
       if (value === 0 || value === false) return value
     }
-    return value || def.default
+    return value || cloneDeep(def.default)
   },
 
   /**

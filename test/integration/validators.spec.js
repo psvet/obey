@@ -1,4 +1,3 @@
-/* global describe, it, expect */
 const obey = require('src/index')
 const modelFixtures = require('test/fixtures/validators')
 
@@ -8,7 +7,7 @@ describe('integration:validators', () => {
       const testModel = obey.model(modelFixtures.default)
       const testData = {}
       return testModel.validate(testData).then(res => {
-        expect(res.name).to.equal('foo')
+        expect(res.name).toEqual('foo')
       })
     })
   })
@@ -17,7 +16,7 @@ describe('integration:validators', () => {
       const testModel = obey.model(modelFixtures.allow)
       const testData = { name: 'quz' }
       return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
+        expect(err.collection).toEqual([{
           type: 'allow',
           sub: [ 'foo', 'bar' ],
           key: 'name',
@@ -30,25 +29,25 @@ describe('integration:validators', () => {
       const testModel = obey.model(modelFixtures.allowNull)
       const testData = { name: null, email: 'notNull@test.com', phone: '555-555-5555' }
       return testModel.validate(testData).then(res => {
-        expect(res.name).to.be.null
-        expect(res.email).to.equal(testData.email)
-        expect(res.phone).to.equal(testData.phone)
+        expect(res.name).toBeNull()
+        expect(res.email).toEqual(testData.email)
+        expect(res.phone).toEqual(testData.phone)
       })
     })
     it('builds a model with allowed null value in empty (falsey) field', () => {
       const testModel = obey.model(modelFixtures.allowNullDefault)
       const testData = { name: '', email: 'notNull@test.com', phone: '555-555-5555' }
       return testModel.validate(testData).then(res => {
-        expect(res.name).to.be.null
-        expect(res.email).to.equal(testData.email)
-        expect(res.phone).to.equal(testData.phone)
+        expect(res.name).toBeNull()
+        expect(res.email).toEqual(testData.email)
+        expect(res.phone).toEqual(testData.phone)
       })
     })
     it('builds a model and fails validation due to value of wrong type (allowNull)', () => {
       const testModel = obey.model(modelFixtures.allowNull)
       const testData = { name: 30, email: null, phone: null }
       return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
+        expect(err.collection).toEqual([{
           type: 'string',
           sub: 'default',
           key: 'name',
@@ -70,7 +69,7 @@ describe('integration:validators', () => {
       const testModel = obey.model(modelFixtures.min)
       const testData = { name: 'foo' }
       return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
+        expect(err.collection).toEqual([{
           type: 'min',
           sub: 10,
           key: 'name',
@@ -85,7 +84,7 @@ describe('integration:validators', () => {
       const testModel = obey.model(modelFixtures.max)
       const testData = { name: 'foobarrrrr' }
       return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
+        expect(err.collection).toEqual([{
           type: 'max',
           sub: 5,
           key: 'name',
@@ -100,7 +99,7 @@ describe('integration:validators', () => {
       const testModel = obey.model(modelFixtures.requiredIf)
       const testData = { phone: 5551234567, address: { street: '123 test ave' } }
       return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
+        expect(err.collection).toEqual([{
           type: 'requiredIf',
           sub: 'phone',
           key: 'phoneType',
@@ -122,7 +121,7 @@ describe('integration:validators', () => {
       const testModel = obey.model(modelFixtures.requiredIfNot)
       const testData = { address: { street: '123 test ave' } }
       return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
+        expect(err.collection).toEqual([{
           type: 'requiredIfNot',
           sub: 'address.state',
           key: 'address.country',
@@ -148,7 +147,7 @@ describe('integration:validators', () => {
         }
       }
       return testModel.validate(testData).then(res => {
-        expect(res).to.deep.equal(testData)
+        expect(res).toEqual(testData)
       })
     })
     it('builds a models and fails validation based on jexl expression', () => {
@@ -166,7 +165,7 @@ describe('integration:validators', () => {
         }
       }
       return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
+        expect(err.collection).toEqual([{
           type: 'jexl',
           sub: {
             expr: "value == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure"
@@ -192,7 +191,7 @@ describe('integration:validators', () => {
         }
       }
       return testModel.validate(testData).catch(err => {
-        expect(err.collection).to.deep.equal([{
+        expect(err.collection).toEqual([{
           type: 'jexl',
           sub: {
             expr: "value == root.testVal.nestedObjArray[.name == 'theOne'].payload.treasure",
@@ -222,7 +221,7 @@ describe('integration:validators', () => {
         }
       }
       return testModel.validate(testData).then(res => {
-        expect(res).to.deep.equal(testData)
+        expect(res).toEqual(testData)
       })
     })
   })

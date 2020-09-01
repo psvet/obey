@@ -1,4 +1,3 @@
-/* global describe, it, expect */
 const any = require('src/typeStrategies/any')
 
 describe('type:any', () => {
@@ -6,6 +5,6 @@ describe('type:any', () => {
     const context = {
       value: 'anything'
     }
-    expect(any.default(context)).to.equal('anything')
+    expect(any.default(context)).toEqual('anything')
   })
 })

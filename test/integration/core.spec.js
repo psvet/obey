@@ -1,4 +1,3 @@
-/* global describe, it, expect */
 const obey = require('src/index')
 const modelFixtures = require('test/fixtures/core')
 const ValidationError = require('src/lib/error')
@@ -6,7 +5,7 @@ const ValidationError = require('src/lib/error')
 describe('integration:core', () => {
   let stub
   afterEach(() => {
-    if (stub) stub.restore()
+    if (stub) stub.mockReset()
   })
   it('builds a model and successfully validates passing object', () => {
     const testModel = obey.model(modelFixtures.basicExtended)
@@ -16,7 +15,7 @@ describe('integration:core', () => {
       type: 'foo'
     }
     return testModel.validate(testData).then(res => {
-      expect(res).to.deep.equal(testData)
+      expect(res).toEqual(testData)
     })
   })
   it('builds a model and fails validation on type', () => {
@@ -30,7 +29,7 @@ describe('integration:core', () => {
       }
     }
     return testModel.validate(testData).catch(e => {
-      expect(e).to.be.instanceOf(ValidationError)
+      expect(e).toBeInstanceOf(ValidationError)
     })
   })
   it('builds a model and passes when non-required field is undefined', () => {
@@ -40,9 +39,9 @@ describe('integration:core', () => {
     }
     return testModel.validate(testData)
       .then((res) => {
-        expect(res.fname).to.equal('John')
-        expect(res.lname).to.be.undefined
-        expect(res.type).to.be.undefined
+        expect(res.fname).toEqual('John')
+        expect(res.lname).toBeUndefined()
+        expect(res.type).toBeUndefined()
       })
   })
   it('builds a models and passes with response including supplied undefined value', () => {
@@ -53,13 +52,13 @@ describe('integration:core', () => {
     }
     return testModel.validate(testData)
       .then((res) => {
-        expect(res.fname).to.equal('John')
-        expect(res).to.have.property('lname')
-        expect(res).to.not.have.property('type')
+        expect(res.fname).toEqual('John')
+        expect(res).toHaveProperty('lname')
+        expect(res).not.toHaveProperty('type')
       })
   })
   it('builds a model and fails when required field is undefined', () => {
-    stub = sinon.stub(console, 'log')
+    stub = jest.spyOn(console, 'log')
     const testModel = obey.model(modelFixtures.basicRequired)
     const testData = {
       fname: 'John'
@@ -67,8 +66,8 @@ describe('integration:core', () => {
     return testModel.validate(testData)
       .then(() => { throw new Error('Should fail') })
       .catch((err) => {
-        expect(err.message).to.equal('lname (undefined): Property \'lname\' is required')
-        expect(stub).calledWith('-----\nObey Warning: `require` should be `required`\n-----')
+        expect(err.message).toEqual('lname (undefined): Property \'lname\' is required')
+        expect(stub).toHaveBeenCalledWith('-----\nObey Warning: `require` should be `required`\n-----')
       })
   })
   it('builds a model and successfully validates when nested object present', () => {
@@ -80,7 +79,7 @@ describe('integration:core', () => {
       }
     }
     return testModel.validate(testData).then(res => {
-      expect(res).to.deep.equal(testData)
+      expect(res).toEqual(testData)
     })
   })
   it('builds a model and fails validates when nested object present', () => {
@@ -94,7 +93,7 @@ describe('integration:core', () => {
     return testModel.validate(testData)
       .then(() => { throw new Error('Should fail') })
       .catch(err => {
-        expect(err.collection).to.deep.equal([
+        expect(err.collection).toEqual([
           { type: 'string', sub: 'default', key: 'name', value: true, message: 'Value must be a string' },
           { type: 'string', sub: 'default', key: 'someobj.foo', value: 5, message: 'Value must be a string' }
         ])
@@ -107,7 +106,7 @@ describe('integration:core', () => {
     }
     return testModel.validate(testData)
       .then(data => {
-        expect(data.name).to.equal('')
+        expect(data.name).toEqual('')
       })
   })
   it('builds a model and fails with empty string (not allowed with flag)', () => {
@@ -120,7 +119,7 @@ describe('integration:core', () => {
         throw new Error('Should have thrown')
       })
       .catch(err => {
-        expect(err.message).to.equal('name (): Value must be a string')
+        expect(err.message).toEqual('name (): Value must be a string')
       })
   })
   it('builds a model and passes with empty array (allowed with flag)', () => {
@@ -130,7 +129,7 @@ describe('integration:core', () => {
     }
     return testModel.validate(testData)
       .then(data => {
-        expect(data.names).to.deep.equal([])
+        expect(data.names).toEqual([])
       })
   })
   it('builds a model and fails with empty array (not allowed with flag)', () => {
@@ -143,7 +142,7 @@ describe('integration:core', () => {
         throw new Error('Should have thrown')
       })
       .catch(err => {
-        expect(err.message).to.equal('names (): Value must not be empty array')
+        expect(err.message).toEqual('names (): Value must not be empty array')
       })
   })
   it('builds a model and passes validation when partial option is set to true', () => {
@@ -153,7 +152,7 @@ describe('integration:core', () => {
     }
     return testModel.validate(testData, { partial: true })
       .then(data => {
-        expect(data).to.deep.equal(testData)
+        expect(data).toEqual(testData)
       })
   })
   it('builds a model and passes validation when partial option is set to true, does not run creators', () => {
@@ -164,29 +163,29 @@ describe('integration:core', () => {
     }
     return testModel.validate(testData, { partial: true })
       .then(data => {
-        expect(data).to.deep.equal(testData)
+        expect(data).toEqual(testData)
       })
   })
   it('builds a model and disregards conditional require because of default rule', () => {
-    stub = sinon.stub(console, 'log')
+    stub = jest.spyOn(console, 'log')
     const testModel = obey.model(modelFixtures.conditionalWithDefault)
     const testData = {
       fname: 'Test'
     }
     return testModel.validate(testData)
       .then(data => {
-        expect(data).to.deep.equal({
+        expect(data).toEqual({
           fname: 'Test',
           lname: 'Bar'
         })
         expect(stub)
-          .calledWith(
+          .toHaveBeenCalledWith(
             "-----\nObey Warning: removing conditional require rule(s) (requiredIfNot) due to 'default' or 'creator' being defined\n-----"
           )
       })
   })
   it('builds a model and disregards conditional require because of creator', () => {
-    stub = sinon.stub(console, 'log')
+    stub = jest.spyOn(console, 'log')
     obey.creator('foo-namer', () => 'FOO')
     const testModel = obey.model(modelFixtures.conditionalWithCreator)
     const testData = {
@@ -194,12 +193,12 @@ describe('integration:core', () => {
     }
     return testModel.validate(testData)
       .then(data => {
-        expect(data).to.deep.equal({
+        expect(data).toEqual({
           fname: 'FOO',
           lname: 'Bar'
         })
         expect(stub)
-          .calledWith(
+          .toHaveBeenCalledWith(
             "-----\nObey Warning: removing conditional require rule(s) (requiredIf) due to 'default' or 'creator' being defined\n-----"
           )
       })
@@ -209,7 +208,7 @@ describe('integration:core', () => {
     const testData = { zip: '' }
     return testModel.validate(testData)
       .catch(err => {
-        expect(err.message).to.equal('zip (): Property \'zip\' is required')
+        expect(err.message).toEqual('zip (): Property \'zip\' is required')
       })
   })
   it('does not allow empty predefined type value without `empty` rule when not required', () => {
@@ -217,7 +216,7 @@ describe('integration:core', () => {
     const testData = { phone: '' }
     return testModel.validate(testData)
       .catch(err => {
-        expect(err.message).to.equal('phone (): Value must be a valid phone number')
+        expect(err.message).toEqual('phone (): Value must be a valid phone number')
       })
   })
   it('builds a model correctly with `allow` (object) and `empty` rules', () => {
@@ -225,7 +224,7 @@ describe('integration:core', () => {
     const testData = { foo: '' }
     return testModel.validate(testData)
       .then(res => {
-        expect(res).to.deep.equal(testData)
+        expect(res).toEqual(testData)
       })
   })
   it('builds a model correctly with `allow` and `empty` rules', () => {
@@ -233,7 +232,7 @@ describe('integration:core', () => {
     const testData = { foo: '' }
     return testModel.validate(testData)
       .then(res => {
-        expect(res).to.deep.equal(testData)
+        expect(res).toEqual(testData)
       })
   })
 })

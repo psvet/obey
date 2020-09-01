@@ -1,27 +1,27 @@
-/* global describe, it, expect */
 const rules = require('src/rules')
+const ValidationError = require('src/lib/error')
 
 describe('rules', () => {
   describe('makeValidate', () => {
     it('returns the bound validation method', () => {
       const actual = rules.makeValidate({ type: 'string' })
-      expect(actual).to.be.a('function')
+      expect(actual).toEqual(expect.any(Function))
     })
   })
   describe('validate', () => {
     it('throws an error if the definition does not contain a type', () => {
-      expect(rules.validate.bind(null, {}, 'foo')).to.throw('Model properties must define a \'type\'')
+      expect(rules.validate.bind(null, {}, 'foo')).toThrow('Model properties must define a \'type\'')
     })
     it('processes validation on a valid definition object', () => {
       return rules.validate({ type: 'string' }, 'foo')
         .then(data => {
-          expect(data).to.equal('foo')
+          expect(data).toEqual('foo')
         })
     })
     it('processes global props even when falsey', () => {
       return rules.validate({ type: 'number', default: 0 }, undefined)
         .then(data => {
-          expect(data).to.equal(0)
+          expect(data).toEqual(0)
         })
     })
     it('should not persist init data forever', () => {
@@ -37,7 +37,7 @@ describe('rules', () => {
         .then(() => {
           assert.fail(true, false, 'Data is invalid, marked as valid')
         })
-        .catch(() => expect(rules.validate(def, {})).to.be.fulfilled)
+        .catch(() => expect(rules.validate(def, {})).resolves.toEqual({}))
     })
     it('should recursively pass init data to objects', () => {
       let def = {
@@ -56,7 +56,7 @@ describe('rules', () => {
         person: { name: 'John Smith' },
         contacts: {}
       }
-      return expect(rules.validate(def, data)).to.be.rejected
+      return expect(rules.validate(def, data)).rejects.toThrow(ValidationError)
     })
     it('should recursively pass init data to arrays', () => {
       let def = {
@@ -77,15 +77,15 @@ describe('rules', () => {
         person: { name: 'John Smith' },
         labels: [{label: 'awesome', condRequired: 'nice'}, {label: 'awful'}]
       }
-      return expect(rules.validate(def, data)).to.be.rejected
+      return expect(rules.validate(def, data)).rejects.toThrow(ValidationError)
     })
   })
   describe('build', () => {
     it('returns an object with the original definition and validate method', () => {
       const actual = rules.build({ type: 'string' })
-      expect(actual).to.be.an('object')
-      expect(actual.def).to.deep.equal({ type: 'string' })
-      expect(actual.validate).to.be.a('function')
+      expect(actual).toEqual(expect.any(Object))
+      expect(actual.def).toEqual({ type: 'string' })
+      expect(actual.validate).toEqual(expect.any(Function))
     })
   })
 })

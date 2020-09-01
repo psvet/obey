@@ -1,4 +1,3 @@
-/* global describe, it, expect, afterEach */
 const obey = require('src/index')
 const creators = require('src/creators')
 const modelFixtures = require('test/fixtures/creators')
@@ -12,7 +11,7 @@ describe('integration:creators', () => {
       const testModel = obey.model(modelFixtures.synchronous)
       obey.creator('syncCreator', () => 'foo')
       return testModel.validate({}).then(res => {
-        expect(res.name).to.equal('foo')
+        expect(res.name).toEqual('foo')
       })
     })
   })
@@ -25,7 +24,7 @@ describe('integration:creators', () => {
         })
       })
       return testModel.validate({}).then(res => {
-        expect(res.name).to.equal('foo')
+        expect(res.name).toEqual('foo')
       })
     })
   })

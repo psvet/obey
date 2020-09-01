@@ -1,3 +1,9 @@
+### v5.0.0 (2020-09-01):
+
+* Migrated tests from mocha to jest.
+* Update default `uuid` type to be case insensitive.
+* Replace travis with github actions for CI.
+
 ### v4.1.1 (2019-07-04):
 
 * Fixed bug around `allow` stomping on `empty` when validating strings. Originally using `allow` would require specifying `''` as an allowed value, even if `empty` was also enabled.

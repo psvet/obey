@@ -1,4 +1,3 @@
-/* global describe, it, expect, afterEach */
 const creators = require('src/creators')
 
 describe('creators', () => {
@@ -8,28 +7,27 @@ describe('creators', () => {
   describe('execute', () => {
     it('returns the original value if defined', () => {
       const actual = creators.execute({}, 'bar')
-      expect(actual).to.equal('bar')
+      expect(actual).toEqual('bar')
     })
     it('runs creator and returns created value if exists', () => {
       creators.add('test', () => 'foo')
       const actual = creators.execute({ creator: 'test' })
-      expect(actual).to.equal('foo')
+      expect(actual).toEqual('foo')
     })
     it('throws an error if the creator does not exist', () => {
-      expect(creators.execute.bind(null, { creator: 'nope'})).to.throw('creator \'nope\' does not exist')
+      expect(creators.execute.bind(null, { creator: 'nope'})).toThrow('creator \'nope\' does not exist')
     })
   })
   describe('add', () => {
     it('adds a new creator to the lib', () => {
       creators.add('test', () => 'foo')
-      expect(creators.lib).to.have.property('test')
-      expect(creators.lib.test).to.be.a('function')
+      expect(creators.lib).toHaveProperty('test', expect.any(Function))
     })
     it('throws an error if the creator name is not a string', () => {
-      expect(creators.add.bind(null, true, () => 'foo')).to.throw('creator name should be a string')
+      expect(creators.add.bind(null, true, () => 'foo')).toThrow('creator name should be a string')
     })
     it('throws an error if the creator method is not a function', () => {
-      expect(creators.add.bind(null, 'foo', undefined)).to.throw('creator method should be a function')
+      expect(creators.add.bind(null, 'foo', undefined)).toThrow('creator method should be a function')
     })
   })
 })

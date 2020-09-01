@@ -1,4 +1,3 @@
-/* global describe, it, expect, afterEach */
 const obey = require('src/index')
 const modifiers = require('src/modifiers')
 const modelFixtures = require('test/fixtures/modifiers')
@@ -12,7 +11,7 @@ describe('integration:modifiers', () => {
       const testModel = obey.model(modelFixtures.synchronous)
       obey.modifier('syncModifier', (val) => `${val}_CHANGED`)
       return testModel.validate({ name: 'foo' }).then(res => {
-        expect(res.name).to.equal('foo_CHANGED')
+        expect(res.name).toEqual('foo_CHANGED')
       })
     })
   })
@@ -25,7 +24,7 @@ describe('integration:modifiers', () => {
         })
       })
       return testModel.validate({ name: 'foo' }).then(res => {
-        expect(res.name).to.equal('foo_CHANGED')
+        expect(res.name).toEqual('foo_CHANGED')
       })
     })
   })

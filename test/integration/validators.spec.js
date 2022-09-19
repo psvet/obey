@@ -74,7 +74,7 @@ describe('integration:validators', () => {
           sub: 10,
           key: 'name',
           value: 'foo',
-          message: 'Length must be greater than 10'
+          message: 'Length must be greater than or equal to 10'
         }])
       })
     })
@@ -89,7 +89,7 @@ describe('integration:validators', () => {
           sub: 5,
           key: 'name',
           value: 'foobarrrrr',
-          message: 'Length must be less than 5'
+          message: 'Length must be less than or equal to 5'
         }])
       })
     })

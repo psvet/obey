@@ -87,6 +87,11 @@ describe('validators', () => {
     })
   })
   describe('min', () => {
+    it('passes if array length is greater than or equal to def min', () => {
+      const def = { min: 3 }
+      validators.min(def, [ 'foo', 'bar', 'foobar' ], 'test', mockErrors)
+      expect(mockErrors.length).toEqual(0)
+    })
     it('creates an error object if array length is less than def min', () => {
       const def = { min: 3 }
       validators.min(def, [ 'foo' ], 'test', mockErrors)
@@ -95,7 +100,7 @@ describe('validators', () => {
         sub: 3,
         key: 'test',
         value: [ 'foo' ],
-        message: 'Length must be greater than 3'
+        message: 'Length must be greater than or equal to 3'
       })
     })
     it('creates an error object if string length is less than def min', () => {
@@ -106,7 +111,7 @@ describe('validators', () => {
         sub: 5,
         key: 'test',
         value: 'foo',
-        message: 'Length must be greater than 5'
+        message: 'Length must be greater than or equal to 5'
       })
     })
     it('creates an error object if number is less than def min', () => {
@@ -117,11 +122,16 @@ describe('validators', () => {
         sub: 10,
         key: 'test',
         value: 5,
-        message: 'Value must be greater than 10'
+        message: 'Value must be greater than or equal to 10'
       })
     })
   })
   describe('max', () => {
+    it('passes if array length is less than or equal to def max', () => {
+      const def = { max: 3 }
+      validators.max(def, [ 'foo', 'bar'], 'test', mockErrors)
+      expect(mockErrors.length).toEqual(0)
+    })
     it('creates an error object if array length is greater than def max', () => {
       const def = { max: 1 }
       validators.max(def, [ 'foo', 'bar' ], 'test', mockErrors)
@@ -130,7 +140,7 @@ describe('validators', () => {
         sub: 1,
         key: 'test',
         value: [ 'foo', 'bar' ],
-        message: 'Length must be less than 1'
+        message: 'Length must be less than or equal to 1'
       })
     })
     it('creates an error object if string length is greater than def max', () => {
@@ -141,7 +151,7 @@ describe('validators', () => {
         sub: 2,
         key: 'test',
         value: 'foo',
-        message: 'Length must be less than 2'
+        message: 'Length must be less than or equal to 2'
       })
     })
     it('creates an error object if number is greater than def max', () => {
@@ -152,7 +162,7 @@ describe('validators', () => {
         sub: 5,
         key: 'test',
         value: 10,
-        message: 'Value must be less than 5'
+        message: 'Value must be less than or equal to 5'
       })
     })
   })

@@ -49,10 +49,10 @@ const validators = {
   min: function(def, value, key, errors) {
     const type = 'min'
     const sub = def.min
-    if (Array.isArray(value) || typeof value === 'string' && value.length < def.min) {
-      errors.push({ type, sub, key, value, message: `Length must be greater than ${def.min}` })
+    if ((Array.isArray(value) || typeof value === 'string') && value.length < def.min) {
+      errors.push({ type, sub, key, value, message: `Length must be greater than or equal to ${def.min}` })
     } else if (typeof value === 'number' && value < def.min) {
-      errors.push({ type, sub, key, value, message: `Value must be greater than ${def.min}` })
+      errors.push({ type, sub, key, value, message: `Value must be greater than or equal to ${def.min}` })
     }
   },
 
@@ -67,10 +67,10 @@ const validators = {
   max: function(def, value, key, errors) {
     const type = 'max'
     const sub = def.max
-    if (Array.isArray(value) || typeof value === 'string' && value.length > def.max) {
-      errors.push({ type, sub, key, value, message: `Length must be less than ${def.max}` })
+    if ((Array.isArray(value) || typeof value === 'string') && value.length > def.max) {
+      errors.push({ type, sub, key, value, message: `Length must be less than or equal to ${def.max}` })
     } else if (typeof value === 'number' && value > def.max) {
-      errors.push({ type, sub, key, value, message: `Value must be less than ${def.max}` })
+      errors.push({ type, sub, key, value, message: `Value must be less than or equal to ${def.max}` })
     }
   },
 

@@ -1,3 +1,7 @@
+### v5.0.1 (2022-10-10):
+
+* Fixes `min` and `max` validation and messaging
+
 ### v5.0.0 (2020-09-01):
 
 * Migrated tests from mocha to jest.
